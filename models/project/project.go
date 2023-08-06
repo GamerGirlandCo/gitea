@@ -289,16 +289,16 @@ func NewProject(p *Project) error {
 
 // GetProjectByID returns the projects in a repository
 func GetProjectByID(ctx context.Context, id int64) (*Project, error) {
-	p := new(Project)
+	p := Project{ID: id}
 
-	has, err := db.GetEngine(ctx).ID(id).Get(p)
+	has, err := db.GetEngine(ctx).Get(&p)
 	if err != nil {
 		return nil, err
 	} else if !has {
 		return nil, ErrProjectNotExist{ID: id}
 	}
 
-	return p, nil
+	return &p, nil
 }
 
 // UpdateProject updates project properties
