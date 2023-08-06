@@ -9,6 +9,7 @@ import (
 	"regexp"
 
 	"code.gitea.io/gitea/models/db"
+	user_model "code.gitea.io/gitea/models/user"
 	"code.gitea.io/gitea/modules/setting"
 	"code.gitea.io/gitea/modules/timeutil"
 
@@ -56,8 +57,10 @@ type Board struct {
 	Sorting int8   `xorm:"NOT NULL DEFAULT 0"`
 	Color   string `xorm:"VARCHAR(7)"`
 
-	ProjectID int64 `xorm:"INDEX NOT NULL"`
-	CreatorID int64 `xorm:"NOT NULL"`
+	ProjectID int64            `xorm:"INDEX NOT NULL"`
+	Project   *Project         `xorm:"-"`
+	CreatorID int64            `xorm:"NOT NULL"`
+	Creator   *user_model.User `xorm:"-"`
 
 	CreatedUnix timeutil.TimeStamp `xorm:"INDEX created"`
 	UpdatedUnix timeutil.TimeStamp `xorm:"INDEX updated"`
@@ -244,6 +247,22 @@ func (p *Project) GetBoards(ctx context.Context) (BoardList, error) {
 	return append([]*Board{defaultB}, boards...), nil
 }
 
+func GetBoardsAndCount(ctx context.Context, projectID int64) (BoardList, int64, error) {
+	engine := db.GetEngine(ctx)
+	boards := make([]*Board, 0, 10)
+
+	defaultB, err := getDefaultBoard(ctx, projectID)
+	if err != nil {
+		return nil, 0, err
+	}
+
+	count, err := engine.Where("project_id=? AND `default`=?", projectID, false).OrderBy("Sorting").FindAndCount(&boards)
+	if err != nil {
+		return nil, 0, err
+	}
+	return append([]*Board{defaultB}, boards...), count + 1, nil
+}
+
 // getDefaultBoard return default board and create a dummy if none exist
 func (p *Project) getDefaultBoard(ctx context.Context) (*Board, error) {
 	var board Board
@@ -292,5 +311,62 @@ func UpdateBoardSorting(bs BoardList) error {
 			return err
 		}
 	}
+	return nil
+}
+
+// LoadBoardCreator load creator of project board.
+func (b *Board) LoadBoardCreator(ctx context.Context) (err error) {
+	if b.Creator == nil {
+		b.Creator, err = user_model.GetUserByID(ctx, b.CreatorID)
+		if err != nil {
+			return fmt.Errorf("getUserByID [%d]: %v", b.CreatorID, err)
+		}
+	}
+	return nil
+}
+
+// LoadProject load project of project board.
+func (b *Board) LoadProject(ctx context.Context) (err error) {
+	if b.Project == nil {
+		b.Project, err = GetProjectByID(ctx, b.ProjectID)
+		if err != nil {
+			return fmt.Errorf("getProjectByID [%d]: %v", b.CreatorID, err)
+		}
+	}
+	return nil
+}
+
+// LoadAttributes load projects and creators of project boards.
+func (bl BoardList) LoadAttributes(ctx context.Context) (err error) {
+	creators := make(map[int64]*user_model.User)
+	projects := make(map[int64]*Project)
+	var ok bool
+
+	for i := range bl {
+		if bl[i].Project == nil {
+			bl[i].Project, ok = projects[bl[i].ProjectID]
+			if !ok {
+				project, err := GetProjectByID(ctx, bl[i].ProjectID)
+				if err != nil {
+					return fmt.Errorf("getProjectByID [%d]: %v", bl[i].ProjectID, err)
+				}
+				bl[i].Project = project
+				projects[bl[i].ProjectID] = project
+			}
+		}
+
+		if bl[i].Creator == nil {
+			bl[i].Creator, ok = creators[bl[i].CreatorID]
+			if !ok {
+				creator, err := user_model.GetUserByID(ctx, bl[i].CreatorID)
+				if err != nil {
+					return fmt.Errorf("getUserByID [%d]: %v", bl[i].CreatorID, err)
+				}
+				bl[i].Creator = creator
+				creators[bl[i].CreatorID] = creator
+			}
+		}
+	}
+
 	return nil
 }

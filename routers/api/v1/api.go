@@ -1013,9 +1013,28 @@ func Routes() *web.Route {
 					m.Post("/new", reqToken(), mustNotBeArchived, reqRepoWriter(unit.TypeWiki), bind(api.CreateWikiPageOptions{}), repo.NewWikiPage)
 					m.Get("/pages", repo.ListWikiPages)
 				}, mustEnableWiki)
-				m.Post("/markup", reqToken(), bind(api.MarkupOption{}), misc.Markup)
-				m.Post("/markdown", reqToken(), bind(api.MarkdownOption{}), misc.Markdown)
-				m.Post("/markdown/raw", reqToken(), misc.MarkdownRaw)
+				m.Group("/projects", func() {
+					m.Combo("").
+						Get(reqToken(auth_model.AccessTokenScopeRepo), repo.ListRepositoryProjects).
+						Post(reqToken(auth_model.AccessTokenScopeRepo), mustNotBeArchived, bind(api.NewProjectPayload{}), repo.CreateRepositoryProject)
+				})
+				m.Group("/labels", func() {
+					m.Combo("").Get(repo.ListLabels).
+						Post(reqToken(auth_model.AccessTokenScopeRepo), reqRepoWriter(unit.TypeIssues, unit.TypePullRequests), bind(api.CreateLabelOption{}), repo.CreateLabel)
+					m.Combo("/{id}").Get(repo.GetLabel).
+						Patch(reqToken(auth_model.AccessTokenScopeRepo), reqRepoWriter(unit.TypeIssues, unit.TypePullRequests), bind(api.EditLabelOption{}), repo.EditLabel).
+						Delete(reqToken(auth_model.AccessTokenScopeRepo), reqRepoWriter(unit.TypeIssues, unit.TypePullRequests), repo.DeleteLabel)
+				})
+				m.Post("/markup", reqToken(auth_model.AccessTokenScopeRepo), bind(api.MarkupOption{}), misc.Markup)
+				m.Post("/markdown", reqToken(auth_model.AccessTokenScopeRepo), bind(api.MarkdownOption{}), misc.Markdown)
+				m.Post("/markdown/raw", reqToken(auth_model.AccessTokenScopeRepo), misc.MarkdownRaw)
+				m.Group("/milestones", func() {
+					m.Combo("").Get(repo.ListMilestones).
+						Post(reqToken(auth_model.AccessTokenScopeRepo), reqRepoWriter(unit.TypeIssues, unit.TypePullRequests), bind(api.CreateMilestoneOption{}), repo.CreateMilestone)
+					m.Combo("/{id}").Get(repo.GetMilestone).
+						Patch(reqToken(auth_model.AccessTokenScopeRepo), reqRepoWriter(unit.TypeIssues, unit.TypePullRequests), bind(api.EditMilestoneOption{}), repo.EditMilestone).
+						Delete(reqToken(auth_model.AccessTokenScopeRepo), reqRepoWriter(unit.TypeIssues, unit.TypePullRequests), repo.DeleteMilestone)
+				})
 				m.Get("/stargazers", repo.ListStargazers)
 				m.Get("/subscribers", repo.ListSubscribers)
 				m.Group("/subscription", func() {
@@ -1392,7 +1411,28 @@ func Routes() *web.Route {
 
 		m.Group("/topics", func() {
 			m.Get("/search", repo.TopicSearch)
-		}, tokenRequiresScopes(auth_model.AccessTokenScopeCategoryRepository))
+    }, tokenRequiresScopes(auth_model.AccessTokenScopeCategoryRepository))
+    
+    // Projects
+		m.Group("/projects", func() {
+			m.Group("/{id}", func() {
+				m.Combo("").
+					Get(reqToken(auth_model.AccessTokenScopeRepo), reqRepoReader(unit.TypeProjects), repo.GetProject).
+					Patch(reqToken(auth_model.AccessTokenScopeRepo), reqRepoWriter(unit.TypeProjects), bind(api.UpdateProjectPayload{}), repo.UpdateProject).
+					Delete(reqToken(auth_model.AccessTokenScopeRepo), reqRepoWriter(unit.TypeProjects), repo.DeleteProject)
+
+				m.Combo("/boards").
+					Post(reqToken(auth_model.AccessTokenScopeRepo), reqRepoWriter(unit.TypeProjects), bind(api.NewProjectBoardPayload{}), repo.CreateProjectBoard).
+					Get(reqToken(auth_model.AccessTokenScopeRepo), reqRepoReader(unit.TypeProjects), repo.ListProjectBoards)
+			})
+
+			m.Group("/boards", func() {
+				m.Combo("/{id}").
+					Get(reqToken(auth_model.AccessTokenScopeRepo), repo.GetProjectBoard).
+					Patch(reqToken(auth_model.AccessTokenScopeRepo), bind(api.UpdateProjectBoardPayload{}), repo.UpdateProjectBoard).
+					Delete(reqToken(auth_model.AccessTokenScopeRepo), repo.DeleteProjectBoard)
+			})
+		})
 	}, sudo())
 
 	return m

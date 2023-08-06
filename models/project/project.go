@@ -85,6 +85,9 @@ func (err ErrProjectBoardNotExist) Unwrap() error {
 	return util.ErrNotExist
 }
 
+// List is a list of projects
+// type List []*Project
+
 // Project represents a project board
 type Project struct {
 	ID          int64                  `xorm:"pk autoincr"`
@@ -95,6 +98,7 @@ type Project struct {
 	RepoID      int64                  `xorm:"INDEX"`
 	Repo        *repo_model.Repository `xorm:"-"`
 	CreatorID   int64                  `xorm:"NOT NULL"`
+	Creator     *user_model.User       `xorm:"-"`
 	IsClosed    bool                   `xorm:"INDEX"`
 	BoardType   BoardType
 	CardType    CardType
@@ -115,15 +119,6 @@ func (p *Project) LoadOwner(ctx context.Context) (err error) {
 	return err
 }
 
-func (p *Project) LoadRepo(ctx context.Context) (err error) {
-	if p.RepoID == 0 || p.Repo != nil {
-		return nil
-	}
-	p.Repo, err = repo_model.GetRepositoryByID(ctx, p.RepoID)
-	return err
-}
-
-// Link returns the project's relative URL.
 func (p *Project) Link() string {
 	if p.OwnerID > 0 {
 		err := p.LoadOwner(db.DefaultContext)
@@ -421,6 +416,28 @@ func DeleteProjectByID(ctx context.Context, id int64) error {
 
 		return updateRepositoryProjectCount(ctx, p.RepoID)
 	})
+}
+
+// LoadRepo load repo of the project.
+func (p *Project) LoadRepo(ctx context.Context) (err error) {
+	if p.Repo == nil {
+		p.Repo, err = repo_model.GetRepositoryByID(ctx, p.RepoID)
+		if err != nil {
+			return fmt.Errorf("getRepositoryByID [%d]: %v", p.RepoID, err)
+		}
+	}
+	return nil
+}
+
+// LoadCreator load creator of the project.
+func (p *Project) LoadCreator(ctx context.Context) (err error) {
+	if p.Creator == nil {
+		p.Creator, err = user_model.GetUserByID(ctx, p.CreatorID)
+		if err != nil {
+			return fmt.Errorf("getUserByID [%d]: %v", p.CreatorID, err)
+		}
+	}
+	return nil
 }
 
 func DeleteProjectByRepoID(ctx context.Context, repoID int64) error {
