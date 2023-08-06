@@ -279,6 +279,7 @@ func (p *Project) getDefaultBoard(ctx context.Context) (*Board, error) {
 		ProjectID: p.ID,
 		Title:     "Uncategorized",
 		Default:   true,
+		CreatorID: p.CreatorID,
 	}, nil
 }
 
