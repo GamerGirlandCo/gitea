@@ -36,9 +36,11 @@ func GetProject(ctx *context.APIContext) {
 	project_id := ctx.ParamsInt64(":id")
 	project, err := project_model.GetProjectByID(ctx, project_id)
 
-	if project.RepoID != ctx.Repo.Repository.ID {
-		ctx.Error(http.StatusInternalServerError, "GetProjectByID", err)
-		return
+	if ctx.Repo.Repository != nil {
+		if project.RepoID != ctx.Repo.Repository.ID {
+			ctx.Error(http.StatusInternalServerError, "GetProjectByID", err)
+			return
+		}
 	}
 
 	if err != nil {
@@ -80,9 +82,11 @@ func UpdateProject(ctx *context.APIContext) {
 	form := web.GetForm(ctx).(*api.UpdateProjectPayload)
 	project, err := project_model.GetProjectByID(ctx, ctx.ParamsInt64(":id"))
 
-	if project.RepoID != ctx.Repo.Repository.ID {
-		ctx.Error(http.StatusInternalServerError, "UpdateProject", err)
-		return
+	if ctx.Repo != nil {
+		if project.RepoID != ctx.Repo.Repository.ID {
+			ctx.Error(http.StatusInternalServerError, "UpdateProject", err)
+			return
+		}
 	}
 
 	if err != nil {
@@ -128,9 +132,11 @@ func DeleteProject(ctx *context.APIContext) {
 	project_id := ctx.ParamsInt64(":id")
 	project, err := project_model.GetProjectByID(ctx, project_id)
 
-	if project.RepoID != ctx.Repo.Repository.ID {
-		ctx.Error(http.StatusInternalServerError, "DeleteProject", err)
-		return
+	if ctx.Repo.Repository != nil {
+		if project.RepoID != ctx.Repo.Repository.ID {
+			ctx.Error(http.StatusInternalServerError, "DeleteProject", err)
+			return
+		}
 	}
 
 	err = project_model.DeleteProjectByID(ctx, project_id)
