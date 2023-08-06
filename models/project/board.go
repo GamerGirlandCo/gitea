@@ -250,8 +250,11 @@ func (p *Project) GetBoards(ctx context.Context) (BoardList, error) {
 func GetBoardsAndCount(ctx context.Context, projectID int64) (BoardList, int64, error) {
 	engine := db.GetEngine(ctx)
 	boards := make([]*Board, 0, 10)
-
-	defaultB, err := getDefaultBoard(ctx, projectID)
+	project, err := GetProjectByID(ctx, projectID)
+	if err != nil {
+		return nil, 0, err
+	}
+	defaultB, err := project.getDefaultBoard(ctx)
 	if err != nil {
 		return nil, 0, err
 	}
