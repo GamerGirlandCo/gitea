@@ -136,10 +136,21 @@ func (opts FindGroupsOptions) ToConds() builder.Cond {
 	if opts.OwnerID != 0 {
 		cond = cond.And(builder.Eq{"owner_id": opts.OwnerID})
 	}
-	if opts.ParentGroupID != 0 {
+	if opts.ParentGroupID > 0 {
 		cond = cond.And(builder.Eq{"parent_group_id": opts.ParentGroupID})
-	} else {
-		cond = cond.And(builder.IsNull{"parent_group_id"})
+	} else if opts.ParentGroupID == 0 {
+		cond = cond.And(builder.Eq{"parent_group_id": 0})
+	}
+	if opts.CanCreateIn.Has() && opts.ActorID > 0 {
+		cond = cond.And(builder.In("id",
+			builder.Select("group_team.group_id").
+				From("group_team").
+				Where(builder.Eq{"team_user.uid": opts.ActorID}).
+				Join("INNER", "team_user", "team_user.team_id = group_team.team_id").
+				And(builder.Eq{"group_team.can_create_in": true})))
+	}
+	if opts.Name != "" {
+		cond = cond.And(builder.Eq{"lower_name": opts.Name})
 	}
 	return cond
 }
