@@ -71,3 +71,11 @@ func KeysOfMap[K comparable, V any](m map[K]V) []K {
 	}
 	return keys
 }
+
+func SliceMap[T any, R any](slice []T, mapper func(it T) R) []R {
+	ret := make([]R, 0)
+	for _, it := range slice {
+		ret = append(ret, mapper(it))
+	}
+	return ret
+}
