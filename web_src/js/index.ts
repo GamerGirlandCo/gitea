@@ -67,6 +67,7 @@ import {callInitFunctions} from './modules/init.ts';
 import {initRepoViewFileTree} from './features/repo-view-file-tree.ts';
 import {initActionsPermissionsForm} from './features/common-actions-permissions.ts';
 import {initGlobalShortcut} from './modules/shortcut.ts';
+import {initCommonGroup, initGroup} from "./features/group.ts";
 
 const initStartTime = performance.now();
 const initPerformanceTracer = callInitFunctions([
@@ -159,6 +160,9 @@ const initPerformanceTracer = callInitFunctions([
   initOAuth2SettingsDisableCheckbox,
 
   initRepoFileView,
+
+  initCommonGroup,
+  initGroup,
   initActionsPermissionsForm,
 ]);
 
@@ -170,17 +174,5 @@ const initDur = performance.now() - initStartTime;
 if (initDur > 500) {
   console.error(`slow init functions took ${initDur.toFixed(3)}ms`);
 }
-
-// https://htmx.org/events/#htmx:sendError
-type HtmxEvent = Event & {detail: HtmxResponseInfo};
-document.body.addEventListener('htmx:sendError', (event) => {
-  // TODO: add translations
-  showErrorToast(`Network error when calling ${(event as HtmxEvent).detail.requestConfig.path}`);
-});
-// https://htmx.org/events/#htmx:responseError
-document.body.addEventListener('htmx:responseError', (event) => {
-  // TODO: add translations
-  showErrorToast(`Error ${(event as HtmxEvent).detail.xhr.status} when calling ${(event as HtmxEvent).detail.requestConfig.path}`);
-});
 
 document.dispatchEvent(new CustomEvent('gitea:index-ready'));
