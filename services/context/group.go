@@ -4,6 +4,9 @@
 package context
 
 import (
+	"context"
+	"strings"
+
 	group_model "code.gitea.io/gitea/models/group"
 	"code.gitea.io/gitea/models/organization"
 	"code.gitea.io/gitea/models/perm"
@@ -15,8 +18,6 @@ import (
 	"code.gitea.io/gitea/modules/markup/markdown"
 	"code.gitea.io/gitea/modules/setting"
 	"code.gitea.io/gitea/modules/structs"
-	"context"
-	"strings"
 )
 
 type RepoGroup struct {
@@ -39,6 +40,7 @@ func (g *RepoGroup) CanWriteUnit(ctx *Context, unitType unit.Type) bool {
 func (g *RepoGroup) CanReadUnit(ctx *Context, unitType unit.Type) bool {
 	return g.UnitPermission(ctx, ctx.Doer, unitType) >= perm.AccessModeRead
 }
+
 func (g *RepoGroup) UnitPermission(ctx context.Context, doer *user_model.User, unitType unit.Type) perm.AccessMode {
 	if doer != nil {
 		teams, err := organization.GetUserGroupTeams(ctx, g.Group.ID, doer.ID)
@@ -198,7 +200,7 @@ func GroupAssignment(args GroupAssignmentOptions) func(ctx *Context) {
 		if len(teamName) > 0 {
 			teamExists := false
 			for _, team := range ctx.RepoGroup.Teams {
-				if team.LowerName == strings.ToLower(teamName) {
+				if strings.EqualFold(team.LowerName, strings.ToLower(teamName)) {
 					teamExists = true
 					var groupTeam *group_model.RepoGroupTeam
 					groupTeam, err = group_model.FindGroupTeamByTeamID(ctx, group.ID, team.ID)
