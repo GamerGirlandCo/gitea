@@ -142,7 +142,7 @@ jobs:
 			t.Run("test "+tc.treePath, func(t *testing.T) {
 				// create the workflow file
 				opts := getWorkflowCreateFileOptions(user2, apiRepo.DefaultBranch, "create "+tc.treePath, tc.fileContent)
-				fileResp := createWorkflowFile(t, token, user2.Name, apiRepo.Name, tc.treePath, opts)
+				fileResp := createWorkflowFile(t, token, user2.Name, apiRepo.Name, tc.treePath, apiRepo.GroupID, opts)
 
 				// fetch and execute task
 				for i := 0; i < len(tc.outcomes); i++ {
@@ -154,7 +154,7 @@ jobs:
 				}
 
 				// check result
-				req := NewRequest(t, "GET", fmt.Sprintf("/api/v1/repos/%s/%s/actions/tasks", user2.Name, apiRepo.Name)).
+				req := NewRequest(t, "GET", fmt.Sprintf("/api/v1/repos/%s/%d/%s/actions/tasks", user2.Name, apiRepo.GroupID, apiRepo.Name)).
 					AddTokenAuth(token)
 				resp := MakeRequest(t, req, http.StatusOK)
 				var actionTaskRespAfter api.ActionTaskResponse
@@ -324,7 +324,7 @@ jobs:
 		for _, tc := range testCases {
 			t.Run("test "+tc.treePath, func(t *testing.T) {
 				opts := getWorkflowCreateFileOptions(user2, apiRepo.DefaultBranch, "create "+tc.treePath, tc.fileContent)
-				createWorkflowFile(t, token, user2.Name, apiRepo.Name, tc.treePath, opts)
+				createWorkflowFile(t, token, user2.Name, apiRepo.Name, tc.treePath, apiRepo.GroupID, opts)
 
 				for i := 0; i < len(tc.outcomes); i++ {
 					task := runner.fetchTask(t)
@@ -490,7 +490,7 @@ jobs:
       - run: echo 'test the pull'
 `
 		opts := getWorkflowCreateFileOptions(user2, baseRepo.DefaultBranch, "create "+wfTreePath, wfFileContent)
-		createWorkflowFile(t, user2Token, baseRepo.OwnerName, baseRepo.Name, wfTreePath, opts)
+		createWorkflowFile(t, user2Token, baseRepo.OwnerName, baseRepo.Name, wfTreePath, baseRepo.GroupID, opts)
 		// user2 creates a pull request
 		doAPICreateFile(user2APICtx, "user2-patch.txt", &api.CreateFileOptions{
 			FileOptions: api.FileOptions{
@@ -582,7 +582,7 @@ jobs:
       - run: echo 'test the pull'
 `
 		opts := getWorkflowCreateFileOptions(user2, baseRepo.DefaultBranch, "create "+wfTreePath, wfFileContent)
-		createWorkflowFile(t, user2Token, baseRepo.OwnerName, baseRepo.Name, wfTreePath, opts)
+		createWorkflowFile(t, user2Token, baseRepo.OwnerName, baseRepo.Name, wfTreePath, baseRepo.GroupID, opts)
 		// user2 creates a pull request
 		doAPICreateFile(user2APICtx, "user2-patch.txt", &api.CreateFileOptions{
 			FileOptions: api.FileOptions{
@@ -734,8 +734,8 @@ func getWorkflowCreateFileOptions(u *user_model.User, branch, msg, content strin
 	}
 }
 
-func createWorkflowFile(t *testing.T, authToken, ownerName, repoName, treePath string, opts *api.CreateFileOptions) *api.FileResponse {
-	req := NewRequestWithJSON(t, "POST", fmt.Sprintf("/api/v1/repos/%s/%s/contents/%s", ownerName, repoName, treePath), opts).
+func createWorkflowFile(t *testing.T, authToken, ownerName, repoName, treePath string, groupID int64, opts *api.CreateFileOptions) *api.FileResponse {
+	req := NewRequestWithJSON(t, "POST", fmt.Sprintf("/api/v1/repos/%s/%d/%s/contents/%s", ownerName, groupID, repoName, treePath), opts).
 		AddTokenAuth(authToken)
 	resp := MakeRequest(t, req, http.StatusCreated)
 	var fileResponse api.FileResponse
