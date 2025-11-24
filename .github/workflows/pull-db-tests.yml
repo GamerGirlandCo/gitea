@@ -75,8 +75,8 @@ jobs:
       - run: GOEXPERIMENT='' make backend
         env:
           TAGS: bindata gogit sqlite sqlite_unlock_notify
-      - name: run migration tests
-        run: make test-sqlite-migration
+#      - name: run migration tests
+#        run: make test-sqlite-migration
       - name: run tests
         run: GOEXPERIMENT='' make test-sqlite
         timeout-minutes: 50

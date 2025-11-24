@@ -65,6 +65,7 @@ func TestAPIRepoBranchesPlain(t *testing.T) {
 		assert.NoError(t, err)
 		var branch2 api.Branch
 		assert.NoError(t, json.Unmarshal(bs, &branch2))
+		t.Logf("PROBLEMATIC BRANCH %+v\n", branch2)
 		assert.Equal(t, "test_branch2", branch2.Name)
 		assert.Equal(t, branch.Commit.ID, branch2.Commit.ID)
 
