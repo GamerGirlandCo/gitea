@@ -4,7 +4,6 @@
 package integration
 
 import (
-	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
@@ -172,11 +171,8 @@ func testAPICreateBranches(t *testing.T, giteaURL *url.URL) {
 
 func testAPICreateBranch(t testing.TB, session *TestSession, groupID int64, user, repo, oldBranch, newBranch string, status int) bool {
 	token := getTokenForLoggedInUser(t, session, auth_model.AccessTokenScopeWriteRepository)
-	var groupSegment string
-	if groupID > 0 {
-		groupSegment = fmt.Sprintf("%d/", groupID)
-	}
-	req := NewRequestWithJSON(t, "POST", "/api/v1/repos/"+user+"/"+groupSegment+repo+"/branches", &api.CreateBranchRepoOption{
+
+	req := NewRequestWithJSON(t, "POST", "/api/v1/repos/"+user+"/"+maybeGroupSegment(groupID)+repo+"/branches", &api.CreateBranchRepoOption{
 		BranchName:    newBranch,
 		OldBranchName: oldBranch,
 	}).AddTokenAuth(token)
