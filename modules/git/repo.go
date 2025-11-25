@@ -17,6 +17,7 @@ import (
 	"time"
 
 	"code.gitea.io/gitea/modules/git/gitcmd"
+	"code.gitea.io/gitea/modules/log"
 	"code.gitea.io/gitea/modules/proxy"
 )
 
@@ -213,8 +214,10 @@ func Push(ctx context.Context, repoPath string, opts PushOptions) error {
 		remoteBranchArgs = append(remoteBranchArgs, opts.Branch)
 	}
 	cmd.AddDashesAndList(remoteBranchArgs...)
-
+	log.Info("REPO %s\n", repoPath)
 	stdout, stderr, err := cmd.WithEnv(opts.Env).WithTimeout(opts.Timeout).WithDir(repoPath).RunStdString(ctx)
+	log.Info("STDOUT = '%s'\n", stdout)
+	log.Info("STERR = '%s'\n", stderr)
 	if err != nil {
 		if strings.Contains(stderr, "non-fast-forward") {
 			return &ErrPushOutOfDate{StdOut: stdout, StdErr: stderr, Err: err}
