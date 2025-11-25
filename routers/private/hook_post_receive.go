@@ -43,6 +43,8 @@ func HookPostReceive(ctx *gitea_context.PrivateContext) {
 	repoName := ctx.PathParam("repo")
 	groupID := ctx.PathParamInt64("group_id")
 
+	log.Info("PARAMS: owner=%s; repo=%s; group_id=%d\n", ownerName, repoName, groupID)
+
 	// defer getting the repository at this point - as we should only retrieve it if we're going to call update
 	var (
 		repo    *repo_model.Repository
@@ -52,6 +54,8 @@ func HookPostReceive(ctx *gitea_context.PrivateContext) {
 
 	updates := make([]*repo_module.PushUpdateOptions, 0, len(opts.OldCommitIDs))
 	wasEmpty := false
+
+	log.Info("COMMITS: %+v", opts.OldCommitIDs)
 
 	for i := range opts.OldCommitIDs {
 		refFullName := opts.RefFullNames[i]
@@ -122,6 +126,7 @@ func HookPostReceive(ctx *gitea_context.PrivateContext) {
 				pull_service.UpdatePullsRefs(ctx, repo, update)
 			}
 		}
+		log.Info("BRANCHES TO SYNC: %+v\n", branchesToSync)
 		if len(branchesToSync) > 0 {
 			var err error
 			gitRepo, err = gitrepo.OpenRepository(ctx, repo)
