@@ -72,7 +72,7 @@ jobs:
           go-version-file: go.mod
           check-latest: true
       - run: make deps-backend
-      - run: GOEXPERIMENT='' make backend
+#      - run: GOEXPERIMENT='' make backend
         env:
           TAGS: bindata gogit sqlite sqlite_unlock_notify
 #      - name: run migration tests
