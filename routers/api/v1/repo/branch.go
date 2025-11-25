@@ -375,7 +375,7 @@ func ListBranches(ctx *context.APIContext) {
 			}
 			apiBranches = append(apiBranches, apiBranch)
 		}
-		log.Log(0, log.INFO, "%+v\n", branches)
+		log.Log(0, log.INFO, " ---> %+v\n", branches)
 	}
 
 	ctx.SetLinkHeader(int(totalNumOfBranches), listOptions.PageSize)
