@@ -41,6 +41,9 @@ func HookPostReceive(ctx *gitea_context.PrivateContext) {
 
 	ownerName := ctx.PathParam("owner")
 	repoName := ctx.PathParam("repo")
+	groupID := ctx.PathParamInt64("group_id")
+
+	log.Info("PARAMS: owner=%s; repo=%s; group_id=%d\n", ownerName, repoName, groupID)
 
 	// defer getting the repository at this point - as we should only retrieve it if we're going to call update
 	var (
@@ -52,6 +55,8 @@ func HookPostReceive(ctx *gitea_context.PrivateContext) {
 	updates := make([]*repo_module.PushUpdateOptions, 0, len(opts.OldCommitIDs))
 	wasEmpty := false
 
+	log.Info("COMMITS: %+v", opts.OldCommitIDs)
+
 	for i := range opts.OldCommitIDs {
 		refFullName := opts.RefFullNames[i]
 
@@ -61,7 +66,7 @@ func HookPostReceive(ctx *gitea_context.PrivateContext) {
 		// may be a very large number of them).
 		if refFullName.IsBranch() || refFullName.IsTag() {
 			if repo == nil {
-				repo = loadRepository(ctx, ownerName, repoName)
+				repo = loadRepository(ctx, ownerName, repoName, groupID)
 				if ctx.Written() {
 					// Error handled in loadRepository
 					return
@@ -75,6 +80,7 @@ func HookPostReceive(ctx *gitea_context.PrivateContext) {
 				NewCommitID:  opts.NewCommitIDs[i],
 				PusherID:     opts.UserID,
 				PusherName:   opts.UserName,
+				RepoGroupID:  groupID,
 				RepoUserName: ownerName,
 				RepoName:     repoName,
 			}
@@ -98,7 +104,7 @@ func HookPostReceive(ctx *gitea_context.PrivateContext) {
 				continue
 			}
 			if repo == nil {
-				repo = loadRepository(ctx, ownerName, repoName)
+				repo = loadRepository(ctx, ownerName, repoName, groupID)
 				if ctx.Written() {
 					return
 				}
@@ -120,6 +126,7 @@ func HookPostReceive(ctx *gitea_context.PrivateContext) {
 				pull_service.UpdatePullsRefs(ctx, repo, update)
 			}
 		}
+		log.Info("BRANCHES TO SYNC: %+v\n", branchesToSync)
 		if len(branchesToSync) > 0 {
 			var err error
 			gitRepo, err = gitrepo.OpenRepository(ctx, repo)
@@ -176,7 +183,7 @@ func HookPostReceive(ctx *gitea_context.PrivateContext) {
 	if isPrivate.Has() || isTemplate.Has() {
 		// load the repository
 		if repo == nil {
-			repo = loadRepository(ctx, ownerName, repoName)
+			repo = loadRepository(ctx, ownerName, repoName, groupID)
 			if ctx.Written() {
 				// Error handled in loadRepository
 				return
@@ -239,7 +246,7 @@ func HookPostReceive(ctx *gitea_context.PrivateContext) {
 		if !git.IsEmptyCommitID(newCommitID) && refFullName.IsBranch() {
 			// First ensure we have the repository loaded, we're allowed pulls requests and we can get the base repo
 			if repo == nil {
-				repo = loadRepository(ctx, ownerName, repoName)
+				repo = loadRepository(ctx, ownerName, repoName, groupID)
 				if ctx.Written() {
 					return
 				}

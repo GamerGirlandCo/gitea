@@ -15,6 +15,7 @@ import (
 	user_model "code.gitea.io/gitea/models/user"
 	"code.gitea.io/gitea/modules/git"
 	"code.gitea.io/gitea/modules/gitrepo"
+	"code.gitea.io/gitea/modules/log"
 	"code.gitea.io/gitea/modules/optional"
 	repo_module "code.gitea.io/gitea/modules/repository"
 	api "code.gitea.io/gitea/modules/structs"
@@ -358,6 +359,7 @@ func ListBranches(ctx *context.APIContext) {
 			if err != nil {
 				// Skip if this branch doesn't exist anymore.
 				if git.IsErrNotExist(err) {
+					log.Log(0, log.INFO, "BRANCH %s DOES NOT EXIST?!", branches[i].Name)
 					totalNumOfBranches--
 					continue
 				}
@@ -373,6 +375,7 @@ func ListBranches(ctx *context.APIContext) {
 			}
 			apiBranches = append(apiBranches, apiBranch)
 		}
+		log.Log(0, log.INFO, " ---> %+v\n", branches)
 	}
 
 	ctx.SetLinkHeader(int(totalNumOfBranches), listOptions.PageSize)

@@ -107,12 +107,14 @@ func ChangeRepoFiles(ctx context.Context, repo *repo_model.Repository, doer *use
 
 	gitRepo, closer, err := gitrepo.RepositoryFromContextOrOpen(ctx, repo)
 	if err != nil {
+		log.Error("error getting git repo: %s", err.Error())
 		return nil, err
 	}
 	defer closer.Close()
 
 	// oldBranch must exist for this operation
 	if exist, err := git_model.IsBranchExist(ctx, repo.ID, opts.OldBranch); err != nil {
+		log.Error("error getting checking branch: %s", err.Error())
 		return nil, err
 	} else if !exist && !repo.IsEmpty {
 		return nil, git_model.ErrBranchNotExist{
