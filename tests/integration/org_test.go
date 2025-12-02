@@ -11,12 +11,14 @@ import (
 
 	auth_model "code.gitea.io/gitea/models/auth"
 	"code.gitea.io/gitea/models/db"
+	group_model "code.gitea.io/gitea/models/group"
 	"code.gitea.io/gitea/models/organization"
 	"code.gitea.io/gitea/models/perm"
 	"code.gitea.io/gitea/models/unit"
 	"code.gitea.io/gitea/models/unittest"
 	user_model "code.gitea.io/gitea/models/user"
 	api "code.gitea.io/gitea/modules/structs"
+	group_service "code.gitea.io/gitea/services/group"
 	"code.gitea.io/gitea/tests"
 
 	"github.com/stretchr/testify/assert"
@@ -28,25 +30,33 @@ func TestOrgRepos(t *testing.T) {
 
 	var (
 		users = []string{"user1", "user2"}
-		cases = map[string][]string{
-			"alphabetically":        {"repo21", "repo3", "repo5"},
-			"reversealphabetically": {"repo5", "repo3", "repo21"},
+		cases = map[string]map[string][]string{
+			"129": {
+				"alphabetically":        {"repo21", "repo3"},
+				"reversealphabetically": {"repo3", "repo21"},
+			},
+			"139": {
+				"alphabetically":        {"repo5"},
+				"reversealphabetically": {"repo5"},
+			},
 		}
 	)
 
 	for _, user := range users {
 		t.Run(user, func(t *testing.T) {
 			session := loginUser(t, user)
-			for sortBy, repos := range cases {
-				req := NewRequest(t, "GET", "/org3?sort="+sortBy)
-				resp := session.MakeRequest(t, req, http.StatusOK)
+			for group, groupCases := range cases {
+				for sortBy, repos := range groupCases {
+					req := NewRequest(t, "GET", "/org3/groups/"+group+"?sort="+sortBy)
+					resp := session.MakeRequest(t, req, http.StatusOK)
 
-				htmlDoc := NewHTMLParser(t, resp.Body)
+					htmlDoc := NewHTMLParser(t, resp.Body)
 
-				sel := htmlDoc.doc.Find("a.name")
-				assert.Len(t, repos, len(sel.Nodes))
-				for i := range repos {
-					assert.Equal(t, repos[i], strings.TrimSpace(sel.Eq(i).Text()))
+					sel := htmlDoc.doc.Find("a.name")
+					assert.Len(t, repos, len(sel.Nodes))
+					for i := range repos {
+						assert.Equal(t, repos[i], strings.TrimSpace(sel.Eq(i).Text()))
+					}
 				}
 			}
 		})
@@ -193,6 +203,12 @@ func TestOrgRestrictedUser(t *testing.T) {
 	req = NewRequest(t, "PUT", fmt.Sprintf("/api/v1/teams/%d/members/%s", apiTeam.ID, restrictedUser)).
 		AddTokenAuth(token)
 	_ = adminSession.MakeRequest(t, req, http.StatusNoContent)
+
+	// we also need to give this new team access to the repo's group
+	g := unittest.AssertExistsAndLoadBean[*group_model.Group](t, &group_model.Group{
+		ID: int64(repoGroup),
+	})
+	assert.NoError(t, group_service.AddTeamToGroup(t.Context(), g, apiTeam.Name))
 
 	// Now we need to check if the restrictedUser can access the repo
 	req = NewRequest(t, "GET", "/"+orgName)

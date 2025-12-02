@@ -174,6 +174,35 @@ func (g *Group) ShortName(length int) string {
 	return util.EllipsisDisplayString(g.Name, length)
 }
 
+// Depth retrieves the depth/nesting level of this group
+func (g *Group) Depth(ctx context.Context) (d int) {
+	err := g.LoadParentGroup(ctx)
+	if err != nil {
+		return 0
+	}
+	pg := g.ParentGroup
+	for {
+		if pg == nil {
+			break
+		}
+		if pg.ParentGroup == nil {
+			err = pg.LoadParentGroup(ctx)
+			if err != nil {
+				return 0
+			}
+		}
+		d++
+		pg = pg.ParentGroup
+	}
+	return d
+}
+
+// DisplayLeftMargin generates a value for the left margin
+// displayed on the frontend beside this group
+func (g *Group) DisplayLeftMargin(ctx context.Context) string {
+	return fmt.Sprintf("%drem", g.Depth(ctx)+1)
+}
+
 func GetGroupByID(ctx context.Context, id int64) (*Group, error) {
 	group := new(Group)
 
@@ -328,6 +357,23 @@ func ParentGroupCond(ctx context.Context, idStr string, groupID int64) builder.C
 		return builder.NotIn(idStr)
 	}
 	return builder.In(idStr, groupList)
+}
+
+// ChildGroupCond returns a condition recursively matching a group and its descendants
+func ChildGroupCond(firstParent int64) builder.Cond {
+	if firstParent < 0 {
+		firstParent = 0
+	}
+	return builder.Expr(`with recursive groups as (
+		select * from repo_group
+		WHERE parent_group_id = ?
+
+		union all
+
+		select subgroup.*
+		from repo_group subgroup
+		join groups g on g.id = subgroup.parent_group_id
+	) select g.id from groups g`, firstParent)
 }
 
 func UpdateGroup(ctx context.Context, group *Group) error {
