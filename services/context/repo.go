@@ -19,6 +19,7 @@ import (
 	asymkey_model "code.gitea.io/gitea/models/asymkey"
 	"code.gitea.io/gitea/models/db"
 	git_model "code.gitea.io/gitea/models/git"
+	group_model "code.gitea.io/gitea/models/group"
 	issues_model "code.gitea.io/gitea/models/issues"
 	access_model "code.gitea.io/gitea/models/perm/access"
 	repo_model "code.gitea.io/gitea/models/repo"
@@ -655,6 +656,15 @@ func repoAssignmentPrepareTemplateData(ctx *Context, data *repoAssignmentPrepare
 	ctx.Data["Title"] = repo.Owner.Name + "/" + repo.Name
 	ctx.Data["PageTitleCommon"] = repo.Name + " - " + setting.AppName
 	ctx.Data["Repository"] = repo
+	if repo.GroupID > 0 {
+		if ctx.Data["Breadcrumbs"], err = group_model.GetParentGroupChain(ctx, repo.GroupID); err != nil {
+			ctx.ServerError("GetParentGroupChain", err)
+			return
+		}
+	} else {
+		ctx.Data["Breadcrumbs"] = nil
+	}
+
 	ctx.Data["Owner"] = ctx.Repo.Repository.Owner
 	ctx.Data["CanWriteCode"] = ctx.Repo.Permission.CanWrite(unit_model.TypeCode)
 	ctx.Data["CanWriteIssues"] = ctx.Repo.Permission.CanWrite(unit_model.TypeIssues)
