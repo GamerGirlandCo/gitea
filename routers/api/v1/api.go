@@ -1595,8 +1595,8 @@ func Routes() *web.Router {
 						Get(notify.ListRepoNotifications).
 						Put(notify.ReadRepoNotifications)
 				}, context.GroupAssignmentAPI(true), repoAssignment(), reqGroupMembership(perm.AccessModeRead, false), checkTokenPublicOnly())
-			}, tokenRequiresScopes(auth_model.AccessTokenScopeCategoryNotification))
-		})
+			})
+		}, tokenRequiresScopes(auth_model.AccessTokenScopeCategoryNotification))
 
 		// Issue (requires issue scope)
 		m.Group("/repos", func() {
