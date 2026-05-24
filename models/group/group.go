@@ -275,7 +275,6 @@ func groupPathCTEBuilder() string {
 }
 
 func GetGroupByPathname(ctx context.Context, ownerID int64, pathname string) (*Group, error) {
-
 	rawSQL := fmt.Sprintf(`%s
 SELECT *
 FROM groups

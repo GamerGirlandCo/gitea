@@ -602,7 +602,7 @@ func (repo *Repository) IsGenerated() bool {
 }
 
 // RepoPath returns repository path by given user and repository name.
-func RepoPath(userName, repoName string, groupPath string) string { //revive:disable-line:exported
+func RepoPath(userName, repoName, groupPath string) string { //revive:disable-line:exported
 	var joinArgs []string
 	joinArgs = append(joinArgs, user_model.UserPath(userName))
 	if len(groupPath) > 0 {
@@ -706,12 +706,12 @@ func groupSegmentWithTrailingSlash(groupPath string) string {
 }
 
 // ComposeHTTPSCloneURL returns HTTPS clone URL based on the given owner and repository name.
-func ComposeHTTPSCloneURL(ctx context.Context, owner, repo string, groupPath string) string {
+func ComposeHTTPSCloneURL(ctx context.Context, owner, repo, groupPath string) string {
 	return fmt.Sprintf("%s%s/%s%s.git", httplib.GuessCurrentAppURL(ctx), url.PathEscape(owner), groupSegmentWithTrailingSlash(groupPath), url.PathEscape(repo))
 }
 
 // ComposeSSHCloneURL returns SSH clone URL based on the given owner and repository name.
-func ComposeSSHCloneURL(doer *user_model.User, ownerName, repoName string, groupPath string) string {
+func ComposeSSHCloneURL(doer *user_model.User, ownerName, repoName, groupPath string) string {
 	sshUser := setting.SSH.User
 	sshDomain := setting.SSH.Domain
 
@@ -745,7 +745,7 @@ func ComposeSSHCloneURL(doer *user_model.User, ownerName, repoName string, group
 }
 
 // ComposeTeaCloneCommand returns Tea CLI clone command based on the given owner and repository name.
-func ComposeTeaCloneCommand(ctx context.Context, owner, repo string, groupPath string) string {
+func ComposeTeaCloneCommand(ctx context.Context, owner, repo, groupPath string) string {
 	return fmt.Sprintf("tea clone %s/%s%s", url.PathEscape(owner), groupSegmentWithTrailingSlash(groupPath), url.PathEscape(repo))
 }
 
@@ -919,7 +919,7 @@ func GetRepositoriesMapByIDs(ctx context.Context, ids []int64) (map[int64]*Repos
 	return repos, db.GetEngine(ctx).In("id", ids).Find(&repos)
 }
 
-func IsRepositoryModelExist(ctx context.Context, u *user_model.User, repoName string, groupPath string) (bool, error) {
+func IsRepositoryModelExist(ctx context.Context, u *user_model.User, repoName, groupPath string) (bool, error) {
 	grp, err := group.GetGroupByPathname(ctx, u.ID, groupPath)
 	if err != nil {
 		return false, err

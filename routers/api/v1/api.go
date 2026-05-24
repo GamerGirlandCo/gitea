@@ -1579,7 +1579,6 @@ func Routes() *web.Router {
 					m.Methods("HEAD,GET", "/<ball_type:tarball|zipball|bundle>/*", reqRepoReader(unit.TypeCode), context.ReferencesGitRepo(true), repo.DownloadArchive)
 				}, context.GroupAssignmentAPI(true), repoAssignment(), checkTokenPublicOnly())
 			})
-
 		}, tokenRequiresScopes(auth_model.AccessTokenScopeCategoryRepository))
 
 		// Artifacts direct download endpoint authenticates via signed url
@@ -1717,7 +1716,6 @@ func Routes() *web.Router {
 					})
 				}, context.GroupAssignmentAPI(true), repoAssignment(), checkTokenPublicOnly())
 			})
-
 		}, tokenRequiresScopes(auth_model.AccessTokenScopeCategoryIssue))
 
 		// NOTE: these are Gitea package management API - see packages.CommonRoutes and packages.DockerContainerRoutes for endpoints that implement package manager APIs
