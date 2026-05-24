@@ -1282,7 +1282,7 @@ func Routes() *web.Router {
 			m.Post("/migrate", reqToken(), bind(api.MigrateRepoOptions{}), repo.Migrate)
 			m.PathGroup("/{username}/*", func(m *web.RouterPathGroup) {
 				m.Group("/<repo_group:*>/<reponame>", func() {
-					m.Get("/compare/*", reqRepoReader(unit.TypeCode), repo.CompareDiff)
+					m.Get("/compare/<*:*>", reqRepoReader(unit.TypeCode), repo.CompareDiff)
 
 					m.Combo("").Get(reqAnyRepoReader(), repo.Get).
 						Delete(reqToken(), reqOwner(), repo.Delete).
@@ -1346,24 +1346,24 @@ func Routes() *web.Router {
 							Put(reqAdmin(), repo.AddTeam).
 							Delete(reqAdmin(), repo.DeleteTeam)
 					}, reqToken())
-					m.Get("/raw/*", context.ReferencesGitRepo(), context.RepoRefForAPI, reqRepoReader(unit.TypeCode), repo.GetRawFile)
-					m.Get("/media/*", context.ReferencesGitRepo(), context.RepoRefForAPI, reqRepoReader(unit.TypeCode), repo.GetRawFileOrLFS)
-					m.Methods("HEAD,GET", "/archive/*", reqRepoReader(unit.TypeCode), context.ReferencesGitRepo(true), repo.GetArchive)
+					m.Get("/raw/<*:*>", context.ReferencesGitRepo(), context.RepoRefForAPI, reqRepoReader(unit.TypeCode), repo.GetRawFile)
+					m.Get("/media/<*:*>", context.ReferencesGitRepo(), context.RepoRefForAPI, reqRepoReader(unit.TypeCode), repo.GetRawFileOrLFS)
+					m.Methods("HEAD,GET", "/archive/<*:*>", reqRepoReader(unit.TypeCode), context.ReferencesGitRepo(true), repo.GetArchive)
 					m.Combo("/forks").Get(repo.ListForks).
 						Post(reqToken(), reqRepoReader(unit.TypeCode), bind(api.CreateForkOption{}), repo.CreateFork)
 					m.Post("/merge-upstream", reqToken(), mustNotBeArchived, reqRepoWriter(unit.TypeCode), bind(api.MergeUpstreamRequest{}), repo.MergeUpstream)
 					m.Group("/branches", func() {
 						m.Get("", repo.ListBranches)
-						m.Get("/*", repo.GetBranch)
-						m.Delete("/*", reqToken(), reqRepoWriter(unit.TypeCode), mustNotBeArchived, repo.DeleteBranch)
+						m.Get("/<*:*>", repo.GetBranch)
+						m.Delete("/<*:*>", reqToken(), reqRepoWriter(unit.TypeCode), mustNotBeArchived, repo.DeleteBranch)
 						m.Post("", reqToken(), reqRepoWriter(unit.TypeCode), mustNotBeArchived, bind(api.CreateBranchRepoOption{}), repo.CreateBranch)
-						m.Put("/*", reqToken(), reqRepoWriter(unit.TypeCode), mustNotBeArchived, bind(api.UpdateBranchRepoOption{}), repo.UpdateBranch)
-						m.Patch("/*", reqToken(), reqRepoWriter(unit.TypeCode), mustNotBeArchived, bind(api.RenameBranchRepoOption{}), repo.RenameBranch)
+						m.Put("/<*:*>", reqToken(), reqRepoWriter(unit.TypeCode), mustNotBeArchived, bind(api.UpdateBranchRepoOption{}), repo.UpdateBranch)
+						m.Patch("/<*:*>", reqToken(), reqRepoWriter(unit.TypeCode), mustNotBeArchived, bind(api.RenameBranchRepoOption{}), repo.RenameBranch)
 					}, context.ReferencesGitRepo(), reqRepoReader(unit.TypeCode))
 					m.Group("/branch_protections", func() {
 						m.Get("", repo.ListBranchProtections)
 						m.Post("", bind(api.CreateBranchProtectionOption{}), mustNotBeArchived, repo.CreateBranchProtection)
-						m.Group("/*", func() {
+						m.Group("/<*:*>", func() {
 							m.Get("", repo.GetBranchProtection)
 							m.Patch("", bind(api.EditBranchProtectionOption{}), mustNotBeArchived, repo.EditBranchProtection)
 							m.Delete("", mustNotBeArchived, repo.DeleteBranchProtection)
@@ -1372,9 +1372,9 @@ func Routes() *web.Router {
 					}, reqToken(), reqAdmin())
 					m.Group("/tags", func() {
 						m.Get("", repo.ListTags)
-						m.Get("/*", repo.GetTag)
+						m.Get("/<*:*>", repo.GetTag)
 						m.Post("", reqToken(), reqRepoWriter(unit.TypeCode), mustNotBeArchived, bind(api.CreateTagOption{}), repo.CreateTag)
-						m.Delete("/*", reqToken(), reqRepoWriter(unit.TypeCode), mustNotBeArchived, repo.DeleteTag)
+						m.Delete("/<*:*>", reqToken(), reqRepoWriter(unit.TypeCode), mustNotBeArchived, repo.DeleteTag)
 					}, reqRepoReader(unit.TypeCode), context.ReferencesGitRepo(true))
 					m.Group("/tag_protections", func() {
 						m.Combo("").Get(repo.ListTagProtection).
@@ -1507,7 +1507,7 @@ func Routes() *web.Router {
 								Post(bind(api.PullReviewRequestOptions{}), repo.CreateReviewRequests)
 							m.Post("/comments/<id>/replies", reqToken(), mustNotBeArchived, bind(api.CreatePullReviewCommentReplyOptions{}), repo.CreatePullReviewCommentReply)
 						})
-						m.Get("/<base>/*", repo.GetPullRequestByBaseHead)
+						m.Get("/<base>/<*:*>", repo.GetPullRequestByBaseHead)
 					}, mustAllowPulls, reqRepoReader(unit.TypeCode), context.ReferencesGitRepo())
 					m.Group("/statuses", func() { // "/statuses/{sha>" only accepts commit ID
 						m.Combo("/<sha>").Get(repo.GetCommitStatuses).
@@ -1524,10 +1524,10 @@ func Routes() *web.Router {
 					m.Group("/git", func() {
 						m.Group("/commits", func() {
 							m.Get("/<sha>", repo.GetSingleCommit)
-							m.Get("/<sha}.{diffType:diff|patch>", repo.DownloadCommitDiffOrPatch)
+							m.Get("/<sha>.<diffType:diff|patch>", repo.DownloadCommitDiffOrPatch)
 						})
 						m.Get("/refs", repo.GetGitAllRefs)
-						m.Get("/refs/*", repo.GetGitRefs)
+						m.Get("/refs/<>", repo.GetGitRefs)
 						m.Get("/trees/<sha>", repo.GetTree)
 						m.Get("/blobs/<sha>", repo.GetBlob)
 						m.Get("/tags/<sha>", repo.GetAnnotatedTag)
@@ -1536,11 +1536,11 @@ func Routes() *web.Router {
 					m.Post("/diffpatch", mustEnableEditor, reqToken(), bind(api.ApplyDiffPatchFileOptions{}), repo.ReqChangeRepoFileOptionsAndCheck, repo.ApplyDiffPatch)
 					m.Group("/contents", func() {
 						m.Get("", repo.GetContentsList)
-						m.Get("/*", repo.GetContents)
+						m.Get("/<*:*>", repo.GetContents)
 						m.Group("", func() {
 							// "change file" operations, need permission to write to the target branch provided by the form
 							m.Post("", bind(api.ChangeFilesOptions{}), repo.ReqChangeRepoFileOptionsAndCheck, repo.ChangeFiles)
-							m.Group("/*", func() {
+							m.Group("/<*:*>", func() {
 								m.Post("", bind(api.CreateFileOptions{}), repo.ReqChangeRepoFileOptionsAndCheck, repo.CreateFile)
 								m.Put("", bind(api.UpdateFileOptions{}), repo.ReqChangeRepoFileOptionsAndCheck, repo.UpdateFile)
 								m.Delete("", bind(api.DeleteFileOptions{}), repo.ReqChangeRepoFileOptionsAndCheck, repo.DeleteFile)
@@ -1549,7 +1549,7 @@ func Routes() *web.Router {
 					}, reqRepoReader(unit.TypeCode), context.ReferencesGitRepo())
 					m.Group("/contents-ext", func() {
 						m.Get("", repo.GetContentsExt)
-						m.Get("/*", repo.GetContentsExt)
+						m.Get("/<*:*>", repo.GetContentsExt)
 					}, reqRepoReader(unit.TypeCode), context.ReferencesGitRepo())
 					m.Combo("/file-contents", reqRepoReader(unit.TypeCode), context.ReferencesGitRepo()).
 						Get(repo.GetFileContentsGet).
@@ -1576,7 +1576,7 @@ func Routes() *web.Router {
 						m.Delete("", repo.DeleteAvatar)
 					}, reqAdmin(), reqToken())
 
-					m.Methods("HEAD,GET", "/<ball_type:tarball|zipball|bundle>/*", reqRepoReader(unit.TypeCode), context.ReferencesGitRepo(true), repo.DownloadArchive)
+					m.Methods("HEAD,GET", "/<ball_type:tarball|zipball|bundle>/<*:*>", reqRepoReader(unit.TypeCode), context.ReferencesGitRepo(true), repo.DownloadArchive)
 				}, context.GroupAssignmentAPI(true), repoAssignment(), checkTokenPublicOnly())
 			})
 		}, tokenRequiresScopes(auth_model.AccessTokenScopeCategoryRepository))
