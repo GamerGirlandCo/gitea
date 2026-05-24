@@ -864,10 +864,11 @@ func GetRepositoryByOwnerAndName(ctx context.Context, ownerName, repoName, group
 
 // GetRepositoryByName returns the repository by given name under user if exists.
 func GetRepositoryByName(ctx context.Context, ownerID, groupID int64, name string) (*Repository, error) {
+	cond := builder.Eq{"`group_id`": groupID}
 	var repo Repository
 	has, err := db.GetEngine(ctx).
 		Where("`owner_id`=?", ownerID).
-		And("`group_id`=?", groupID).
+		And(cond).
 		And("`lower_name`=?", strings.ToLower(name)).
 		NoAutoCondition().
 		Get(&repo)
