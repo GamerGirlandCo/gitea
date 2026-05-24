@@ -8,7 +8,6 @@ import (
 	"fmt"
 	"net"
 	stdurl "net/url"
-	"strconv"
 	"strings"
 
 	"code.gitea.io/gitea/modules/httplib"
@@ -103,7 +102,7 @@ type RepositoryURL struct {
 
 	// if the URL belongs to current Gitea instance, then the below fields have values
 	OwnerName     string
-	GroupID       int64
+	GroupPath     string
 	RepoName      string
 	RemainingPath string
 }
@@ -125,25 +124,17 @@ func ParseRepositoryURL(ctx context.Context, repoURL string) (*RepositoryURL, er
 
 	fillPathParts := func(s string) {
 		s = strings.TrimPrefix(s, "/")
-		fields := strings.SplitN(s, "/", 3)
+		fields := strings.Split(s, "/")
 		if len(fields) >= 2 {
 			ret.OwnerName = fields[0]
-			ret.RepoName = strings.TrimSuffix(fields[1], ".git")
-			if len(fields) == 3 {
-				rest := strings.SplitN(fields[2], "/", 3)
-				if len(rest) >= 2 {
-					ret.GroupID, err = strconv.ParseInt(rest[0], 10, 64)
-					if err != nil {
-						ret.RemainingPath = "/" + fields[2]
-						return
-					}
-					ret.RepoName = strings.TrimSuffix(rest[1], ".git")
-					if len(rest) >= 3 {
-						ret.RemainingPath = "/" + strings.Join(rest[2:], "/")
-					}
-				} else {
-					ret.RemainingPath = "/" + rest[0]
-				}
+			if len(fields) >= 3 {
+				groupSegment := fields[1 : len(fields)-1]
+				ret.RepoName = strings.TrimSuffix(fields[len(fields)-1], ".git")
+
+				ret.GroupPath = strings.Join(groupSegment, "/")
+
+			} else {
+				ret.RepoName = strings.TrimSuffix(fields[1], ".git")
 			}
 		}
 	}
@@ -177,8 +168,8 @@ func ParseRepositoryURL(ctx context.Context, repoURL string) (*RepositoryURL, er
 func MakeRepositoryWebLink(repoURL *RepositoryURL) string {
 	if repoURL.OwnerName != "" {
 		var groupSegment string
-		if repoURL.GroupID > 0 {
-			groupSegment = "group/" + strconv.FormatInt(repoURL.GroupID, 10) + "/"
+		if repoURL.GroupPath != "" {
+			groupSegment = strings.Join(util.SliceMap(strings.Split(repoURL.GroupPath, "/"), stdurl.PathEscape), "/") + "/"
 		}
 		return setting.AppSubURL + "/" + repoURL.OwnerName + "/" + groupSegment + repoURL.RepoName
 	}

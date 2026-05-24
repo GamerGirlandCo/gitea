@@ -65,7 +65,7 @@ func TestCompareRouterReq(t *testing.T) {
 				CompareSeparator: "...",
 				HeadOwner:        "teabot",
 				HeadOriRef:       "feature1",
-				HeadGroupID:      -1,
+				HeadGroupPath:    -1,
 			},
 		},
 		{

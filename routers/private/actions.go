@@ -10,6 +10,7 @@ import (
 	"strings"
 
 	actions_model "code.gitea.io/gitea/models/actions"
+	group_model "code.gitea.io/gitea/models/group"
 	repo_model "code.gitea.io/gitea/models/repo"
 	user_model "code.gitea.io/gitea/models/user"
 	"code.gitea.io/gitea/modules/json"
@@ -83,7 +84,7 @@ func parseScope(ctx *context.PrivateContext, scope string) (ownerID, repoID int6
 		return ownerID, repoID, nil
 	}
 
-	r, err := repo_model.GetRepositoryByName(ctx, u.ID, ctx.PathParamInt64("group_id"), repoName)
+	r, err := repo_model.GetRepositoryByName(ctx, u.ID, group_model.GroupIDByPathname(ctx, u.ID, ctx.PathParam("repo_group")), repoName)
 	if err != nil {
 		return ownerID, repoID, err
 	}

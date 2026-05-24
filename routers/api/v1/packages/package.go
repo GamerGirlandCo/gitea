@@ -7,6 +7,7 @@ import (
 	"errors"
 	"net/http"
 
+	group_model "code.gitea.io/gitea/models/group"
 	"code.gitea.io/gitea/models/packages"
 	repo_model "code.gitea.io/gitea/models/repo"
 	"code.gitea.io/gitea/modules/optional"
@@ -390,7 +391,7 @@ func LinkPackage(ctx *context.APIContext) {
 		return
 	}
 
-	repo, err := repo_model.GetRepositoryByName(ctx, ctx.ContextUser.ID, ctx.PathParamInt64("group_id"), ctx.PathParam("repo_name"))
+	repo, err := repo_model.GetRepositoryByName(ctx, ctx.ContextUser.ID, group_model.GroupIDByPathname(ctx, ctx.ContextUser.ID, ctx.PathParam("repo_group")), ctx.PathParam("repo_name"))
 	if err != nil {
 		if errors.Is(err, util.ErrNotExist) {
 			ctx.APIError(http.StatusNotFound, err)

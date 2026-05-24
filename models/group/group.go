@@ -8,7 +8,6 @@ import (
 	"fmt"
 	"net/url"
 	"slices"
-	"strconv"
 
 	"code.gitea.io/gitea/models/db"
 	org_model "code.gitea.io/gitea/models/organization"
@@ -46,11 +45,11 @@ type Group struct {
 
 // GroupLink returns the link to this group
 func (g *Group) GroupLink() string {
-	return setting.AppSubURL + "/" + url.PathEscape(g.OwnerName) + "/groups/" + strconv.FormatInt(g.ID, 10)
+	return setting.AppSubURL + "/" + url.PathEscape(g.OwnerName) + "/groups/" + g.FullPath()
 }
 
 func (g *Group) OrgGroupLink() string {
-	return setting.AppSubURL + "/org/" + url.PathEscape(g.OwnerName) + "/groups/" + strconv.FormatInt(g.ID, 10)
+	return setting.AppSubURL + "/org/" + url.PathEscape(g.OwnerName) + "/groups/" + g.FullPath()
 }
 
 func (Group) TableName() string { return "repo_group" }
@@ -134,6 +133,11 @@ func (g *Group) LoadOwner(ctx context.Context) error {
 	var err error
 	g.Owner, err = user_model.GetUserByID(ctx, g.OwnerID)
 	return err
+}
+
+func (g *Group) FullPath(ctxs ...context.Context) string {
+	path, _ := GroupPathByID(g.ID, ctxs...)
+	return path
 }
 
 func (g *Group) CanAccess(ctx context.Context, user *user_model.User) (bool, error) {
@@ -225,9 +229,83 @@ func GetGroupByIDAndCond(ctx context.Context, id int64, cond builder.Cond) (*Gro
 	if err != nil {
 		return nil, err
 	} else if !has {
-		return nil, ErrGroupNotExist{id}
+		return nil, ErrGroupNotExist{ID: id}
 	}
 	return group, nil
+}
+
+func GroupPathByID(gid int64, ctxs ...context.Context) (string, error) {
+	if gid <= 0 {
+		return "", nil
+	}
+	ctx := util.OptionalArg(ctxs, context.TODO())
+	var strs []string
+	err := db.GetEngine(ctx).SQL(fmt.Sprintf(`%s
+select path from groups where id = ?`, gid)).Find(&strs)
+	if err != nil {
+		log.Error("unable to find group path: %w", err)
+		return "", err
+	}
+	if len(strs) < 1 {
+		return "", nil
+	}
+	return strs[0], nil
+}
+
+func groupPathCTEBuilder() string {
+	var recursiveKeyword string
+	if !setting.Database.Type.IsMSSQL() {
+		recursiveKeyword = " RECURSIVE"
+	}
+	return fmt.Sprintf(`WITH%s groups AS (
+    SELECT
+        repo_group.*,
+       lower_name AS path
+    FROM repo_group
+    WHERE parent_group_id = 0
+
+    UNION ALL
+
+    SELECT
+        g.*,
+        concat(p.path, '/', g.lower_name) as path
+    FROM repo_group g
+    INNER JOIN groups p ON g.parent_group_id = p.id
+)`, recursiveKeyword)
+}
+
+func GetGroupByPathname(ctx context.Context, ownerID int64, pathname string) (*Group, error) {
+
+	rawSQL := fmt.Sprintf(`%s
+SELECT *
+FROM groups
+WHERE owner_id = ? and path = ? LIMIT 1;`, groupPathCTEBuilder())
+	g := new(Group)
+	has, err := db.GetEngine(ctx).SQL(rawSQL, ownerID, pathname).Get(g)
+	if err != nil {
+		return nil, err
+	}
+	if !has {
+		return nil, ErrGroupNotExist{Path: pathname}
+	}
+
+	return g, nil
+}
+
+func GroupIDByPathname(ctx context.Context, ownerID int64, pathname string) int64 {
+	if pathname == "" {
+		return 0
+	}
+	owner, err := user_model.GetUserByID(ctx, ownerID)
+	if err != nil {
+		return 0
+	}
+
+	rg, err := GetGroupByPathname(ctx, owner.LowerName, pathname)
+	if err != nil || rg == nil {
+		return 0
+	}
+	return rg.ID
 }
 
 func GetGroupByID(ctx context.Context, id int64) (*Group, error) {

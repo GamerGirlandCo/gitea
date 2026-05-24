@@ -14,6 +14,7 @@ import (
 	"strings"
 
 	"code.gitea.io/gitea/models/db"
+	group_model "code.gitea.io/gitea/models/group"
 	org_model "code.gitea.io/gitea/models/organization"
 	"code.gitea.io/gitea/models/perm"
 	repo_model "code.gitea.io/gitea/models/repo"
@@ -278,7 +279,7 @@ func TeamsRepoAction(ctx *context.Context) {
 	case "add":
 		repoName := path.Base(ctx.FormString("repo_name"))
 		var repo *repo_model.Repository
-		repo, err = repo_model.GetRepositoryByName(ctx, ctx.Org.Organization.ID, ctx.PathParamInt64("group_id"), repoName)
+		repo, err = repo_model.GetRepositoryByName(ctx, ctx.Org.Organization.ID, group_model.GroupIDByPathname(ctx, ctx.Org.Organization.ID, ctx.PathParam("repo_group")), repoName)
 		if err != nil {
 			if repo_model.IsErrRepoNotExist(err) {
 				ctx.Flash.Error(ctx.Tr("org.teams.add_nonexistent_repo"))

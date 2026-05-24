@@ -18,6 +18,7 @@ import (
 	"time"
 
 	auth_model "code.gitea.io/gitea/models/auth"
+	group_model "code.gitea.io/gitea/models/group"
 	"code.gitea.io/gitea/models/perm"
 	access_model "code.gitea.io/gitea/models/perm/access"
 	repo_model "code.gitea.io/gitea/models/repo"
@@ -107,7 +108,7 @@ func httpBase(ctx *context.Context, optGitService ...string) *serviceHandler {
 	}
 
 	repoExist := true
-	repo, err := repo_model.GetRepositoryByName(ctx, owner.ID, ctx.PathParamInt64("group_id"), reponame)
+	repo, err := repo_model.GetRepositoryByName(ctx, owner.ID, group_model.GroupIDByPathname(ctx, owner.ID, ctx.PathParam("repo_group")), reponame)
 	if err != nil {
 		if !repo_model.IsErrRepoNotExist(err) {
 			ctx.ServerError("GetRepositoryByName", err)

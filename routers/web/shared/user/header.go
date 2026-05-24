@@ -8,6 +8,7 @@ import (
 	"net/url"
 
 	"code.gitea.io/gitea/models/db"
+	group_model "code.gitea.io/gitea/models/group"
 	"code.gitea.io/gitea/models/organization"
 	access_model "code.gitea.io/gitea/models/perm/access"
 	project_model "code.gitea.io/gitea/models/project"
@@ -93,7 +94,7 @@ func prepareContextForProfileBigAvatar(ctx *context.Context) {
 
 func FindOwnerProfileReadme(ctx *context.Context, doer *user_model.User, optProfileRepoName ...string) (profileDbRepo *repo_model.Repository, profileReadmeBlob *git.Blob) {
 	profileRepoName := util.OptionalArg(optProfileRepoName, RepoNameProfile)
-	profileDbRepo, err := repo_model.GetRepositoryByName(ctx, ctx.ContextUser.ID, ctx.PathParamInt64("group_id"), profileRepoName)
+	profileDbRepo, err := repo_model.GetRepositoryByName(ctx, ctx.ContextUser.ID, group_model.GroupIDByPathname(ctx, ctx.ContextUser.ID, ctx.PathParam("repo_group")), profileRepoName)
 	if err != nil {
 		if !repo_model.IsErrRepoNotExist(err) {
 			log.Error("FindOwnerProfileReadme failed to GetRepositoryByName: %v", err)
