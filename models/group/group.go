@@ -241,7 +241,7 @@ func GroupPathByID(gid int64, ctxs ...context.Context) (string, error) {
 	ctx := util.OptionalArg(ctxs, context.TODO())
 	var strs []string
 	err := db.GetEngine(ctx).SQL(fmt.Sprintf(`%s
-select path from groups where id = ?`, gid)).Find(&strs)
+select path from groups where id = ?`, groupPathCTEBuilder()), gid).Find(&strs)
 	if err != nil {
 		log.Error("unable to find group path: %w", err)
 		return "", err
