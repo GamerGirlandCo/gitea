@@ -5,6 +5,7 @@ package web
 
 import (
 	"bytes"
+	"context"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -100,7 +101,7 @@ func TestPathProcessor(t *testing.T) {
 	testProcess := func(pattern, uri string, expectedPathParams map[string]string) {
 		chiCtx := chi.NewRouteContext()
 		chiCtx.RouteMethod = "GET"
-		p := newRouterPathMatcher("GET", patternRegexp(pattern), http.NotFound)
+		p := newRouterPathMatcher("GET", patternRegexp(pattern), nil, http.NotFound)
 		shouldProcess := expectedPathParams != nil
 		assert.Equal(t, shouldProcess, p.matchPath(chiCtx, uri), "use pattern %s to process uri %s", pattern, uri)
 		assert.Equal(t, expectedPathParams, chiURLParamsToMap(chiCtx), "use pattern %s to process uri %s", pattern, uri)
@@ -338,5 +339,204 @@ func TestPreMiddlewareProvider(t *testing.T) {
 	resRecorder.test(t, root, "GET /a/no-such", testResult{
 		method:       "GET",
 		handlerMarks: []string{"before-root", "root", "before-sub", "sub", "not-found"},
+	})
+}
+
+func TestRouterPathGroupGroup(t *testing.T) {
+	resRecorder := &testRecorder{}
+	h := resRecorder.handle
+
+	r := NewRouter()
+	r.NotFound(h("not-found"))
+	r.PathGroup("/stuff/*", func(g *RouterPathGroup) {
+		g.Group("/<repo_group:*>/<reponame>", func() {
+			g.Group("/bar", func() {
+				g.Get("", h("nested-group"))
+			}, h("inner-group"))
+		}, h("outer-group"))
+	})
+
+	resRecorder.test(t, r, "GET /stuff/one/two/three/four/bar", testResult{
+		method: "GET",
+		pathParams: map[string]string{
+			"*":          "one/two/three/four/bar",
+			"repo_group": "one/two/three",
+			"reponame":   "four",
+		},
+		handlerMarks:    []string{"outer-group", "inner-group", "nested-group"},
+		chiRoutePattern: new("/stuff/<repo_group:*>/<reponame>/bar"),
+	})
+}
+
+func TestRouterPathGroupDuplicatePath(t *testing.T) {
+	resRecorder := &testRecorder{}
+	h := resRecorder.handle
+
+	r := NewRouter()
+	r.NotFound(h("not-found"))
+	r.Group("/repos/{username}", func() {
+		r.PathGroup("/*", func(g *RouterPathGroup) {
+			g.Get("/<repo_group:*>/<reponame>/notifications", h("notifications"))
+		}, h("path-group-1"))
+	})
+	r.Group("/repos/{username}", func() {
+		r.PathGroup("/*", func(g *RouterPathGroup) {
+			g.Get("/<repo_group:*>/<reponame>/issues", h("issues"))
+		}, h("path-group-2"))
+	})
+
+	resRecorder.test(t, r, "GET /repos/alice/one/two/repo/notifications", testResult{
+		method: "GET",
+		pathParams: map[string]string{
+			"*":          "one/two/repo/notifications",
+			"username":   "alice",
+			"repo_group": "one/two",
+			"reponame":   "repo",
+		},
+		handlerMarks:    []string{"path-group-1", "notifications"},
+		chiRoutePattern: new("/repos/{username}/<repo_group:*>/<reponame>/notifications"),
+	})
+
+	resRecorder.test(t, r, "GET /repos/alice/one/two/repo/issues", testResult{
+		method: "GET",
+		pathParams: map[string]string{
+			"*":          "one/two/repo/issues",
+			"username":   "alice",
+			"repo_group": "one/two",
+			"reponame":   "repo",
+		},
+		handlerMarks:    []string{"path-group-2", "issues"},
+		chiRoutePattern: new("/repos/{username}/<repo_group:*>/<reponame>/issues"),
+	})
+
+	resRecorder.test(t, r, "GET /repos/alice/one/two/repo/other", testResult{
+		method: "GET",
+		pathParams: map[string]string{
+			"*":        "one/two/repo/other",
+			"username": "alice",
+		},
+		handlerMarks: []string{"not-found"},
+	})
+}
+
+func TestRouterPathGroupGroupTrailingSlash(t *testing.T) {
+	resRecorder := &testRecorder{}
+	h := resRecorder.handle
+
+	r := NewRouter()
+	r.NotFound(h("not-found"))
+	var pathGroup *RouterPathGroup
+	r.PathGroup("/repos/{username}/*", func(g *RouterPathGroup) {
+		pathGroup = g
+		g.Group("/<repo_group:*>/<reponame>/", func() {
+			g.Combo("").Get(h("repo-get"))
+			g.Group("/pulls", func() {
+				g.Combo("").Get(h("repo-pulls"))
+			})
+		})
+	})
+	if assert.Len(t, pathGroup.matchers, 2) {
+		assert.Equal(t, "/<repo_group:*>/<reponame>/pulls", pathGroup.matchers[0].pattern)
+		assert.Equal(t, "/<repo_group:*>/<reponame>", pathGroup.matchers[1].pattern)
+	}
+
+	resRecorder.test(t, r, "GET /repos/alice/one/two/repo/pulls", testResult{
+		method: "GET",
+		pathParams: map[string]string{
+			"*":          "one/two/repo/pulls",
+			"username":   "alice",
+			"repo_group": "one/two",
+			"reponame":   "repo",
+		},
+		handlerMarks:    []string{"repo-pulls"},
+		chiRoutePattern: new("/repos/{username}/<repo_group:*>/<reponame>/pulls"),
+	})
+}
+
+func TestRouterPathGroupDuplicatePathSpecificityAcrossGroups(t *testing.T) {
+	resRecorder := &testRecorder{}
+	h := resRecorder.handle
+
+	r := NewRouter()
+	r.NotFound(h("not-found"))
+	r.PathGroup("/repos/{username}/*", func(g *RouterPathGroup) {
+		g.Group("/<repo_group:*>/<reponame>", func() {
+			g.Combo("").Get(h("repo-get"))
+			g.Group("/pulls", func() {
+				g.Combo("").Get(h("repo-pulls"))
+			})
+		})
+	}, h("path-group-1"))
+	r.PathGroup("/repos/{username}/*", func(g *RouterPathGroup) {
+		g.Group("/<repo_group:*>/<reponame>", func() {
+			g.Group("/issues", func() {
+				g.Combo("").Get(h("repo-issues"))
+			})
+		})
+	}, h("path-group-2"))
+
+	resRecorder.test(t, r, "GET /repos/alice/one/two/repo/pulls", testResult{
+		method: "GET",
+		pathParams: map[string]string{
+			"*":          "one/two/repo/pulls",
+			"username":   "alice",
+			"repo_group": "one/two",
+			"reponame":   "repo",
+		},
+		handlerMarks:    []string{"path-group-1", "repo-pulls"},
+		chiRoutePattern: new("/repos/{username}/<repo_group:*>/<reponame>/pulls"),
+	})
+
+	resRecorder.test(t, r, "GET /repos/alice/one/two/repo/issues", testResult{
+		method: "GET",
+		pathParams: map[string]string{
+			"*":          "one/two/repo/issues",
+			"username":   "alice",
+			"repo_group": "one/two",
+			"reponame":   "repo",
+		},
+		handlerMarks:    []string{"path-group-2", "repo-issues"},
+		chiRoutePattern: new("/repos/{username}/<repo_group:*>/<reponame>/issues"),
+	})
+}
+
+func TestRouterPathGroupPreMiddlewareProvider(t *testing.T) {
+	type ctxKey struct{}
+
+	resRecorder := &testRecorder{}
+	h := resRecorder.handle
+
+	r := NewRouter()
+	r.AfterRouting(func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(resp http.ResponseWriter, req *http.Request) {
+			if req.Context().Value(ctxKey{}) == "ok" {
+				resRecorder.res.handlerMarks = append(resRecorder.res.handlerMarks, "after-routing:pre-ok")
+			} else {
+				resRecorder.res.handlerMarks = append(resRecorder.res.handlerMarks, "after-routing:pre-missing")
+			}
+			next.ServeHTTP(resp, req)
+		})
+	})
+
+	preSetContext := types.PreMiddlewareProvider(func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(resp http.ResponseWriter, req *http.Request) {
+			next.ServeHTTP(resp, req.WithContext(context.WithValue(req.Context(), ctxKey{}, "ok")))
+		})
+	})
+
+	r.PathGroup("/repos/{username}/*", func(g *RouterPathGroup) {
+		g.Get("/<repo_group:*>/<reponame>/HEAD", preSetContext, h("handler"))
+	})
+
+	resRecorder.test(t, r, "GET /repos/alice/one/two/repo/HEAD", testResult{
+		method: "GET",
+		pathParams: map[string]string{
+			"*":          "one/two/repo/HEAD",
+			"username":   "alice",
+			"repo_group": "one/two",
+			"reponame":   "repo",
+		},
+		handlerMarks:    []string{"after-routing:pre-ok", "handler"},
+		chiRoutePattern: new("/repos/{username}/<repo_group:*>/<reponame>/HEAD"),
 	})
 }
