@@ -66,10 +66,10 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
-	"strconv"
 	"strings"
 
 	auth_model "code.gitea.io/gitea/models/auth"
+	group_model "code.gitea.io/gitea/models/group"
 	"code.gitea.io/gitea/models/organization"
 	"code.gitea.io/gitea/models/perm"
 	access_model "code.gitea.io/gitea/models/perm/access"
@@ -138,12 +138,19 @@ func repoAssignment() func(ctx *context.APIContext) {
 		userName := ctx.PathParam("username")
 		repoName := ctx.PathParam("reponame")
 		var gid int64
-		groupParam := ctx.PathParam("group_id")
+		groupParam := ctx.PathParam("repo_group")
 		if groupParam != "" {
-			gid, _ = strconv.ParseInt(groupParam, 10, 64)
-			if gid == 0 {
-				ctx.Redirect(strings.Replace(ctx.Req.URL.RequestURI(), "/0/", "/", 1), 307)
+			grp, err := group_model.GetGroupByPathname(ctx, userName, groupParam)
+			if err != nil {
+				if group_model.IsErrGroupNotExist(err) {
+					ctx.APIErrorNotFound(err)
+				} else {
+					ctx.APIErrorInternal(err)
+				}
 				return
+			}
+			if grp != nil {
+				gid = grp.ID
 			}
 		}
 		var (
