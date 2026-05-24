@@ -274,13 +274,13 @@ func groupPathCTEBuilder() string {
 )`, recursiveKeyword)
 }
 
-func GetGroupByPathname(ctx context.Context, ownerID int64, pathname string) (*Group, error) {
+func GetGroupByPathname(ctx context.Context, owner string, pathname string) (*Group, error) {
 	rawSQL := fmt.Sprintf(`%s
 SELECT *
 FROM groups
-WHERE owner_id = ? and path = ? LIMIT 1;`, groupPathCTEBuilder())
+WHERE owner_name = ? and path = ? LIMIT 1;`, groupPathCTEBuilder())
 	g := new(Group)
-	has, err := db.GetEngine(ctx).SQL(rawSQL, ownerID, pathname).Get(g)
+	has, err := db.GetEngine(ctx).SQL(rawSQL, owner, pathname).Get(g)
 	if err != nil {
 		return nil, err
 	}

@@ -831,13 +831,9 @@ func (err ErrRepoNotExist) Unwrap() error {
 // GetRepositoryByOwnerAndName returns the repository by given owner name and repo name
 func GetRepositoryByOwnerAndName(ctx context.Context, ownerName, repoName, groupPath string) (*Repository, error) {
 	var repo Repository
-	u, err := user_model.GetUserByName(ctx, ownerName)
-	if err != nil {
-		return nil, err
-	}
 	var gid int64
 	if groupPath != "" {
-		parentGroup, err := group.GetGroupByPathname(ctx, u.ID, groupPath)
+		parentGroup, err := group.GetGroupByPathname(ctx, ownerName, groupPath)
 		if err != nil {
 			if group.IsErrGroupNotExist(err) {
 				return nil, ErrRepoNotExist{0, 0, ownerName, repoName}
@@ -926,7 +922,7 @@ func IsRepositoryModelExist(ctx context.Context, u *user_model.User, repoName, g
 	var gid int64
 
 	if groupPath != "" {
-		grp, err := group.GetGroupByPathname(ctx, u.ID, groupPath)
+		grp, err := group.GetGroupByPathname(ctx, u.LowerName, groupPath)
 		if err != nil {
 			return false, err
 		}
