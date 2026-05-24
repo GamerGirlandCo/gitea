@@ -835,16 +835,18 @@ func GetRepositoryByOwnerAndName(ctx context.Context, ownerName, repoName, group
 	if err != nil {
 		return nil, err
 	}
-	parentGroup, err := group.GetGroupByPathname(ctx, u.ID, groupPath)
-	if err != nil {
-		if group.IsErrGroupNotExist(err) {
-			return nil, ErrRepoNotExist{0, 0, ownerName, repoName}
-		}
-		return nil, err
-	}
 	var gid int64
-	if parentGroup != nil {
-		gid = parentGroup.ID
+	if groupPath != "" {
+		parentGroup, err := group.GetGroupByPathname(ctx, u.ID, groupPath)
+		if err != nil {
+			if group.IsErrGroupNotExist(err) {
+				return nil, ErrRepoNotExist{0, 0, ownerName, repoName}
+			}
+			return nil, err
+		}
+		if parentGroup != nil {
+			gid = parentGroup.ID
+		}
 	}
 	has, err := db.GetEngine(ctx).Table("repository").Select("repository.*").
 		Join("INNER", "`user`", "`user`.id = repository.owner_id").
@@ -920,13 +922,16 @@ func GetRepositoriesMapByIDs(ctx context.Context, ids []int64) (map[int64]*Repos
 }
 
 func IsRepositoryModelExist(ctx context.Context, u *user_model.User, repoName, groupPath string) (bool, error) {
-	grp, err := group.GetGroupByPathname(ctx, u.ID, groupPath)
-	if err != nil {
-		return false, err
-	}
 	var gid int64
-	if grp != nil {
-		gid = grp.ID
+
+	if groupPath != "" {
+		grp, err := group.GetGroupByPathname(ctx, u.ID, groupPath)
+		if err != nil {
+			return false, err
+		}
+		if grp != nil {
+			gid = grp.ID
+		}
 	}
 	return db.GetEngine(ctx).Get(&Repository{
 		OwnerID:   u.ID,
