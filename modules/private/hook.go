@@ -93,20 +93,20 @@ func newInternalRequestAPIForHooks(ctx context.Context, hookName, ownerName, rep
 }
 
 // HookPreReceive check whether the provided commits are allowed
-func HookPreReceive(ctx context.Context, ownerName, repoName string, groupPath string, opts HookOptions) ResponseExtra {
+func HookPreReceive(ctx context.Context, ownerName, repoName, groupPath string, opts HookOptions) ResponseExtra {
 	req := newInternalRequestAPIForHooks(ctx, "pre-receive", ownerName, repoName, groupPath, opts)
 	_, extra := requestJSONResp(req, &ResponseText{})
 	return extra
 }
 
 // HookPostReceive updates services and users
-func HookPostReceive(ctx context.Context, ownerName, repoName string, groupPath string, opts HookOptions) (*HookPostReceiveResult, ResponseExtra) {
+func HookPostReceive(ctx context.Context, ownerName, repoName, groupPath string, opts HookOptions) (*HookPostReceiveResult, ResponseExtra) {
 	req := newInternalRequestAPIForHooks(ctx, "post-receive", ownerName, repoName, groupPath, opts)
 	return requestJSONResp(req, &HookPostReceiveResult{})
 }
 
 // HookProcReceive proc-receive hook
-func HookProcReceive(ctx context.Context, ownerName, repoName string, groupPath string, opts HookOptions) (*HookProcReceiveResult, ResponseExtra) {
+func HookProcReceive(ctx context.Context, ownerName, repoName, groupPath string, opts HookOptions) (*HookProcReceiveResult, ResponseExtra) {
 	req := newInternalRequestAPIForHooks(ctx, "proc-receive", ownerName, repoName, groupPath, opts)
 	return requestJSONResp(req, &HookProcReceiveResult{})
 }
