@@ -132,7 +132,6 @@ func ParseRepositoryURL(ctx context.Context, repoURL string) (*RepositoryURL, er
 				ret.RepoName = strings.TrimSuffix(fields[len(fields)-1], ".git")
 
 				ret.GroupPath = strings.Join(groupSegment, "/")
-
 			} else {
 				ret.RepoName = strings.TrimSuffix(fields[1], ".git")
 			}
