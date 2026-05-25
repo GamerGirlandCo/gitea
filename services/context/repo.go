@@ -572,7 +572,7 @@ func repoAssignmentAutoRedirectWiki(ctx *Context, data *repoAssignmentPrepareDat
 func repoAssignmentPrepareRepo(ctx *Context, data *repoAssignmentPrepareDataStruct) {
 	repoName := data.repoName
 	// Get repository.
-	gid := group_model.GroupIDByPathname(ctx, ctx.Repo.Owner.ID, data.groupPath)
+	gid := group_model.IDByPathname(ctx, ctx.Repo.Owner.ID, data.groupPath)
 	repo, err := repo_model.GetRepositoryByName(ctx, ctx.Repo.Owner.ID, gid, repoName)
 	if err != nil {
 		if repo_model.IsErrRepoNotExist(err) {

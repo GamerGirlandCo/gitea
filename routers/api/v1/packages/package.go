@@ -391,7 +391,7 @@ func LinkPackage(ctx *context.APIContext) {
 		return
 	}
 
-	repo, err := repo_model.GetRepositoryByName(ctx, ctx.ContextUser.ID, group_model.GroupIDByPathname(ctx, ctx.ContextUser.ID, ctx.PathParam("repo_group")), ctx.PathParam("repo_name"))
+	repo, err := repo_model.GetRepositoryByName(ctx, ctx.ContextUser.ID, group_model.IDByPathname(ctx, ctx.ContextUser.ID, ctx.PathParam("repo_group")), ctx.PathParam("repo_name"))
 	if err != nil {
 		if errors.Is(err, util.ErrNotExist) {
 			ctx.APIError(http.StatusNotFound, err)

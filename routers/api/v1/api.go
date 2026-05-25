@@ -96,11 +96,11 @@ import (
 	"code.gitea.io/gitea/services/auth"
 	"code.gitea.io/gitea/services/context"
 	"code.gitea.io/gitea/services/forms"
-	"github.com/go-chi/chi/v5"
 
 	_ "code.gitea.io/gitea/routers/api/v1/swagger" // for swagger generation
 
 	"gitea.com/go-chi/binding"
+	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/cors"
 )
 

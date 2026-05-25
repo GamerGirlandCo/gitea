@@ -108,7 +108,13 @@ func httpBase(ctx *context.Context, optGitService ...string) *serviceHandler {
 	}
 
 	repoExist := true
-	repo, err := repo_model.GetRepositoryByName(ctx, owner.ID, group_model.GroupIDByPathname(ctx, owner.ID, ctx.PathParam("repo_group")), reponame)
+	repoGroup := ctx.PathParam("repo_group")
+	repoGroupID := group_model.IDByPathname(ctx, owner.ID, repoGroup)
+	if repoGroup != "" && repoGroupID == 0 {
+		ctx.PlainText(http.StatusNotFound, "Repository not found")
+		return nil
+	}
+	repo, err := repo_model.GetRepositoryByName(ctx, owner.ID, repoGroupID, reponame)
 	if err != nil {
 		if !repo_model.IsErrRepoNotExist(err) {
 			ctx.ServerError("GetRepositoryByName", err)
@@ -230,7 +236,7 @@ func httpBase(ctx *context.Context, optGitService ...string) *serviceHandler {
 			return nil
 		}
 
-		repo, err = repo_service.PushCreateRepo(ctx, ctx.Doer, owner, reponame)
+		repo, err = repo_service.PushCreateRepo(ctx, ctx.Doer, owner, reponame, repoGroupID)
 		if err != nil {
 			log.Error("pushCreateRepo: %v", err)
 			ctx.Status(http.StatusNotFound)

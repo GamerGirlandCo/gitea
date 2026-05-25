@@ -153,7 +153,16 @@ func ServCommand(ctx *context.PrivateContext) {
 
 	// Now get the Repository and set the results section
 	repoExist := true
-	repo, err := repo_model.GetRepositoryByName(ctx, owner.ID, group_model.GroupIDByPathname(ctx, owner.ID, ctx.PathParam("repo_group")), results.RepoName)
+	repoGroup := ctx.PathParam("repo_group")
+	repoGroupID := group_model.IDByPathname(ctx, owner.ID, repoGroup)
+	if repoGroup != "" && repoGroupID == 0 {
+		log.Warn("Failed authentication attempt (cannot find repository group: %s/%s) from %s", results.OwnerName, repoGroup, ctx.RemoteAddr())
+		ctx.JSON(http.StatusNotFound, private.Response{
+			UserMsg: fmt.Sprintf("Cannot find repository: %s/%s", results.OwnerName, results.RepoName),
+		})
+		return
+	}
+	repo, err := repo_model.GetRepositoryByName(ctx, owner.ID, repoGroupID, results.RepoName)
 	if err != nil {
 		if !repo_model.IsErrRepoNotExist(err) {
 			log.Error("Unable to get repository: %s/%s Error: %v", results.OwnerName, results.RepoName, err)
@@ -383,7 +392,7 @@ func ServCommand(ctx *context.PrivateContext) {
 			return
 		}
 
-		repo, err = repo_service.PushCreateRepo(ctx, user, owner, results.RepoName)
+		repo, err = repo_service.PushCreateRepo(ctx, user, owner, results.RepoName, repoGroupID)
 		if err != nil {
 			log.Error("pushCreateRepo: %v", err)
 			ctx.JSON(http.StatusNotFound, private.Response{

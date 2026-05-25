@@ -48,9 +48,7 @@ func parseHead(head string) (headOwnerName, headRepoName string, headGroupPath *
 		return paths[0], "", nil, paths[1]
 	}
 	lastPart := strings.Split(ownerRepo[1], "/")
-	var (
-		realRepoName, groupPath string
-	)
+	var realRepoName, groupPath string
 	if len(lastPart) >= 2 {
 		realRepoName = lastPart[len(lastPart)-1]
 		groupPath = strings.Join(lastPart[:len(lastPart)-1], "/")
@@ -179,7 +177,7 @@ func GetHeadOwnerAndRepo(ctx context.Context, baseRepo *repo_model.Repository, c
 			var gid int64
 
 			if compareReq.HeadGroupPath.Has() {
-				gid = group_model.GroupIDByPathname(ctx, headOwner.ID, compareReq.HeadGroupPath.Value())
+				gid = group_model.IDByPathname(ctx, headOwner.ID, compareReq.HeadGroupPath.Value())
 			} else {
 				gid = baseRepo.GroupID
 			}

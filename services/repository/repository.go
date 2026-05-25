@@ -26,6 +26,7 @@ import (
 	repo_module "code.gitea.io/gitea/modules/repository"
 	"code.gitea.io/gitea/modules/setting"
 	"code.gitea.io/gitea/modules/structs"
+	"code.gitea.io/gitea/modules/util"
 	notify_service "code.gitea.io/gitea/services/notify"
 	pull_service "code.gitea.io/gitea/services/pull"
 )
@@ -71,7 +72,7 @@ func DeleteRepository(ctx context.Context, doer *user_model.User, repo *repo_mod
 }
 
 // PushCreateRepo creates a repository when a new repository is pushed to an appropriate namespace
-func PushCreateRepo(ctx context.Context, authUser, owner *user_model.User, repoName string) (*repo_model.Repository, error) {
+func PushCreateRepo(ctx context.Context, authUser, owner *user_model.User, repoName string, groupID ...int64) (*repo_model.Repository, error) {
 	if !authUser.IsAdmin {
 		if owner.IsOrganization() {
 			if ok, err := organization.CanCreateOrgRepo(ctx, owner.ID, authUser.ID); err != nil {
@@ -87,6 +88,7 @@ func PushCreateRepo(ctx context.Context, authUser, owner *user_model.User, repoN
 	repo, err := CreateRepository(ctx, authUser, owner, CreateRepoOptions{
 		Name:      repoName,
 		IsPrivate: setting.Repository.DefaultPushCreatePrivate || setting.Repository.ForcePrivate,
+		GroupID:   util.OptionalArg(groupID, int64(0)),
 	})
 	if err != nil {
 		return nil, err

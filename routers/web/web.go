@@ -1300,7 +1300,7 @@ func registerWebRoutes(m *web.Router, webAuth *AuthMiddleware) {
 	})
 	// end "/{username}/{group_id}/{reponame}": repo code: find, compare, list
 
-	addIssuesPullsViewRoutes := func() {
+	addIssuesPullsViewRoutes := func(m *web.RouterPathGroup) {
 		// for /{username}/{group_id}/{reponame}/issues" or "/{username}/{group_id}/{reponame}/pulls"
 		m.Get("/posters", repo.IssuePullPosters)
 		m.Group("/<index>", func() {
@@ -1316,8 +1316,8 @@ func registerWebRoutes(m *web.Router, webAuth *AuthMiddleware) {
 	}
 	// FIXME: many "pulls" requests are sent to "issues" endpoints correctly, so the issue endpoints have to tolerate pull request permissions at the moment
 	m.PathGroup("/{username}/*", func(m *web.RouterPathGroup) {
-		m.Group("/<repo_group:*>/<reponame>/<type:issues>", addIssuesPullsViewRoutes, optSignIn, context.RepoAssignment, context.RequireUnitReader(unit.TypeIssues, unit.TypePullRequests))
-		m.Group("/<repo_group:*>/<reponame>/<type:pulls>", addIssuesPullsViewRoutes, optSignIn, context.RepoAssignment, reqUnitPullsReader)
+		m.Group("/<repo_group:*>/<reponame>/<type:issues>", func() { addIssuesPullsViewRoutes(m) }, optSignIn, context.RepoAssignment, context.RequireUnitReader(unit.TypeIssues, unit.TypePullRequests))
+		m.Group("/<repo_group:*>/<reponame>/<type:pulls>", func() { addIssuesPullsViewRoutes(m) }, optSignIn, context.RepoAssignment, reqUnitPullsReader)
 	})
 
 	m.PathGroup("/{username}/*", func(m *web.RouterPathGroup) {
@@ -1637,7 +1637,7 @@ func registerWebRoutes(m *web.Router, webAuth *AuthMiddleware) {
 	// end "/{username}/{group_id}/{reponame}/wiki"
 
 	m.PathGroup("/{username}/*", func(m *web.RouterPathGroup) {
-		m.Group("/<repo_group:*>/<repo_name>/activity", func() {
+		m.Group("/<repo_group:*>/<reponame>/activity", func() {
 			// activity has its own permission checks
 			m.Get("", repo.Activity)
 			m.Get("/<period>", repo.Activity)
@@ -1694,7 +1694,6 @@ func registerWebRoutes(m *web.Router, webAuth *AuthMiddleware) {
 
 	// end "/{username}/{group_id}/{reponame}/pulls/{index}": repo pull request
 	m.PathGroup("/{username}/*", func(m *web.RouterPathGroup) {
-
 		m.Group("/<repo_group:*>/<reponame>", func() {
 			m.Group("/activity_author_data", func() {
 				m.Get("", repo.ActivityAuthors)

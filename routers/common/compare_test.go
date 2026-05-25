@@ -6,6 +6,8 @@ package common
 import (
 	"testing"
 
+	"code.gitea.io/gitea/modules/optional"
+
 	"github.com/stretchr/testify/assert"
 )
 
@@ -23,6 +25,7 @@ func TestCompareRouterReq(t *testing.T) {
 			CompareRouterReq: &CompareRouterReq{
 				BaseOriRef:       "v1.0",
 				CompareSeparator: "...",
+				HeadGroupPath:    optional.Some(""),
 				HeadOriRef:       "v1.1",
 			},
 		},
@@ -31,6 +34,7 @@ func TestCompareRouterReq(t *testing.T) {
 			CompareRouterReq: &CompareRouterReq{
 				BaseOriRef:       "main",
 				CompareSeparator: "..",
+				HeadGroupPath:    optional.Some(""),
 				HeadOriRef:       "develop",
 			},
 		},
@@ -40,6 +44,7 @@ func TestCompareRouterReq(t *testing.T) {
 				BaseOriRef:       "main",
 				BaseOriRefSuffix: "^",
 				CompareSeparator: "...",
+				HeadGroupPath:    optional.Some(""),
 				HeadOriRef:       "develop",
 			},
 		},
@@ -49,6 +54,7 @@ func TestCompareRouterReq(t *testing.T) {
 				BaseOriRef:       "main",
 				BaseOriRefSuffix: "^^^^^",
 				CompareSeparator: "...",
+				HeadGroupPath:    optional.Some(""),
 				HeadOriRef:       "develop",
 			},
 		},
@@ -56,6 +62,7 @@ func TestCompareRouterReq(t *testing.T) {
 			input: "develop",
 			CompareRouterReq: &CompareRouterReq{
 				CompareSeparator: "...",
+				HeadGroupPath:    optional.Some(""),
 				HeadOriRef:       "develop",
 			},
 		},
@@ -65,13 +72,13 @@ func TestCompareRouterReq(t *testing.T) {
 				CompareSeparator: "...",
 				HeadOwner:        "teabot",
 				HeadOriRef:       "feature1",
-				HeadGroupPath:    -1,
 			},
 		},
 		{
 			input: "lunny/forked_repo:develop",
 			CompareRouterReq: &CompareRouterReq{
 				CompareSeparator: "...",
+				HeadGroupPath:    optional.Some(""),
 				HeadOwner:        "lunny",
 				HeadRepoName:     "forked_repo",
 				HeadOriRef:       "develop",
@@ -82,6 +89,7 @@ func TestCompareRouterReq(t *testing.T) {
 			CompareRouterReq: &CompareRouterReq{
 				BaseOriRef:       "main",
 				CompareSeparator: "...",
+				HeadGroupPath:    optional.Some(""),
 				HeadOwner:        "lunny",
 				HeadRepoName:     "forked_repo",
 				HeadOriRef:       "develop",
@@ -93,6 +101,7 @@ func TestCompareRouterReq(t *testing.T) {
 				BaseOriRef:       "main",
 				BaseOriRefSuffix: "^",
 				CompareSeparator: "...",
+				HeadGroupPath:    optional.Some(""),
 				HeadOwner:        "lunny",
 				HeadRepoName:     "forked_repo",
 				HeadOriRef:       "develop",

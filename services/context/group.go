@@ -74,19 +74,19 @@ func (g *RepoGroup) UnitPermission(ctx context.Context, doer *user_model.User, u
 
 func getGroupByParams(ctx commonCtx, repoGroup *RepoGroup, handleNotFound func(error), handleOtherError func(string, error)) (err error) {
 	group := ctx.PathParam("repo_group")
-	user, err := user_model.GetUserByName(ctx, ctx.PathParam("username"))
-	if err != nil {
-		if user_model.IsErrUserNotExist(err) {
-			handleNotFound(err)
-		} else {
-			handleOtherError("GetUserByName", err)
-		}
-		return err
-	}
-
 	if group == "" && ctx.PathParam("group_id") != "" {
 		repoGroup.Group, err = group_model.GetGroupByID(ctx, ctx.PathParamInt64("group_id"))
 	} else if group != "" {
+		var user *user_model.User
+		user, err = user_model.GetUserByName(ctx, ctx.PathParam("username"))
+		if err != nil {
+			if user_model.IsErrUserNotExist(err) {
+				handleNotFound(err)
+			} else {
+				handleOtherError("GetUserByName", err)
+			}
+			return err
+		}
 		repoGroup.Group, err = group_model.GetGroupByPathname(ctx, user.LowerName, group)
 	}
 

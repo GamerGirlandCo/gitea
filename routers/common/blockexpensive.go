@@ -38,6 +38,7 @@ func isRoutePathExpensive(routePattern string) bool {
 	if strings.HasPrefix(routePattern, "/user/") || strings.HasPrefix(routePattern, "/login/") {
 		return false
 	}
+	routePattern = strings.Replace(routePattern, "/<repo_group:*>/<reponame>", "/{reponame}", 1)
 
 	expensivePaths := []string{
 		// code related

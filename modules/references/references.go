@@ -373,7 +373,7 @@ func FindRenderizableCommitCrossReference(content string) (bool, *RenderizableRe
 		GroupPath:   content[m[4]:m[5]],
 		Name:        content[m[6]:m[7]],
 		CommitSha:   content[m[8]:m[9]],
-		RefLocation: &RefSpan{Start: m[2], End: m[7]},
+		RefLocation: &RefSpan{Start: m[2], End: m[9]},
 	}
 }
 

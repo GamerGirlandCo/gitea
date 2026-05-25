@@ -84,7 +84,7 @@ func parseScope(ctx *context.PrivateContext, scope string) (ownerID, repoID int6
 		return ownerID, repoID, nil
 	}
 
-	r, err := repo_model.GetRepositoryByName(ctx, u.ID, group_model.GroupIDByPathname(ctx, u.ID, ctx.PathParam("repo_group")), repoName)
+	r, err := repo_model.GetRepositoryByName(ctx, u.ID, group_model.IDByPathname(ctx, u.ID, ctx.PathParam("repo_group")), repoName)
 	if err != nil {
 		return ownerID, repoID, err
 	}

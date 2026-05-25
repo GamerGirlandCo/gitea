@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/url"
 	"reflect"
+	"slices"
 	"strings"
 
 	"code.gitea.io/gitea/modules/htmlutil"
@@ -141,7 +142,7 @@ func wrapMiddlewareAppendNormal(all []middlewareProvider, middlewares []any) []m
 	return all
 }
 
-func wrapMiddlewaresSplit(useMiddlewares, curMiddlewares, h []any) (_ []middlewareProvider, _ []middlewareProvider, hasPreMiddlewares bool) {
+func wrapMiddlewaresSplit(useMiddlewares, curMiddlewares, h []any) (_, _ []middlewareProvider, hasPreMiddlewares bool) {
 	preMiddlewares := make([]middlewareProvider, 0, len(useMiddlewares)+len(curMiddlewares)+len(h))
 	preMiddlewares = wrapMiddlewareAppendPre(preMiddlewares, useMiddlewares)
 	preMiddlewares = wrapMiddlewareAppendPre(preMiddlewares, curMiddlewares)
@@ -155,12 +156,7 @@ func wrapMiddlewaresSplit(useMiddlewares, curMiddlewares, h []any) (_ []middlewa
 	return preMiddlewares, normalMiddlewares, hasPreMiddlewares
 }
 
-func wrapMiddlewaresOnly(useMiddlewares, curMiddlewares, h []any) (_ []middlewareProvider, hasPreMiddlewares bool) {
-	preMiddlewares, normalMiddlewares, hasPreMiddlewares := wrapMiddlewaresSplit(useMiddlewares, curMiddlewares, h)
-	return append(preMiddlewares, normalMiddlewares...), hasPreMiddlewares
-}
-
-func wrapMiddlewareAndHandler(useMiddlewares, curMiddlewares, h []any) (_ []middlewareProvider, _ http.HandlerFunc, hasPreMiddlewares bool) {
+func wrapMiddlewareAndHandler(useMiddlewares, curMiddlewares, h []any) (_ []middlewareProvider, _ http.HandlerFunc) {
 	if len(h) == 0 {
 		panic("no endpoint handler provided")
 	}
@@ -168,19 +164,20 @@ func wrapMiddlewareAndHandler(useMiddlewares, curMiddlewares, h []any) (_ []midd
 		panic("endpoint handler can't be nil")
 	}
 
-	preMiddlewares, normalMiddlewares, hasPreMiddlewares := wrapMiddlewaresSplit(useMiddlewares, curMiddlewares, h)
-	middlewares := append(preMiddlewares, normalMiddlewares[:len(normalMiddlewares)-1]...)
+	preMiddlewares, normalMiddlewares, _ := wrapMiddlewaresSplit(useMiddlewares, curMiddlewares, h)
+	middlewares := slices.Clone(preMiddlewares)
+	middlewares = append(middlewares, normalMiddlewares[:len(normalMiddlewares)-1]...)
 	handlerFunc := normalMiddlewares[len(normalMiddlewares)-1](nil).ServeHTTP
 	if mockPoint := RouterMockPoint(MockAfterMiddlewares); mockPoint != nil {
 		middlewares = append(middlewares, mockPoint)
 	}
-	return middlewares, handlerFunc, hasPreMiddlewares
+	return middlewares, handlerFunc
 }
 
 // Methods adds the same handlers for multiple http "methods" (separated by ",").
 // If any method is invalid, the lower level router will panic.
 func (r *Router) Methods(methods, pattern string, h ...any) {
-	middlewares, handlerFunc, _ := wrapMiddlewareAndHandler(r.afterRouting, r.curMiddlewares, h)
+	middlewares, handlerFunc := wrapMiddlewareAndHandler(r.afterRouting, r.curMiddlewares, h)
 	fullPattern := r.getPattern(pattern)
 	if strings.Contains(methods, ",") {
 		methods := strings.SplitSeq(methods, ",")
@@ -204,7 +201,7 @@ func (r *Router) Mount(pattern string, subRouter *Router) {
 
 // Any delegate requests for all methods
 func (r *Router) Any(pattern string, h ...any) {
-	middlewares, handlerFunc, _ := wrapMiddlewareAndHandler(r.afterRouting, r.curMiddlewares, h)
+	middlewares, handlerFunc := wrapMiddlewareAndHandler(r.afterRouting, r.curMiddlewares, h)
 	r.chiRouter.With(middlewares...).HandleFunc(r.getPattern(pattern), handlerFunc)
 }
 
@@ -246,7 +243,7 @@ func (r *Router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 
 // NotFound defines a handler to respond whenever a route could not be found.
 func (r *Router) NotFound(h http.HandlerFunc) {
-	middlewares, handlerFunc, _ := wrapMiddlewareAndHandler(r.afterRouting, r.curMiddlewares, []any{h})
+	middlewares, handlerFunc := wrapMiddlewareAndHandler(r.afterRouting, r.curMiddlewares, []any{h})
 	r.chiRouter.NotFound(func(w http.ResponseWriter, r *http.Request) {
 		executeMiddlewaresHandler(w, r, middlewares, handlerFunc)
 	})

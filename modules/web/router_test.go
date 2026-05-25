@@ -520,6 +520,11 @@ func TestRouterPathGroupPreMiddlewareProvider(t *testing.T) {
 	r := NewRouter()
 	r.AfterRouting(func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(resp http.ResponseWriter, req *http.Request) {
+			if chi.RouteContext(req.Context()).RoutePattern() == "/repos/{username}/<repo_group:*>/<reponame>/HEAD" {
+				resRecorder.res.handlerMarks = append(resRecorder.res.handlerMarks, "after-routing:route-ok")
+			} else {
+				resRecorder.res.handlerMarks = append(resRecorder.res.handlerMarks, "after-routing:route-missing")
+			}
 			if req.Context().Value(ctxKey{}) == "ok" {
 				resRecorder.res.handlerMarks = append(resRecorder.res.handlerMarks, "after-routing:pre-ok")
 			} else {
@@ -547,7 +552,7 @@ func TestRouterPathGroupPreMiddlewareProvider(t *testing.T) {
 			"repo_group": "one/two",
 			"reponame":   "repo",
 		},
-		handlerMarks:    []string{"after-routing:pre-ok", "handler"},
+		handlerMarks:    []string{"after-routing:route-ok", "after-routing:pre-ok", "handler"},
 		chiRoutePattern: new("/repos/{username}/<repo_group:*>/<reponame>/HEAD"),
 	})
 }

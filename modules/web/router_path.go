@@ -33,13 +33,12 @@ func (g *RouterPathGroup) ServeHTTP(resp http.ResponseWriter, req *http.Request)
 	g.r.chiRouter.NotFoundHandler().ServeHTTP(resp, req)
 }
 
-func (g *RouterPathGroup) tryServeHTTP(resp http.ResponseWriter, req *http.Request) bool {
+func (g *RouterPathGroup) tryServeHTTP(resp http.ResponseWriter, req *http.Request) {
 	matcher := g.findMatcher(req)
 	if matcher == nil {
-		return false
+		return
 	}
 	g.serveMatch(resp, req, matcher)
-	return true
 }
 
 func (g *RouterPathGroup) findMatcher(req *http.Request) *routerPathMatcher {
@@ -76,9 +75,16 @@ func (g *RouterPathGroup) hasPathMatch(req *http.Request) bool {
 }
 
 func (g *RouterPathGroup) serveMatch(resp http.ResponseWriter, req *http.Request, matcher *routerPathMatcher) {
-	chiCtx := chi.RouteContext(req.Context())
-	chiCtx.RoutePatterns = append(chiCtx.RoutePatterns, matcher.pattern)
+	appendRoutePattern(req, matcher.pattern)
 	executeMiddlewaresHandler(resp, req, matcher.middlewares, matcher.handlerFunc)
+}
+
+func appendRoutePattern(req *http.Request, pattern string) {
+	chiCtx := chi.RouteContext(req.Context())
+	if len(chiCtx.RoutePatterns) > 0 && chiCtx.RoutePatterns[len(chiCtx.RoutePatterns)-1] == pattern {
+		return
+	}
+	chiCtx.RoutePatterns = append(chiCtx.RoutePatterns, pattern)
 }
 
 type RouterPathGroupPattern struct {
@@ -420,8 +426,9 @@ func (h *routerPathGroupsHandler) ServeHTTP(resp http.ResponseWriter, req *http.
 			}
 
 			executeMiddlewaresHandler(resp, req, matcher.preMiddlewares, func(resp http.ResponseWriter, req *http.Request) {
+				appendRoutePattern(req, matcher.pattern)
 				executeMiddlewaresHandler(resp, req, entry.middlewares, func(resp http.ResponseWriter, req *http.Request) {
-					_ = entry.group.tryServeHTTP(resp, req)
+					entry.group.tryServeHTTP(resp, req)
 				})
 			})
 		})
@@ -445,8 +452,9 @@ func (h *routerPathGroupsHandler) ServeHTTP(resp http.ResponseWriter, req *http.
 	if matchedEntry != nil {
 		executeMiddlewaresHandler(resp, req, matchedEntry.preMiddlewares, func(resp http.ResponseWriter, req *http.Request) {
 			executeMiddlewaresHandler(resp, req, matchedMatcher.preMiddlewares, func(resp http.ResponseWriter, req *http.Request) {
+				appendRoutePattern(req, matchedMatcher.pattern)
 				executeMiddlewaresHandler(resp, req, matchedEntry.middlewares, func(resp http.ResponseWriter, req *http.Request) {
-					_ = matchedEntry.group.tryServeHTTP(resp, req)
+					matchedEntry.group.tryServeHTTP(resp, req)
 				})
 			})
 		})

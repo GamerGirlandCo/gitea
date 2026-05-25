@@ -136,7 +136,7 @@ func (g *Group) LoadOwner(ctx context.Context) error {
 }
 
 func (g *Group) FullPath(ctxs ...context.Context) string {
-	path, _ := GroupPathByID(g.ID, ctxs...)
+	path, _ := PathByID(g.ID, ctxs...)
 	return path
 }
 
@@ -234,14 +234,14 @@ func GetGroupByIDAndCond(ctx context.Context, id int64, cond builder.Cond) (*Gro
 	return group, nil
 }
 
-func GroupPathByID(gid int64, ctxs ...context.Context) (string, error) {
+func PathByID(gid int64, ctxs ...context.Context) (string, error) {
 	if gid <= 0 {
 		return "", nil
 	}
 	ctx := util.OptionalArg(ctxs, context.TODO())
 	var strs []string
-	err := db.GetEngine(ctx).SQL(fmt.Sprintf(`%s
-select path from groups where id = ?`, groupPathCTEBuilder()), gid).Find(&strs)
+	err := db.GetEngine(ctx).SQL(groupPathCTEBuilder()+`
+select path from group_paths where id = ?`, gid).Find(&strs)
 	if err != nil {
 		log.Error("unable to find group path: %w", err)
 		return "", err
@@ -257,7 +257,7 @@ func groupPathCTEBuilder() string {
 	if !setting.Database.Type.IsMSSQL() {
 		recursiveKeyword = " RECURSIVE"
 	}
-	return fmt.Sprintf(`WITH%s groups AS (
+	return `WITH` + recursiveKeyword + ` group_paths AS (
     SELECT
         repo_group.*,
        lower_name AS path
@@ -270,15 +270,15 @@ func groupPathCTEBuilder() string {
         g.*,
         concat(p.path, '/', g.lower_name) as path
     FROM repo_group g
-    INNER JOIN groups p ON g.parent_group_id = p.id
-)`, recursiveKeyword)
+    INNER JOIN group_paths p ON g.parent_group_id = p.id
+)`
 }
 
-func GetGroupByPathname(ctx context.Context, owner string, pathname string) (*Group, error) {
-	rawSQL := fmt.Sprintf(`%s
+func GetGroupByPathname(ctx context.Context, owner, pathname string) (*Group, error) {
+	rawSQL := groupPathCTEBuilder() + `
 SELECT *
-FROM groups
-WHERE owner_name = ? and path = ? LIMIT 1;`, groupPathCTEBuilder())
+FROM group_paths
+WHERE owner_name = ? and path = ?`
 	g := new(Group)
 	has, err := db.GetEngine(ctx).SQL(rawSQL, owner, pathname).Get(g)
 	if err != nil {
@@ -291,7 +291,7 @@ WHERE owner_name = ? and path = ? LIMIT 1;`, groupPathCTEBuilder())
 	return g, nil
 }
 
-func GroupIDByPathname(ctx context.Context, ownerID int64, pathname string) int64 {
+func IDByPathname(ctx context.Context, ownerID int64, pathname string) int64 {
 	if pathname == "" {
 		return 0
 	}
@@ -505,7 +505,7 @@ func ChildGroupCond(ctx context.Context, firstParent int64, cond builder.Cond) (
 		recursiveKeyword = "recursive "
 	}
 
-	err = db.GetEngine(ctx).SQL(fmt.Sprintf(`with %sgroups as (
+	err = db.GetEngine(ctx).SQL(fmt.Sprintf(`with %sgroup_descendants as (
 		select * from repo_group
 		WHERE parent_group_id = ? %s
 
@@ -513,8 +513,8 @@ func ChildGroupCond(ctx context.Context, firstParent int64, cond builder.Cond) (
 
 		select subgroup.*
 		from repo_group subgroup
-		join groups g on g.id = subgroup.parent_group_id
-	) select g.id from groups g order by id asc`, recursiveKeyword, filter), firstParent).Find(&ids)
+		join group_descendants g on g.id = subgroup.parent_group_id
+	) select g.id from group_descendants g order by id asc`, recursiveKeyword, filter), firstParent).Find(&ids)
 	return ids, err
 }
 
@@ -539,6 +539,9 @@ func MoveGroup(ctx context.Context, group *Group, newParent int64, newSortOrder 
 	}
 
 	parentGroupChain, err := GetParentGroupChain(ctx, newParent)
+	if err != nil {
+		return err
+	}
 
 	if len(parentGroupChain) >= NestingLimit {
 		return ErrGroupTooDeep{

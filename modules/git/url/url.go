@@ -127,14 +127,18 @@ func ParseRepositoryURL(ctx context.Context, repoURL string) (*RepositoryURL, er
 		fields := strings.Split(s, "/")
 		if len(fields) >= 2 {
 			ret.OwnerName = fields[0]
-			if len(fields) >= 3 {
-				groupSegment := fields[1 : len(fields)-1]
-				ret.RepoName = strings.TrimSuffix(fields[len(fields)-1], ".git")
-
-				ret.GroupPath = strings.Join(groupSegment, "/")
-			} else {
-				ret.RepoName = strings.TrimSuffix(fields[1], ".git")
+			repoIndex := len(fields) - 1
+			for i := 1; i < len(fields); i++ {
+				if strings.HasSuffix(fields[i], ".git") {
+					repoIndex = i
+					if i+1 < len(fields) {
+						ret.RemainingPath = "/" + strings.Join(fields[i+1:], "/")
+					}
+					break
+				}
 			}
+			ret.RepoName = strings.TrimSuffix(fields[repoIndex], ".git")
+			ret.GroupPath = strings.Join(fields[1:repoIndex], "/")
 		}
 	}
 

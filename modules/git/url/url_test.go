@@ -183,7 +183,7 @@ func TestParseRepositoryURL(t *testing.T) {
 	cases := []struct {
 		input                          string
 		ownerName, repoName, remaining string
-		groupID                        int64
+		groupPath                      string
 	}{
 		{input: "/user/repo"},
 
@@ -205,10 +205,10 @@ func TestParseRepositoryURL(t *testing.T) {
 		{input: "root@gitea:user/repo.git", ownerName: "user", repoName: "repo"},
 		{input: "root@external:user/repo.git"},
 
-		{input: "root@try.gitea.io:tablet/group/69/repo.git", ownerName: "tablet", repoName: "repo", groupID: 69},
-		{input: "https://localhost:3000/user/group/666/repo", ownerName: "user", repoName: "repo", groupID: 666},
-		{input: "https://localhost:3000/user/group/69/repo.git/other", ownerName: "user", repoName: "repo", remaining: "/other", groupID: 69},
-		{input: "ssh://try.gitea.io:2222/user/group/42/repo", ownerName: "user", repoName: "repo", groupID: 42},
+		{input: "root@try.gitea.io:tablet/group/69/repo.git", ownerName: "tablet", repoName: "repo", groupPath: "group/69"},
+		{input: "https://localhost:3000/user/group/666/repo", ownerName: "user", repoName: "repo", groupPath: "group/666"},
+		{input: "https://localhost:3000/user/group/69/repo.git/other", ownerName: "user", repoName: "repo", remaining: "/other", groupPath: "group/69"},
+		{input: "ssh://try.gitea.io:2222/user/group/42/repo", ownerName: "user", repoName: "repo", groupPath: "group/42"},
 	}
 
 	for _, c := range cases {
@@ -217,7 +217,7 @@ func TestParseRepositoryURL(t *testing.T) {
 			assert.Equal(t, c.ownerName, ret.OwnerName)
 			assert.Equal(t, c.repoName, ret.RepoName)
 			assert.Equal(t, c.remaining, ret.RemainingPath)
-			assert.Equal(t, c.groupID, ret.GroupID)
+			assert.Equal(t, c.groupPath, ret.GroupPath)
 		})
 	}
 
@@ -227,11 +227,11 @@ func TestParseRepositoryURL(t *testing.T) {
 		cases = []struct {
 			input                          string
 			ownerName, repoName, remaining string
-			groupID                        int64
+			groupPath                      string
 		}{
 			{input: "https://localhost:3000/user/repo"},
 			{input: "https://localhost:3000/subpath/user/repo.git/other", ownerName: "user", repoName: "repo", remaining: "/other"},
-			{input: "https://localhost:3000/subpath/user/group/1/repo.git/other", ownerName: "user", repoName: "repo", groupID: 1, remaining: "/other"},
+			{input: "https://localhost:3000/subpath/user/group/1/repo.git/other", ownerName: "user", repoName: "repo", groupPath: "group/1", remaining: "/other"},
 
 			{input: "ssh://try.gitea.io:2222/user/repo", ownerName: "user", repoName: "repo"},
 			{input: "ssh://external:2222/user/repo"},
@@ -249,7 +249,7 @@ func TestParseRepositoryURL(t *testing.T) {
 				assert.Equal(t, c.ownerName, ret.OwnerName)
 				assert.Equal(t, c.repoName, ret.RepoName)
 				assert.Equal(t, c.remaining, ret.RemainingPath)
-				assert.Equal(t, c.groupID, ret.GroupID)
+				assert.Equal(t, c.groupPath, ret.GroupPath)
 			})
 		}
 	})
