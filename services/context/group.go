@@ -108,8 +108,10 @@ func getGroupByParams(ctx commonCtx, repoGroup *RepoGroup, handleNotFound func(e
 		}
 		return err
 	}
-	if err = repoGroup.Group.LoadAttributes(ctx); err != nil {
-		handleOtherError("LoadAttributes", err)
+	if repoGroup.Group != nil {
+		if err = repoGroup.Group.LoadAttributes(ctx); err != nil {
+			handleOtherError("LoadAttributes", err)
+		}
 	}
 	return err
 }
@@ -129,9 +131,7 @@ type GroupAssignmentOptions struct {
 
 func groupAssignment(ctx commonCtx, doer *user_model.User, _ bool, handleNotFound func(error), handleOtherError func(string, error), assign func(repoGroup *RepoGroup)) {
 	var err error
-	if ctx.PathParam("repo_group") == "" && ctx.PathParam("group_id") == "" {
-		return
-	}
+
 	repoGroup := new(RepoGroup)
 	err = getGroupByParams(ctx, repoGroup, handleNotFound, handleOtherError)
 	if err != nil {
