@@ -568,6 +568,9 @@ func reqGroupMembership(mode perm.AccessMode, needsCreatePerm bool) func(ctx *co
 		isOrgAdmin := false
 		isOrgMember := false
 		g := ctx.RepoGroup.Group
+		if g == nil {
+			return
+		}
 
 		if ctx.Doer != nil {
 			isOrgOwner, err = organization.IsOrganizationOwner(ctx, g.OwnerID, ctx.Doer.ID)
