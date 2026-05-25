@@ -488,14 +488,14 @@ func ChildGroupCond(ctx context.Context, firstParent int64, cond builder.Cond) (
 
 	err = db.GetEngine(ctx).SQL(fmt.Sprintf(`WITH %srepo_groups AS (
 		SELECT * from repo_group
-		WHERE parent_group_id = %d %s
+		WHERE parent_group_id = ? %s
 
 		UNION ALL
 
 		SELECT subgroup.*
 		FROM repo_group subgroup
 		JOIN repo_groups g ON g.id = subgroup.parent_group_id
-	) SELECT g.id FROM repo_groups g ORDER BY id ASC`, recursiveKeyword, firstParent, filter)).Find(&ids)
+	) SELECT g.id FROM repo_groups g ORDER BY id ASC`, recursiveKeyword, filter), firstParent).Find(&ids)
 	return ids, err
 }
 
