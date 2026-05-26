@@ -241,6 +241,11 @@ func repoAssignment() func(ctx *context.APIContext) {
 	}
 }
 
+func clearStarPathParam(ctx *context.APIContext) {
+	chiCtx := ctx.ChiCtx()
+	chiCtx.URLParams.Add("*", "")
+}
+
 func doerNeedTwoFactorAuth(ctx gocontext.Context, doer *user_model.User) (bool, error) {
 	if !setting.TwoFactorAuthEnforced {
 		return false, nil
@@ -1537,7 +1542,7 @@ func Routes() *web.Router {
 							m.Get("/<sha>.<diffType:diff|patch>", repo.DownloadCommitDiffOrPatch)
 						})
 						m.Get("/refs", repo.GetGitAllRefs)
-						m.Get("/refs/<>", repo.GetGitRefs)
+						m.Get("/refs/<*:*>", repo.GetGitRefs)
 						m.Get("/trees/<sha>", repo.GetTree)
 						m.Get("/blobs/<sha>", repo.GetBlob)
 						m.Get("/tags/<sha>", repo.GetAnnotatedTag)
@@ -1545,7 +1550,7 @@ func Routes() *web.Router {
 					}, context.ReferencesGitRepo(true), reqRepoReader(unit.TypeCode))
 					m.Post("/diffpatch", mustEnableEditor, reqToken(), bind(api.ApplyDiffPatchFileOptions{}), repo.ReqChangeRepoFileOptionsAndCheck, repo.ApplyDiffPatch)
 					m.Group("/contents", func() {
-						m.Get("", repo.GetContentsList)
+						m.Get("", clearStarPathParam, repo.GetContentsList)
 						m.Get("/<*:*>", repo.GetContents)
 						m.Group("", func() {
 							// "change file" operations, need permission to write to the target branch provided by the form
