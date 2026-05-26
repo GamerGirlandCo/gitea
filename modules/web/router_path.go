@@ -64,6 +64,17 @@ func (g *RouterPathGroup) findMatchingMatcher(req *http.Request) *routerPathMatc
 	return nil
 }
 
+func (g *RouterPathGroup) hasPathMatch(req *http.Request) bool {
+	chiCtx := chi.RouteContext(req.Context())
+	path := chiCtx.URLParam(g.pathParam)
+	for _, m := range g.matchers {
+		if m.matchesRoutePath(path) {
+			return true
+		}
+	}
+	return false
+}
+
 func (g *RouterPathGroup) serveMatch(resp http.ResponseWriter, req *http.Request, matcher *routerPathMatcher) {
 	chiCtx := chi.RouteContext(req.Context())
 	chiCtx.RoutePatterns = append(chiCtx.RoutePatterns, matcher.pattern)
@@ -230,9 +241,10 @@ func (p *routerPathMatcher) moreSpecificThan(other *routerPathMatcher) bool {
 }
 
 func (p *routerPathMatcher) matchesPath(method, path string) bool {
-	if !p.methods.Contains(method) {
-		return false
-	}
+	return p.methods.Contains(method) && p.matchesRoutePath(path)
+}
+
+func (p *routerPathMatcher) matchesRoutePath(path string) bool {
 	if !strings.HasPrefix(path, "/") {
 		path = "/" + path
 	}
@@ -398,7 +410,11 @@ func (h *routerPathGroupsHandler) ServeHTTP(resp http.ResponseWriter, req *http.
 			matcher := entry.group.findMatchingMatcher(req)
 			if matcher == nil {
 				executeMiddlewaresHandler(resp, req, entry.middlewares, func(resp http.ResponseWriter, req *http.Request) {
-					h.r.chiRouter.NotFoundHandler().ServeHTTP(resp, req)
+					if entry.group.hasPathMatch(req) {
+						h.r.chiRouter.MethodNotAllowedHandler().ServeHTTP(resp, req)
+					} else {
+						h.r.chiRouter.NotFoundHandler().ServeHTTP(resp, req)
+					}
 				})
 				return
 			}
@@ -414,7 +430,9 @@ func (h *routerPathGroupsHandler) ServeHTTP(resp http.ResponseWriter, req *http.
 
 	var matchedEntry *routerPathGroupEntry
 	var matchedMatcher *routerPathMatcher
+	hasPathMatch := false
 	for _, entry := range h.entries {
+		hasPathMatch = hasPathMatch || entry.group.hasPathMatch(req)
 		matcher := entry.group.findMatchingMatcher(req)
 		if matcher == nil {
 			continue
@@ -432,6 +450,10 @@ func (h *routerPathGroupsHandler) ServeHTTP(resp http.ResponseWriter, req *http.
 				})
 			})
 		})
+		return
+	}
+	if hasPathMatch {
+		h.r.chiRouter.MethodNotAllowedHandler().ServeHTTP(resp, req)
 		return
 	}
 	h.r.chiRouter.NotFoundHandler().ServeHTTP(resp, req)

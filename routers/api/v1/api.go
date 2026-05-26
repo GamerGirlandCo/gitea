@@ -96,6 +96,7 @@ import (
 	"code.gitea.io/gitea/services/auth"
 	"code.gitea.io/gitea/services/context"
 	"code.gitea.io/gitea/services/forms"
+	"github.com/go-chi/chi/v5"
 
 	_ "code.gitea.io/gitea/routers/api/v1/swagger" // for swagger generation
 
@@ -241,8 +242,8 @@ func repoAssignment() func(ctx *context.APIContext) {
 	}
 }
 
-func clearStarPathParam(ctx *context.APIContext) {
-	chiCtx := ctx.ChiCtx()
+func clearWildcardPathParam(ctx *context.APIContext) {
+	chiCtx := chi.RouteContext(ctx.Req.Context())
 	chiCtx.URLParams.Add("*", "")
 }
 
@@ -1246,9 +1247,9 @@ func Routes() *web.Router {
 						m.Get("", user.IsStarring)
 						m.Put("", user.Star)
 						m.Delete("", user.Unstar)
-					})
+					}, context.GroupAssignmentAPI(true), repoAssignment(), checkTokenPublicOnly())
 				}
-				m.PathGroup("/{username}/*", fn, context.GroupAssignmentAPI(true), repoAssignment(), checkTokenPublicOnly())
+				m.PathGroup("/{username}/*", fn)
 			}, reqStarsEnabled(), tokenRequiresScopes(auth_model.AccessTokenScopeCategoryRepository))
 			m.Get("/times", rejectPublicOnly(), repo.ListMyTrackedTimes)
 			m.Get("/stopwatches", rejectPublicOnly(), repo.GetStopwatches)
@@ -1550,7 +1551,7 @@ func Routes() *web.Router {
 					}, context.ReferencesGitRepo(true), reqRepoReader(unit.TypeCode))
 					m.Post("/diffpatch", mustEnableEditor, reqToken(), bind(api.ApplyDiffPatchFileOptions{}), repo.ReqChangeRepoFileOptionsAndCheck, repo.ApplyDiffPatch)
 					m.Group("/contents", func() {
-						m.Get("", clearStarPathParam, repo.GetContentsList)
+						m.Get("", clearWildcardPathParam, repo.GetContentsList)
 						m.Get("/<*:*>", repo.GetContents)
 						m.Group("", func() {
 							// "change file" operations, need permission to write to the target branch provided by the form
@@ -1563,7 +1564,7 @@ func Routes() *web.Router {
 						}, mustEnableEditor, reqToken())
 					}, reqRepoReader(unit.TypeCode), context.ReferencesGitRepo())
 					m.Group("/contents-ext", func() {
-						m.Get("", repo.GetContentsExt)
+						m.Get("", clearWildcardPathParam, repo.GetContentsExt)
 						m.Get("/<*:*>", repo.GetContentsExt)
 					}, reqRepoReader(unit.TypeCode), context.ReferencesGitRepo())
 					m.Combo("/file-contents", reqRepoReader(unit.TypeCode), context.ReferencesGitRepo()).

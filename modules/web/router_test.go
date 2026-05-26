@@ -97,6 +97,17 @@ func (r *testRecorder) test(t *testing.T, rt *Router, methodPath string, expecte
 	assert.Equal(t, expected, r.res)
 }
 
+func (r *testRecorder) testStatus(t *testing.T, rt *Router, methodPath string, expectedStatus int) {
+	r.reset()
+	methodPathFields := strings.Fields(methodPath)
+	req, err := http.NewRequest(methodPathFields[0], methodPathFields[1], nil)
+	assert.NoError(t, err)
+
+	httpRecorder := httptest.NewRecorder()
+	rt.ServeHTTP(httpRecorder, req)
+	assert.Equal(t, expectedStatus, httpRecorder.Code)
+}
+
 func TestPathProcessor(t *testing.T) {
 	testProcess := func(pattern, uri string, expectedPathParams map[string]string) {
 		chiCtx := chi.NewRouteContext()
@@ -561,4 +572,20 @@ func TestRouterGroupSuffixPattern(t *testing.T) {
 		handlerMarks:    []string{"suffix"},
 		chiRoutePattern: new("/swift/{scope}/{name}.json"),
 	})
+}
+
+func TestRouterPathGroupMethodNotAllowed(t *testing.T) {
+	resRecorder := &testRecorder{}
+
+	r := NewRouter()
+	r.PathGroup("/repos/{username}/*", func(g *RouterPathGroup) {
+		g.Group("/<repo_group:*>/<reponame>", func() {
+			g.Group("/actions/secrets", func() {
+				g.Get("", func(http.ResponseWriter, *http.Request) {})
+			})
+		})
+	})
+
+	resRecorder.testStatus(t, r, "PUT /repos/alice/one/two/repo/actions/secrets", http.StatusMethodNotAllowed)
+	resRecorder.testStatus(t, r, "PUT /repos/alice/one/two/repo/actions/secrets/", http.StatusMethodNotAllowed)
 }

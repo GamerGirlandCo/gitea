@@ -14,7 +14,7 @@ func addOwnerRepoGitHTTPRouters(m *web.Router, middlewares ...any) {
 			m.Methods("POST,OPTIONS", "/git-upload-pack", repo.ServiceUploadPack)
 			m.Methods("POST,OPTIONS", "/git-receive-pack", repo.ServiceReceivePack)
 			m.Methods("POST,OPTIONS", "/git-upload-archive", repo.ServiceUploadArchive)
-			m.Methods("GET,OPTIONS", "/info/refs", repo.GetInfoRefs)
+			m.Methods("GET,OPTIONS,HEAD", "/info/refs", repo.GetInfoRefs)
 			m.Methods("GET,OPTIONS", "/HEAD", repo.GetTextFile("HEAD"))
 			m.Methods("GET,OPTIONS", "/objects/info/alternates", repo.GetTextFile("objects/info/alternates"))
 			m.Methods("GET,OPTIONS", "/objects/info/http-alternates", repo.GetTextFile("objects/info/http-alternates"))

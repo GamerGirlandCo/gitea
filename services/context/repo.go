@@ -13,6 +13,7 @@ import (
 	"net/url"
 	"path"
 	"regexp"
+	"slices"
 	"strings"
 
 	asymkey_model "code.gitea.io/gitea/models/asymkey"
@@ -983,6 +984,17 @@ func RepoRefByType(detectRefType git.RefType) func(*Context) {
 		groupPathWithRepo = strings.TrimPrefix(groupPathWithRepo, "/")
 
 		reqPath := ctx.PathParam("*")
+		{
+			splitExt := strings.Split(reqPath, ".")
+			exts := []string{"wiki", "git", "rss", "atom"}
+			if len(splitExt) > 0 && slices.ContainsFunc(exts, func(s string) bool {
+				return splitExt[len(splitExt)-1] == s
+			}) {
+				which := exts[slices.Index(exts, splitExt[len(splitExt)-1])]
+				reqPath = strings.TrimSuffix(reqPath, "."+which)
+			}
+		}
+
 		if len(reqPath) > len(groupPathWithRepo) && strings.HasPrefix(reqPath, groupPathWithRepo) {
 			reqPath = reqPath[len(groupPathWithRepo):]
 		} else if strings.HasSuffix(reqPath, groupPathWithRepo) {
