@@ -983,9 +983,9 @@ func RepoRefByType(detectRefType git.RefType) func(*Context) {
 		groupPathWithRepo = strings.TrimPrefix(groupPathWithRepo, "/")
 
 		reqPath := ctx.PathParam("*")
-		if len(reqPath) > len(groupPathWithRepo) {
+		if len(reqPath) > len(groupPathWithRepo) && strings.HasPrefix(reqPath, groupPathWithRepo) {
 			reqPath = reqPath[len(groupPathWithRepo):]
-		} else if reqPath == groupPathWithRepo {
+		} else if strings.HasSuffix(reqPath, groupPathWithRepo) {
 			reqPath = ""
 		}
 		if reqPath == "" {

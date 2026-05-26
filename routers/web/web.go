@@ -1443,10 +1443,10 @@ func registerWebRoutes(m *web.Router, webAuth *AuthMiddleware) {
 					m.Post("/_fork/<*:*>", repo.ForkToEditPost)     // read-only, fork to own repo, fine with "code reader"
 
 					// the path params are used in PrepareCommitFormOptions to construct the correct form action URL
-					m.Combo("/<editor_action:(_edit)>/<*:*>").
+					m.Combo("/<editor_action:_edit>/<*:*>").
 						Get(repo.EditFile).
 						Post(web.Bind(forms.EditRepoFileForm{}), canWriteToBranch, repo.EditFilePost)
-					m.Combo("/<editor_action:(_new)>/<*:*>").
+					m.Combo("/<editor_action:_new>/<*:*>").
 						Get(repo.EditFile).
 						Post(web.Bind(forms.EditRepoFileForm{}), canWriteToBranch, repo.EditFilePost)
 					m.Combo("/<editor_action:(_delete)>/<*:*>").
