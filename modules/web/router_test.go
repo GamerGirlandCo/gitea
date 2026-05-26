@@ -540,3 +540,25 @@ func TestRouterPathGroupPreMiddlewareProvider(t *testing.T) {
 		chiRoutePattern: new("/repos/{username}/<repo_group:*>/<reponame>/HEAD"),
 	})
 }
+
+func TestRouterGroupSuffixPattern(t *testing.T) {
+	resRecorder := &testRecorder{}
+	h := resRecorder.handle
+
+	r := NewRouter()
+	r.Group("/swift", func() {
+		r.Group("/{scope}/{name}", func() {
+			r.Get(".json", h("suffix"))
+		})
+	})
+
+	resRecorder.test(t, r, "GET /swift/test-scope/test-package.json", testResult{
+		method: "GET",
+		pathParams: map[string]string{
+			"scope": "test-scope",
+			"name":  "test-package",
+		},
+		handlerMarks:    []string{"suffix"},
+		chiRoutePattern: new("/swift/{scope}/{name}.json"),
+	})
+}

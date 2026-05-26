@@ -93,6 +93,8 @@ func joinPattern(prefix, pattern string) string {
 		return pattern
 	case pattern == "":
 		return prefix
+	case strings.HasPrefix(pattern, "."):
+		return prefix + pattern
 	case strings.HasSuffix(prefix, "/") && strings.HasPrefix(pattern, "/"):
 		return prefix[:len(prefix)-1] + pattern
 	case !strings.HasSuffix(prefix, "/") && !strings.HasPrefix(pattern, "/"):
