@@ -15,6 +15,10 @@ type groupItemRepo struct {
 	Repo *repo_model.Repository
 }
 
+func (repo *groupItemRepo) Path() string {
+	return ""
+}
+
 func (repo *groupItemRepo) Link() string {
 	return repo.Repo.Link()
 }

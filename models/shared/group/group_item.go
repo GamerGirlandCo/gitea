@@ -20,6 +20,7 @@ import (
 // used to display, for example, the group sidebar
 type Item interface {
 	Link() string
+	Path() string
 	Title() string
 	Parent() Item
 	Children(doer *user_model.User, requireMember bool) []Item
@@ -32,6 +33,10 @@ type Item interface {
 
 type groupItemGroup struct {
 	Group *group_model.Group
+}
+
+func (g *groupItemGroup) Path() string {
+	return g.Group.FullPath()
 }
 
 func (g *groupItemGroup) Link() string {
