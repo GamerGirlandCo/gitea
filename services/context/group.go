@@ -78,7 +78,7 @@ func (g *RepoGroup) UnitPermission(ctx context.Context, doer *user_model.User, u
 	return perm.AccessModeNone
 }
 
-func getGroupByParams(ctx commonCtx, repoGroup *RepoGroup, handleNotFound func(error), handleOtherError func(string, error)) (err error) {
+func getGroupByParams(ctx commonCtx, repoGroup *RepoGroup, doer *user_model.User, fallbackToDoer bool, handleNotFound func(error), handleOtherError func(string, error)) (err error) {
 	group := ctx.PathParam("repo_group")
 
 	if group == "" && ctx.PathParam("group_id") != "" {
@@ -87,11 +87,16 @@ func getGroupByParams(ctx commonCtx, repoGroup *RepoGroup, handleNotFound func(e
 		user, err := user_model.GetUserByName(ctx, ctx.PathParam("username"))
 		if err != nil {
 			if user_model.IsErrUserNotExist(err) {
-				handleNotFound(err)
+				if fallbackToDoer && doer != nil {
+					user = doer
+				} else {
+					handleNotFound(err)
+					return err
+				}
 			} else {
 				handleOtherError("GetUserByName", err)
+				return err
 			}
-			return err
 		}
 		repoGroup.Group, err = group_model.GetGroupByPathname(ctx, user.LowerName, group)
 		if err != nil {
@@ -120,20 +125,21 @@ func GetGroupByParams(ctx *Context) (err error) {
 	if ctx.RepoGroup == nil {
 		ctx.RepoGroup = &RepoGroup{}
 	}
-	return getGroupByParams(ctx, ctx.RepoGroup, ctx.NotFound, ctx.ServerError)
+	return getGroupByParams(ctx, ctx.RepoGroup, ctx.Doer, false, ctx.NotFound, ctx.ServerError)
 }
 
 type GroupAssignmentOptions struct {
 	RequireMember     bool
 	RequireOwner      bool
 	RequireGroupAdmin bool
+	FallBackToDoer    bool
 }
 
-func groupAssignment(ctx commonCtx, doer *user_model.User, _ bool, handleNotFound func(error), handleOtherError func(string, error), assign func(repoGroup *RepoGroup)) {
+func groupAssignment(ctx commonCtx, doer *user_model.User, fallbackToDoer bool, handleNotFound func(error), handleOtherError func(string, error), assign func(repoGroup *RepoGroup)) {
 	var err error
 
 	repoGroup := new(RepoGroup)
-	err = getGroupByParams(ctx, repoGroup, handleNotFound, handleOtherError)
+	err = getGroupByParams(ctx, repoGroup, doer, fallbackToDoer, handleNotFound, handleOtherError)
 	if err != nil {
 		return
 	}
@@ -165,7 +171,7 @@ func GroupAssignmentWeb(args GroupAssignmentOptions) func(ctx *Context) {
 	return func(ctx *Context) {
 		opts := args
 		var err error
-		groupAssignment(ctx, ctx.Doer, false, ctx.NotFound, ctx.ServerError, func(repoGroup *RepoGroup) {
+		groupAssignment(ctx, ctx.Doer, args.FallBackToDoer, ctx.NotFound, ctx.ServerError, func(repoGroup *RepoGroup) {
 			if ctx.Written() {
 				return
 			}
@@ -253,7 +259,7 @@ func GroupAssignmentWeb(args GroupAssignmentOptions) func(ctx *Context) {
 
 func GroupAssignmentAPI(early404 bool) func(ctx *APIContext) {
 	return func(ctx *APIContext) {
-		groupAssignment(ctx, ctx.Doer, true, func(err error) {
+		groupAssignment(ctx, ctx.Doer, false, func(err error) {
 			ctx.APIErrorNotFound()
 		}, func(str string, err error) {
 			ctx.APIErrorInternal(fmt.Errorf("%s: %w", str, err))
