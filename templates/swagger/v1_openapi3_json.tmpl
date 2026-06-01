@@ -50254,6 +50254,37 @@
         ]
       }
     },
+    "/user/groups/new": {
+      "post": {
+        "operationId": "groupNewUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewGroupOption"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/Group"
+          },
+          "404": {
+            "$ref": "#/components/responses/notFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/validationError"
+          }
+        },
+        "summary": "create a root-level repository group for the current user",
+        "tags": [
+          "repository-group"
+        ]
+      }
+    },
     "/user/hooks": {
       "get": {
         "operationId": "userListHooks",
@@ -50990,37 +51021,6 @@
         "summary": "List a user's root-level groups",
         "tags": [
           "user"
-        ]
-      }
-    },
-    "/users/groups/new": {
-      "post": {
-        "operationId": "groupNewUser",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewGroupOption"
-              }
-            }
-          },
-          "required": true,
-          "x-originalParamName": "body"
-        },
-        "responses": {
-          "201": {
-            "$ref": "#/components/responses/Group"
-          },
-          "404": {
-            "$ref": "#/components/responses/notFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/validationError"
-          }
-        },
-        "summary": "create a root-level repository group for the current user",
-        "tags": [
-          "repository-group"
         ]
       }
     },
