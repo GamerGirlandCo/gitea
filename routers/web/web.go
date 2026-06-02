@@ -521,7 +521,7 @@ func registerWebRoutes(m *web.Router, webAuth *AuthMiddleware) {
 
 	addUserOrgGroupRoutes := func() {
 		m.Group("/groups", func() {
-			m.Group("/{group_id}", func() {
+			m.Group("/{repo_group:*}", func() {
 				m.Group("/settings", func() {
 					m.Combo("").
 						Get(group.Settings).
