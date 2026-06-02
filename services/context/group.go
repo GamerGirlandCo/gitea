@@ -84,7 +84,11 @@ func getGroupByParams(ctx commonCtx, repoGroup *RepoGroup, doer *user_model.User
 	if group == "" && ctx.PathParam("group_id") != "" {
 		repoGroup.Group, err = group_model.GetGroupByID(ctx, ctx.PathParamInt64("group_id"))
 	} else if group != "" {
-		user, err := user_model.GetUserByName(ctx, ctx.PathParam("username"))
+		username := ctx.PathParam("username")
+		if username == "" {
+			username = ctx.PathParam("org")
+		}
+		user, err := user_model.GetUserByName(ctx, username)
 		if err != nil {
 			if user_model.IsErrUserNotExist(err) {
 				if fallbackToDoer && doer != nil {
