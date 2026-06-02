@@ -5,11 +5,15 @@ package group
 
 import (
 	"context"
+	"os"
+	"path/filepath"
 	"strings"
 
 	group_model "gitea.dev/models/group"
 	"gitea.dev/modules/optional"
+	"gitea.dev/modules/setting"
 	"gitea.dev/modules/structs"
+	"gitea.dev/modules/util"
 )
 
 type UpdateOptions struct {
@@ -19,7 +23,11 @@ type UpdateOptions struct {
 }
 
 func UpdateGroup(ctx context.Context, g *group_model.Group, opts *UpdateOptions) error {
+	var nameChanged bool
+	var oldName string
 	if opts.Name.Has() {
+		oldName = g.Name
+		nameChanged = !strings.EqualFold(opts.Name.Value(), g.Name)
 		g.Name = opts.Name.Value()
 		g.LowerName = strings.ToLower(g.Name)
 	}
@@ -28,6 +36,16 @@ func UpdateGroup(ctx context.Context, g *group_model.Group, opts *UpdateOptions)
 	}
 	if opts.Visibility.Has() {
 		g.Visibility = opts.Visibility.Value()
+	}
+	if nameChanged {
+		parentDir := filepath.Dir(filepath.Join(setting.RepoRootPath, filepath.FromSlash(g.FullPath(ctx))))
+		oldDir := filepath.Join(parentDir, oldName)
+		ndir := filepath.Join(setting.RepoRootPath, filepath.FromSlash(g.FullPath(ctx)))
+		if err := util.Rename(oldDir, ndir); err != nil {
+			if !os.IsNotExist(err) {
+				return err
+			}
+		}
 	}
 	return group_model.UpdateGroup(ctx, g)
 }
