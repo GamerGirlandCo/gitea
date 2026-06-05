@@ -897,6 +897,25 @@ $.fn.dropdown = function(parameters) {
                 }
               })
             ;
+            let ancestors = Array.from(new Set(results.flatMap(s => {
+              const currentAncestors = [s];
+              let depth = Number(s.getAttribute('data-item-depth') || 0);
+              while(depth >= 0) {
+                let maybeDataAttr = '.root';
+                if(depth > 0) {
+                  maybeDataAttr ='[data-item-depth="' + depth + '"]';
+                }
+                currentAncestors.push(...$(currentAncestors[currentAncestors.length - 1]).
+                  prevAll('.item' + maybeDataAttr + ':not(.leaf):first').first());
+                depth--;
+              }
+              return [
+                s,
+                ...currentAncestors
+              ]
+            })));
+            results = ancestors;
+            console.debug(ancestors);
           }
           module.debug('Showing only matched items', searchTerm);
           module.remove.filteredItem();
@@ -4209,6 +4228,7 @@ $.fn.dropdown.settings.templates = {
       let maybeData = '';
       let maybeLeaf = '';
       let maybeRoot = '';
+
       const dataObject = option[fields.data];
       if (dataObject) {
         let dataKey;
@@ -4227,6 +4247,8 @@ $.fn.dropdown.settings.templates = {
       }
       if(!depth) {
         maybeRoot = 'root ';
+      } else {
+        maybeData = 'data-item-depth=' + depth + ' ';
       }
 
       if( itemType === 'item' || isMenu ) {
