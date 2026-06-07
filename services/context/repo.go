@@ -610,12 +610,19 @@ func repoAssignmentPrepareRepo(ctx *Context, data *repoAssignmentPrepareDataStru
 }
 
 func repoAssignmentPrepareRepoGroup(ctx *Context, data *repoAssignmentPrepareDataStruct) {
-	gid, _ := strconv.ParseInt(data.rawGroupID, 10, 64)
+	gid, err := group_model.IDByPathname(ctx, ctx.Repo.Owner.ID, data.groupPath)
 	if data.repo.GroupID != gid {
 		ctx.NotFound(nil)
 		return
 	}
-
+	if err != nil {
+		if group_model.IsErrGroupNotExist(err) {
+			ctx.NotFound(err)
+		} else {
+			ctx.ServerError("IDByPathname", err)
+		}
+		return
+	}
 	if gid > 0 {
 		GroupAssignmentWeb(GroupAssignmentOptions{})(ctx)
 	}
