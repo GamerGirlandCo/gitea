@@ -139,7 +139,7 @@ func handleGroupHomeFeed(ctx *context.Context) bool {
 	if !setting.Other.EnableFeed {
 		return false
 	}
-	isFeed, showFeedType := feed.GetFeedType(ctx.PathParam("group_id"), ctx.Req)
+	isFeed, showFeedType := feed.GetFeedType(ctx.PathParam("repo_group"), ctx.Req)
 	if !isFeed {
 		return false
 	}
