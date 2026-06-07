@@ -6,6 +6,7 @@ package context
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	group_model "gitea.dev/models/group"
 	"gitea.dev/models/organization"
@@ -101,6 +102,10 @@ func getGroupByParams(ctx commonCtx, repoGroup *RepoGroup, doer *user_model.User
 				handleOtherError("GetUserByName", err)
 				return err
 			}
+		}
+		if setting.Other.EnableFeed {
+			group = strings.TrimSuffix(group, ".rss")
+			group = strings.TrimSuffix(group, ".atom")
 		}
 		repoGroup.Group, err = group_model.GetGroupByPathname(ctx, user.LowerName, group)
 		if err != nil {
