@@ -281,7 +281,7 @@ func Diff(ctx *context.Context) {
 
 	userName := ctx.Repo.Owner.Name
 	repoName := ctx.Repo.Repository.Name
-	repoGroup := ctx.Repo.Repository.GroupID
+	repoGroup := ctx.Repo.Repository.GroupPath(ctx)
 	commitID := ctx.PathParam("sha")
 
 	diffBlobExcerptData := &gitdiff.DiffBlobExcerptData{

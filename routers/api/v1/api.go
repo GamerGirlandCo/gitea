@@ -101,7 +101,6 @@ import (
 	_ "gitea.dev/routers/api/v1/swagger" // for swagger generation
 
 	"gitea.com/go-chi/binding"
-	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/cors"
 )
 

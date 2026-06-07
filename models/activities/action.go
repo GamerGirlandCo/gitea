@@ -7,7 +7,6 @@ package activities
 import (
 	"context"
 	"fmt"
-	"net/url"
 	"path"
 	"slices"
 	"strconv"
