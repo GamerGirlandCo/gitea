@@ -213,9 +213,9 @@ func TestComposeSSHCloneURL(t *testing.T) {
 	assert.Equal(t, "ssh://doer@domain:123/user/repo.git", ComposeSSHCloneURL(&user_model.User{Name: "doer"}, "user", "repo", ""))
 
 	assert.Equal(t, "https://try.gitea.io/user/repo.git", ComposeHTTPSCloneURL(t.Context(), "user", "repo", ""))
-	assert.Equal(t, "https://try.gitea.io/user/-/group/one/two/repo.git", ComposeHTTPSCloneURL(t.Context(), "user", "repo", "one/two"))
+	assert.Equal(t, "https://try.gitea.io/user/one/two/repo.git", ComposeHTTPSCloneURL(t.Context(), "user", "repo", "one/two"))
 	assert.Equal(t, "tea clone user/repo", ComposeTeaCloneCommand(t.Context(), "user", "repo", ""))
-	assert.Equal(t, "tea clone user/-/group/one/two/repo", ComposeTeaCloneCommand(t.Context(), "user", "repo", "one/two"))
+	assert.Equal(t, "tea clone user/one/two/repo", ComposeTeaCloneCommand(t.Context(), "user", "repo", "one/two"))
 }
 
 func TestIsUsableRepoName(t *testing.T) {
