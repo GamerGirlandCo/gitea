@@ -5,6 +5,7 @@ package group_test
 import (
 	"fmt"
 	"slices"
+	"strings"
 	"testing"
 
 	"gitea.dev/models/db"
@@ -24,6 +25,7 @@ func createTestGroup(t *testing.T, name string, pgid int64) *group_model.Group {
 		Name:          name,
 		OwnerID:       3,
 		ParentGroupID: pgid,
+		LowerName:     strings.ToLower(name),
 	}
 	e := db.GetEngine(t.Context())
 	curCount, err := e.Where(builder.Eq{"parent_group_id": pgid}).Table(newGroup.TableName()).Count()

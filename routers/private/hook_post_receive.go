@@ -41,14 +41,14 @@ func hookPostReceiveCollectPushUpdates(opts *private.HookOptions, repo *repo_mod
 		// may be a very large number of them).
 		if refFullName.IsBranch() || refFullName.IsTag() {
 			option := &repo_module.PushUpdateOptions{
-				RefFullName:  refFullName,
-				OldCommitID:  opts.OldCommitIDs[i],
-				NewCommitID:  opts.NewCommitIDs[i],
-				PusherID:     opts.UserID,
-				PusherName:   opts.UserName,
-				RepoGroupID:  repo.GroupID,
-				RepoUserName: repo.OwnerName,
-				RepoName:     repo.Name,
+				RefFullName:   refFullName,
+				OldCommitID:   opts.OldCommitIDs[i],
+				NewCommitID:   opts.NewCommitIDs[i],
+				PusherID:      opts.UserID,
+				PusherName:    opts.UserName,
+				RepoGroupPath: repo.GroupPath(),
+				RepoUserName:  repo.OwnerName,
+				RepoName:      repo.Name,
 			}
 			updates = append(updates, option)
 		}
@@ -108,8 +108,8 @@ func HookPostReceive(ctx *gitea_context.PrivateContext) {
 
 	ownerName := ctx.PathParam("owner")
 	repoName := ctx.PathParam("repo")
-	groupID := ctx.PathParamInt64("group_id")
-	repo := loadRepository(ctx, ownerName, repoName, groupID)
+	groupPath := ctx.PathParam("repo_group")
+	repo := loadRepository(ctx, ownerName, repoName, groupPath)
 	if ctx.Written() {
 		return
 	}

@@ -7,6 +7,7 @@ package activities
 import (
 	"context"
 	"fmt"
+	"net/url"
 	"path"
 	"slices"
 	"strconv"
@@ -237,21 +238,21 @@ func (a *Action) GetActDisplayNameTitle(ctx context.Context) string {
 }
 
 func (a *Action) ShortLocator(ctx context.Context) giturl.Locator {
-	var gid int64
+	var gpath string
 	_ = a.LoadRepo(ctx)
 	if a.Repo != nil {
-		gid = a.Repo.GroupID
+		gpath = a.Repo.GroupPath()
 	}
-	return giturl.NewLocator(a.ShortActUserName(ctx), a.ShortRepoName(ctx), gid)
+	return giturl.NewLocator(a.ShortActUserName(ctx), a.ShortRepoName(ctx), gpath)
 }
 
 func (a *Action) GetLocator(ctx context.Context) giturl.Locator {
-	var gid int64
+	var gpath string
 	_ = a.LoadRepo(ctx)
 	if a.Repo != nil {
-		gid = a.Repo.GroupID
+		gpath = a.Repo.GroupPath()
 	}
-	return giturl.NewLocator(a.GetRepoUserName(ctx), a.GetRepoName(ctx), gid)
+	return giturl.NewLocator(a.GetRepoUserName(ctx), a.GetRepoName(ctx), gpath)
 }
 
 // GetRepoUserName returns the name of the action repository owner.
@@ -287,7 +288,7 @@ func (a *Action) ShortRepoName(ctx context.Context) string {
 // GetRepoPath returns the virtual path to the action repository.
 func (a *Action) GetRepoPath(ctx context.Context) string {
 	loc := a.GetLocator(ctx)
-	return path.Join(loc.Owner, util.Iif(loc.GroupID == 0, "", strconv.FormatInt(loc.GroupID, 10)), loc.Repo)
+	return path.Join(loc.Owner, loc.GroupPath, loc.Repo)
 }
 
 // ShortRepoPath returns the virtual path to the action repository
