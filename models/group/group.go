@@ -7,7 +7,6 @@ import (
 	"context"
 	"net/url"
 	"slices"
-	"strconv"
 
 	"gitea.dev/models/db"
 	user_model "gitea.dev/models/user"
@@ -23,16 +22,17 @@ const NestingLimit = 20
 // Group represents a group of repositories for a user or organization
 type Group struct {
 	ID          int64 `xorm:"pk autoincr"`
-	OwnerID     int64 `xorm:"INDEX NOT NULL"`
+	OwnerID     int64 `xorm:"INDEX UNIQUE(p) NOT NULL"`
 	OwnerName   string
 	Owner       *user_model.User    `xorm:"-"`
-	LowerName   string              `xorm:"TEXT NOT NULL"`
+	LowerName   string              `xorm:"UNIQUE(p) NOT NULL"`
 	Name        string              `xorm:"TEXT NOT NULL"`
-	Description string              `xorm:"TEXT"`
+	FullName    string              `xorm:"TEXT NOT NULL"`
+	Description string              `xorm:"TEXT NOT NULL"`
 	Visibility  structs.VisibleType `xorm:"NOT NULL DEFAULT 0"`
 	Avatar      string              `xorm:"VARCHAR(64)"`
 
-	ParentGroupID int64         `xorm:"INDEX DEFAULT NULL"`
+	ParentGroupID int64         `xorm:"INDEX UNIQUE(p) NOT NULL DEFAULT 0"`
 	ParentGroup   *Group        `xorm:"-"`
 	Subgroups     RepoGroupList `xorm:"-"`
 
@@ -41,15 +41,15 @@ type Group struct {
 
 // GroupLink returns the link to this group
 func (g *Group) GroupLink() string {
-	return setting.AppSubURL + "/" + url.PathEscape(g.OwnerName) + "/groups/" + strconv.FormatInt(g.ID, 10)
+	return setting.AppSubURL + "/" + url.PathEscape(g.OwnerName) + "/groups/" + g.FullPath()
 }
 
 func (g *Group) OrgGroupLink() string {
-	return setting.AppSubURL + "/org/" + url.PathEscape(g.OwnerName) + "/groups/" + strconv.FormatInt(g.ID, 10)
+	return setting.AppSubURL + "/org/" + url.PathEscape(g.OwnerName) + "/groups/" + g.FullPath()
 }
 
 func (g *Group) UserGroupLink() string {
-	return setting.AppSubURL + "/" + url.PathEscape(g.OwnerName) + "/-/groups/" + strconv.FormatInt(g.ID, 10)
+	return setting.AppSubURL + "/" + url.PathEscape(g.OwnerName) + "/-/groups/" + g.FullPath()
 }
 
 func (Group) TableName() string { return "repo_group" }
@@ -133,6 +133,11 @@ func (g *Group) LoadOwner(ctx context.Context) error {
 	var err error
 	g.Owner, err = user_model.GetUserByID(ctx, g.OwnerID)
 	return err
+}
+
+func (g *Group) FullPath(ctxs ...context.Context) string {
+	path, _ := PathByID(g.ID, ctxs...)
+	return path
 }
 
 func (g *Group) ShortName(length int) string {

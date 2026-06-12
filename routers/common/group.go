@@ -24,7 +24,7 @@ func RegisterRepoRouteGroup(m *web.Router, pattern string, groupMiddleware any, 
 	} else {
 		groupMiddlewares = middlewares
 	}
-	asGroupRoute := repoRouteRegex.ReplaceAllString(pattern, "$1/group/{group_id}$2$3")
+	asGroupRoute := repoRouteRegex.ReplaceAllString(pattern, "$1/{repo_group:+}$2$3")
 
 	m.Group(asGroupRoute, fn, groupMiddlewares...)
 	m.Group(pattern, fn, middlewares...)

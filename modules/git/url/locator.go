@@ -4,9 +4,7 @@
 package url
 
 import (
-	"fmt"
 	"net/url"
-	"strconv"
 	"strings"
 
 	"gitea.dev/modules/util"
@@ -14,36 +12,54 @@ import (
 
 // Locator holds information needed to build various repository paths
 type Locator struct {
-	Owner   string
-	Repo    string
-	GroupID int64
+	Owner     string
+	Repo      string
+	GroupPath string
 }
 
 func (l Locator) groupSegment() string {
-	return util.Iif(l.GroupID > 0, fmt.Sprintf("group/%d", l.GroupID), "")
+	return strings.Trim(l.GroupPath, "/")
 }
 
 func (l Locator) groupSegmentWithTrailingSlash() string {
-	return util.Iif(l.GroupID > 0, l.groupSegment()+"/", "")
+	return util.Iif(l.GroupPath != "", l.groupSegment()+"/", "")
+}
+
+func (l Locator) urlEscapedGroupSegment() string {
+	return strings.Join(util.SliceMap(strings.Split(l.groupSegment(), "/"), url.PathEscape), "/")
+}
+
+func (l Locator) urlEscapedGroupSegmentWithTrailingSlash() string {
+	return util.Iif(l.GroupPath != "", l.urlEscapedGroupSegment()+"/", "")
+}
+
+func (l Locator) cloneGroupSegment() string {
+	if l.GroupPath == "" {
+		return ""
+	}
+	return FormatExplicitGroupPath(l.urlEscapedGroupSegment()) + "/"
+}
+
+func (l Locator) ClonePath() string {
+	return url.PathEscape(l.Owner) + "/" + l.cloneGroupSegment() + url.PathEscape(l.Repo)
 }
 
 func (l Locator) StoragePath() string {
-	seg := util.Iif(l.GroupID > 0, strconv.FormatInt(l.GroupID, 10)+"/", "")
-	return strings.ToLower(l.Owner) + "/" + seg + strings.ToLower(l.Repo)
+	return strings.ToLower(l.Owner) + "/" + strings.ToLower(l.groupSegmentWithTrailingSlash()) + strings.ToLower(l.Repo)
 }
 
 func (l Locator) WebPath() string {
-	return url.PathEscape(l.Owner) + "/" + l.groupSegmentWithTrailingSlash() + url.PathEscape(l.Repo)
+	return url.PathEscape(l.Owner) + "/" + l.urlEscapedGroupSegmentWithTrailingSlash() + url.PathEscape(l.Repo)
 }
 
 func (l Locator) FullName() string {
 	return l.Owner + "/" + l.groupSegmentWithTrailingSlash() + l.Repo
 }
 
-func NewLocator(ownerName, repoName string, groupID int64) Locator {
+func NewLocator(ownerName, repoName, groupPath string) Locator {
 	return Locator{
-		Owner:   ownerName,
-		Repo:    repoName,
-		GroupID: groupID,
+		Owner:     ownerName,
+		Repo:      repoName,
+		GroupPath: groupPath,
 	}
 }

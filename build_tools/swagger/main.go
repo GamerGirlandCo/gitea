@@ -242,8 +242,8 @@ func generatePaths(root string) *OrderedMap {
 			// skip if this endpoint does not start with `/repos/{owner}/{repo}`
 			continue
 		}
-		// generate new endpoint path with `/group/{group_id}` in between the `owner` and `repo` params
-		nk := rxPath.ReplaceAllString(k, "$1/group/{group_id}/$2")
+		// generate new endpoint path with `/group/{repo_group}` in between the `owner` and `repo` params
+		nk := rxPath.ReplaceAllString(k, "$1/group/{repo_group}/$2")
 		methodMap := v.(OrderedMap)
 
 		for method, methodSpec := range methodMap.Iter() {
@@ -260,10 +260,9 @@ func generatePaths(root string) *OrderedMap {
 			param := OrderedMap{
 				indices: make(map[string]int),
 			}
-			param.Set("description", "group ID of the repo")
-			param.Set("name", "group_id")
-			param.Set("type", "integer")
-			param.Set("format", "int64")
+			param.Set("description", "the fully-qualified path of the group containing the repo")
+			param.Set("name", "repo_group")
+			param.Set("type", "string")
 			param.Set("required", true)
 			param.Set("in", "path")
 			params = append(params, param)

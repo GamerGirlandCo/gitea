@@ -47,8 +47,8 @@ type ServCommandResults struct {
 }
 
 // ServCommand preps for a serv call
-func ServCommand(ctx context.Context, keyID int64, ownerName, repoName string, groupID int64, mode perm.AccessMode, verb, lfsVerb string) (*ServCommandResults, ResponseExtra) {
-	locator := giturl.NewLocator(ownerName, repoName, groupID)
+func ServCommand(ctx context.Context, keyID int64, ownerName, repoName, groupPath string, mode perm.AccessMode, verb, lfsVerb string) (*ServCommandResults, ResponseExtra) {
+	locator := giturl.NewLocator(ownerName, repoName, groupPath)
 	reqURL := setting.LocalURL + fmt.Sprintf("api/internal/serv/command/%d/%s?mode=%d",
 		keyID,
 		locator.WebPath(),
