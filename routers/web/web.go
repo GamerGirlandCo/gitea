@@ -542,7 +542,7 @@ func registerWebRoutes(m *web.Router, webAuth *AuthMiddleware) {
 	// Especially some AJAX requests, we can reduce middleware number to improve performance.
 
 	m.Get("/", context.AddGroupValues, Home)
-	m.Get("/-/group/{group_id}", ctxDataSet("PageIsGroupDashboard", true), context.GroupAssignmentWeb(context.GroupAssignmentOptions{RequireMember: true, FallBackToDoer: true}), user.Dashboard)
+	m.Get("/-/group/{repo_group:*}", ctxDataSet("PageIsGroupDashboard", true), context.GroupAssignmentWeb(context.GroupAssignmentOptions{RequireMember: true, FallBackToDoer: true}), user.Dashboard)
 	m.Get("/sitemap.xml", sitemapEnabled, optExploreSignIn, HomeSitemap)
 	m.Group("/.well-known", func() {
 		m.Get("/openid-configuration", auth.OIDCWellKnown)
@@ -1198,8 +1198,9 @@ func registerWebRoutes(m *web.Router, webAuth *AuthMiddleware) {
 		}, reqSignIn, reqSameUser)
 	}, optSignIn, context.UserAssignmentWeb(), context.OrgAssignment(context.OrgAssignmentOptions{}))
 	// end "/{username}/-": packages, projects, code
+
 	m.Group("/{username}/groups", func() {
-		m.Group("/{group_id}", func() {
+		m.Group("/{repo_group:*}", func() {
 			m.Get("", group.Home)
 		}, context.GroupAssignmentWeb(context.GroupAssignmentOptions{}))
 	}, optSignIn, context.UserAssignmentWeb(), context.OrgAssignment(context.OrgAssignmentOptions{}))
