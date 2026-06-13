@@ -112,7 +112,7 @@ func HookProcReceive(ctx context.Context, ownerName, repoName, groupPath string,
 }
 
 // SetDefaultBranch will set the default branch to the provided branch for the provided repository
-func SetDefaultBranch(ctx context.Context, ownerName, repoName, groupPath string, branch string) ResponseExtra {
+func SetDefaultBranch(ctx context.Context, ownerName, repoName, groupPath, branch string) ResponseExtra {
 	locator := giturl.NewLocator(ownerName, repoName, groupPath)
 	reqURL := setting.LocalURL + fmt.Sprintf("api/internal/hook/set-default-branch/%s/%s",
 		locator.WebPath(),
