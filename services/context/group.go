@@ -251,7 +251,7 @@ func GroupAssignmentWeb(args GroupAssignmentOptions) func(ctx *Context) {
 			ctx.Data["Group"] = group
 			ctx.Data["ContextGroup"] = repoGroup
 			ctx.Data["Doer"] = ctx.Doer
-			ctx.Data["GroupLink"] = group.GroupLink()
+			ctx.Data["Link"] = group.GroupLink()
 			ctx.Data["OrgGroupLink"] = repoGroup.OrgGroupLink
 
 			if err = AddGroupBreadcrumbs(ctx, group.ID); err != nil {
