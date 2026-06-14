@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/repos/{owner}/group/{group_id}/{repo}": {
+    "/repos/{owner}/group/{repo_group}/{repo}": {
       "get": {
         "produces": [
           "application/json"
@@ -26,10 +26,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -68,10 +67,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -121,10 +119,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -145,7 +142,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/artifacts": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/artifacts": {
       "get": {
         "produces": [
           "application/json"
@@ -177,10 +174,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -198,7 +194,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/artifacts/{artifact_id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/artifacts/{artifact_id}": {
       "get": {
         "produces": [
           "application/json"
@@ -231,10 +227,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -283,10 +278,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -304,7 +298,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/artifacts/{artifact_id}/zip": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/artifacts/{artifact_id}/zip": {
       "get": {
         "produces": [
           "application/json"
@@ -337,10 +331,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -358,7 +351,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/jobs": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/jobs": {
       "get": {
         "produces": [
           "application/json"
@@ -414,10 +407,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -438,7 +430,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/jobs/{job_id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/jobs/{job_id}": {
       "get": {
         "produces": [
           "application/json"
@@ -471,10 +463,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -492,7 +483,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/jobs/{job_id}/logs": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/jobs/{job_id}/logs": {
       "get": {
         "produces": [
           "application/json"
@@ -525,10 +516,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -546,7 +536,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/runners": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/runners": {
       "get": {
         "produces": [
           "application/json"
@@ -578,10 +568,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -599,7 +588,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/runners/registration-token": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/runners/registration-token": {
       "post": {
         "produces": [
           "application/json"
@@ -625,10 +614,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -640,7 +628,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/runners/{runner_id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/runners/{runner_id}": {
       "get": {
         "produces": [
           "application/json"
@@ -673,10 +661,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -725,10 +712,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -787,10 +773,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -811,7 +796,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/runs": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/runs": {
       "get": {
         "produces": [
           "application/json"
@@ -885,10 +870,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -906,7 +890,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/runs/{run}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/runs/{run}": {
       "get": {
         "produces": [
           "application/json"
@@ -939,10 +923,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -991,10 +974,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -1012,7 +994,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/runs/{run}/artifacts": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/runs/{run}/artifacts": {
       "get": {
         "produces": [
           "application/json"
@@ -1051,10 +1033,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -1072,7 +1053,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/runs/{run}/attempts/{attempt}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/runs/{run}/attempts/{attempt}": {
       "get": {
         "produces": [
           "application/json"
@@ -1112,10 +1093,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -1133,7 +1113,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/runs/{run}/attempts/{attempt}/jobs": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/runs/{run}/attempts/{attempt}/jobs": {
       "get": {
         "produces": [
           "application/json"
@@ -1191,10 +1171,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -1212,7 +1191,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/runs/{run}/jobs": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/runs/{run}/jobs": {
       "get": {
         "produces": [
           "application/json"
@@ -1275,10 +1254,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -1299,7 +1277,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/runs/{run}/jobs/{job_id}/rerun": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/runs/{run}/jobs/{job_id}/rerun": {
       "post": {
         "produces": [
           "application/json"
@@ -1339,10 +1317,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -1369,7 +1346,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/runs/{run}/rerun": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/runs/{run}/rerun": {
       "post": {
         "produces": [
           "application/json"
@@ -1402,10 +1379,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -1432,7 +1408,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/runs/{run}/rerun-failed-jobs": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/runs/{run}/rerun-failed-jobs": {
       "post": {
         "tags": [
           "repository"
@@ -1462,10 +1438,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -1492,7 +1467,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/secrets": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/secrets": {
       "get": {
         "produces": [
           "application/json"
@@ -1530,10 +1505,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -1548,7 +1522,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/secrets/{secretname}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/secrets/{secretname}": {
       "put": {
         "consumes": [
           "application/json"
@@ -1591,10 +1565,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -1649,10 +1622,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -1670,7 +1642,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/tasks": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/tasks": {
       "get": {
         "produces": [
           "application/json"
@@ -1708,10 +1680,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -1738,7 +1709,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/variables": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/variables": {
       "get": {
         "produces": [
           "application/json"
@@ -1776,10 +1747,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -1797,7 +1767,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/variables/{variablename}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/variables/{variablename}": {
       "get": {
         "produces": [
           "application/json"
@@ -1830,10 +1800,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -1889,10 +1858,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -1951,10 +1919,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -2006,10 +1973,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -2033,7 +1999,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/workflows": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/workflows": {
       "get": {
         "produces": [
           "application/json"
@@ -2059,10 +2025,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -2089,7 +2054,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/workflows/{workflow_id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/workflows/{workflow_id}": {
       "get": {
         "produces": [
           "application/json"
@@ -2122,10 +2087,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -2152,7 +2116,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/workflows/{workflow_id}/disable": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/workflows/{workflow_id}/disable": {
       "put": {
         "produces": [
           "application/json"
@@ -2185,10 +2149,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -2212,7 +2175,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/workflows/{workflow_id}/dispatches": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/workflows/{workflow_id}/dispatches": {
       "post": {
         "produces": [
           "application/json"
@@ -2258,10 +2221,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -2288,7 +2250,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/workflows/{workflow_id}/enable": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/workflows/{workflow_id}/enable": {
       "put": {
         "produces": [
           "application/json"
@@ -2321,10 +2283,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -2351,7 +2312,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/workflows/{workflow_id}/runs": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/workflows/{workflow_id}/runs": {
       "get": {
         "produces": [
           "application/json"
@@ -2432,10 +2393,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -2456,7 +2416,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/activities/feeds": {
+    "/repos/{owner}/group/{repo_group}/{repo}/activities/feeds": {
       "get": {
         "produces": [
           "application/json"
@@ -2501,10 +2461,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -2519,7 +2478,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/archive/{archive}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/archive/{archive}": {
       "get": {
         "produces": [
           "application/json"
@@ -2562,10 +2521,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -2580,7 +2538,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/assignees": {
+    "/repos/{owner}/group/{repo_group}/{repo}/assignees": {
       "get": {
         "produces": [
           "application/json"
@@ -2606,10 +2564,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -2624,7 +2581,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/assignees/{assignee}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/assignees/{assignee}": {
       "get": {
         "produces": [
           "application/json"
@@ -2657,10 +2614,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -2678,7 +2634,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/avatar": {
+    "/repos/{owner}/group/{repo_group}/{repo}/avatar": {
       "post": {
         "produces": [
           "application/json"
@@ -2711,10 +2667,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -2753,10 +2708,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -2771,7 +2725,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/branch_protections": {
+    "/repos/{owner}/group/{repo_group}/{repo}/branch_protections": {
       "get": {
         "produces": [
           "application/json"
@@ -2797,10 +2751,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -2846,10 +2799,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -2873,7 +2825,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/branch_protections/priority": {
+    "/repos/{owner}/group/{repo_group}/{repo}/branch_protections/priority": {
       "post": {
         "consumes": [
           "application/json"
@@ -2909,10 +2861,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -2933,7 +2884,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/branch_protections/{name}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/branch_protections/{name}": {
       "get": {
         "produces": [
           "application/json"
@@ -2966,10 +2917,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -3015,10 +2965,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -3074,10 +3023,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -3098,7 +3046,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/branches": {
+    "/repos/{owner}/group/{repo_group}/{repo}/branches": {
       "get": {
         "produces": [
           "application/json"
@@ -3142,10 +3090,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -3191,10 +3138,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -3218,7 +3164,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/branches/{branch}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/branches/{branch}": {
       "get": {
         "produces": [
           "application/json"
@@ -3251,10 +3197,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -3310,10 +3255,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -3368,10 +3312,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -3433,10 +3376,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -3457,7 +3399,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/collaborators": {
+    "/repos/{owner}/group/{repo_group}/{repo}/collaborators": {
       "get": {
         "produces": [
           "application/json"
@@ -3495,10 +3437,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -3513,7 +3454,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/collaborators/{collaborator}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/collaborators/{collaborator}": {
       "get": {
         "produces": [
           "application/json"
@@ -3546,10 +3487,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -3605,10 +3545,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -3660,10 +3599,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -3681,7 +3619,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/collaborators/{collaborator}/permission": {
+    "/repos/{owner}/group/{repo_group}/{repo}/collaborators/{collaborator}/permission": {
       "get": {
         "produces": [
           "application/json"
@@ -3714,10 +3652,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -3735,7 +3672,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/commits": {
+    "/repos/{owner}/group/{repo_group}/{repo}/commits": {
       "get": {
         "produces": [
           "application/json"
@@ -3823,10 +3760,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -3844,7 +3780,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/commits/{ref}/status": {
+    "/repos/{owner}/group/{repo_group}/{repo}/commits/{ref}/status": {
       "get": {
         "produces": [
           "application/json"
@@ -3889,10 +3825,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -3910,7 +3845,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/commits/{ref}/statuses": {
+    "/repos/{owner}/group/{repo_group}/{repo}/commits/{ref}/statuses": {
       "get": {
         "produces": [
           "application/json"
@@ -3981,10 +3916,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -4002,7 +3936,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/commits/{sha}/pull": {
+    "/repos/{owner}/group/{repo_group}/{repo}/commits/{sha}/pull": {
       "get": {
         "produces": [
           "application/json"
@@ -4035,10 +3969,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -4053,7 +3986,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/compare/{basehead}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/compare/{basehead}": {
       "get": {
         "description": "By default returns JSON commit comparison information. The raw diff or patch can be\nrequested with the `output` query parameter set to `diff` or `patch` respectively.\n",
         "produces": [
@@ -4098,10 +4031,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -4116,7 +4048,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/contents": {
+    "/repos/{owner}/group/{repo_group}/{repo}/contents": {
       "get": {
         "description": "This API follows GitHub's design, and it is not easy to use. Recommend users to use our \"contents-ext\" API instead.",
         "produces": [
@@ -4149,10 +4081,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -4202,10 +4133,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -4229,7 +4159,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/contents-ext/{filepath}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/contents-ext/{filepath}": {
       "get": {
         "description": "It guarantees that only one of the response fields is set if the request succeeds. Users can pass \"includes=file_content\" or \"includes=lfs_metadata\" to retrieve more fields. \"includes=file_content\" only works for single file, if you need to retrieve file contents in batch, use \"file-contents\" API after listing the directory.",
         "produces": [
@@ -4275,10 +4205,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -4293,7 +4222,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/contents/{filepath}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/contents/{filepath}": {
       "get": {
         "description": "This API follows GitHub's design, and it is not easy to use. Recommend users to use the \"contents-ext\" API instead.",
         "produces": [
@@ -4333,10 +4262,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -4393,10 +4321,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -4465,10 +4392,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -4534,10 +4460,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -4564,7 +4489,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/diffpatch": {
+    "/repos/{owner}/group/{repo_group}/{repo}/diffpatch": {
       "post": {
         "consumes": [
           "application/json"
@@ -4601,10 +4526,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -4622,7 +4546,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/editorconfig/{filepath}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/editorconfig/{filepath}": {
       "get": {
         "produces": [
           "application/json"
@@ -4661,10 +4585,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -4679,7 +4602,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/file-contents": {
+    "/repos/{owner}/group/{repo_group}/{repo}/file-contents": {
       "get": {
         "description": "See the POST method. This GET method supports using JSON encoded request body in query parameter.",
         "produces": [
@@ -4719,10 +4642,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -4776,10 +4698,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -4794,7 +4715,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/forks": {
+    "/repos/{owner}/group/{repo_group}/{repo}/forks": {
       "get": {
         "produces": [
           "application/json"
@@ -4832,10 +4753,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -4881,10 +4801,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -4908,7 +4827,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/git/blobs/{sha}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/git/blobs/{sha}": {
       "get": {
         "produces": [
           "application/json"
@@ -4941,10 +4860,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -4962,7 +4880,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/git/commits/{sha}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/git/commits/{sha}": {
       "get": {
         "produces": [
           "application/json"
@@ -5013,10 +4931,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -5034,7 +4951,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/git/commits/{sha}.{diffType}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/git/commits/{sha}.{diffType}": {
       "get": {
         "produces": [
           "text/plain"
@@ -5078,10 +4995,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -5096,7 +5012,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/git/notes/{sha}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/git/notes/{sha}": {
       "get": {
         "produces": [
           "application/json"
@@ -5141,10 +5057,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -5162,7 +5077,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/git/refs": {
+    "/repos/{owner}/group/{repo_group}/{repo}/git/refs": {
       "get": {
         "produces": [
           "application/json"
@@ -5188,10 +5103,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -5206,7 +5120,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/git/refs/{ref}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/git/refs/{ref}": {
       "get": {
         "produces": [
           "application/json"
@@ -5239,10 +5153,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -5257,7 +5170,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/git/tags/{sha}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/git/tags/{sha}": {
       "get": {
         "produces": [
           "application/json"
@@ -5290,10 +5203,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -5311,7 +5223,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/git/trees/{sha}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/git/trees/{sha}": {
       "get": {
         "produces": [
           "application/json"
@@ -5362,10 +5274,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -5383,7 +5294,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/hooks": {
+    "/repos/{owner}/group/{repo_group}/{repo}/hooks": {
       "get": {
         "produces": [
           "application/json"
@@ -5421,10 +5332,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -5473,10 +5383,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -5491,7 +5400,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/hooks/git": {
+    "/repos/{owner}/group/{repo_group}/{repo}/hooks/git": {
       "get": {
         "produces": [
           "application/json"
@@ -5517,10 +5426,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -5535,7 +5443,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/hooks/git/{id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/hooks/git/{id}": {
       "get": {
         "produces": [
           "application/json"
@@ -5568,10 +5476,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -5617,10 +5524,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -5673,10 +5579,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -5691,7 +5596,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/hooks/{id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/hooks/{id}": {
       "get": {
         "produces": [
           "application/json"
@@ -5725,10 +5630,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -5775,10 +5679,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -5832,10 +5735,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -5850,7 +5752,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/hooks/{id}/tests": {
+    "/repos/{owner}/group/{repo_group}/{repo}/hooks/{id}/tests": {
       "post": {
         "produces": [
           "application/json"
@@ -5890,10 +5792,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -5908,7 +5809,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issue_config": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issue_config": {
       "get": {
         "produces": [
           "application/json"
@@ -5934,10 +5835,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -5952,7 +5852,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issue_config/validate": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issue_config/validate": {
       "get": {
         "produces": [
           "application/json"
@@ -5978,10 +5878,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -5996,7 +5895,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issue_templates": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issue_templates": {
       "get": {
         "produces": [
           "application/json"
@@ -6022,10 +5921,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -6040,7 +5938,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues": {
       "get": {
         "produces": [
           "application/json"
@@ -6149,10 +6047,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -6201,10 +6098,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -6231,7 +6127,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/comments": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/comments": {
       "get": {
         "produces": [
           "application/json"
@@ -6283,10 +6179,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -6301,7 +6196,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/comments/{id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/comments/{id}": {
       "get": {
         "consumes": [
           "application/json"
@@ -6338,10 +6233,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -6391,10 +6285,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -6454,10 +6347,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -6481,7 +6373,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/comments/{id}/assets": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/comments/{id}/assets": {
       "get": {
         "produces": [
           "application/json"
@@ -6515,10 +6407,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -6581,10 +6472,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -6614,7 +6504,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/comments/{id}/assets/{attachment_id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/comments/{id}/assets/{attachment_id}": {
       "get": {
         "produces": [
           "application/json"
@@ -6656,10 +6546,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -6714,10 +6603,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -6785,10 +6673,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -6809,7 +6696,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/comments/{id}/reactions": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/comments/{id}/reactions": {
       "get": {
         "consumes": [
           "application/json"
@@ -6846,10 +6733,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -6909,10 +6795,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -6975,10 +6860,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -6996,7 +6880,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/pinned": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/pinned": {
       "get": {
         "produces": [
           "application/json"
@@ -7022,10 +6906,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -7040,7 +6923,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}": {
       "get": {
         "produces": [
           "application/json"
@@ -7074,10 +6957,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -7121,10 +7003,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -7185,10 +7066,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -7209,7 +7089,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/assets": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/assets": {
       "get": {
         "produces": [
           "application/json"
@@ -7243,10 +7123,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -7309,10 +7188,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -7339,7 +7217,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/assets/{attachment_id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/assets/{attachment_id}": {
       "get": {
         "produces": [
           "application/json"
@@ -7381,10 +7259,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -7439,10 +7316,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -7510,10 +7386,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -7534,7 +7409,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/assignees": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/assignees": {
       "post": {
         "consumes": [
           "application/json"
@@ -7579,10 +7454,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -7649,10 +7523,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -7673,7 +7546,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/assignees/{assignee}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/assignees/{assignee}": {
       "get": {
         "produces": [
           "application/json"
@@ -7714,10 +7587,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -7735,7 +7607,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/blocks": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/blocks": {
       "get": {
         "produces": [
           "application/json"
@@ -7780,10 +7652,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -7836,10 +7707,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -7892,10 +7762,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -7910,7 +7779,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/comments": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/comments": {
       "get": {
         "produces": [
           "application/json"
@@ -7958,10 +7827,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -8018,10 +7886,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -8042,7 +7909,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/comments/{id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/comments/{id}": {
       "delete": {
         "tags": [
           "issue"
@@ -8081,10 +7948,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -8152,10 +8018,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -8176,7 +8041,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/deadline": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/deadline": {
       "post": {
         "consumes": [
           "application/json"
@@ -8220,10 +8085,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -8241,7 +8105,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/dependencies": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/dependencies": {
       "get": {
         "produces": [
           "application/json"
@@ -8286,10 +8150,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -8342,10 +8205,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -8401,10 +8263,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -8422,7 +8283,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/labels": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/labels": {
       "get": {
         "produces": [
           "application/json"
@@ -8456,10 +8317,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -8516,10 +8376,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -8579,10 +8438,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -8632,10 +8490,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -8653,7 +8510,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/labels/{id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/labels/{id}": {
       "delete": {
         "produces": [
           "application/json"
@@ -8695,10 +8552,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -8719,7 +8575,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/lock": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/lock": {
       "put": {
         "consumes": [
           "application/json"
@@ -8763,10 +8619,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -8819,10 +8674,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -8840,7 +8694,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/pin": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/pin": {
       "post": {
         "tags": [
           "issue"
@@ -8871,10 +8725,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -8921,10 +8774,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -8942,7 +8794,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/pin/{position}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/pin/{position}": {
       "patch": {
         "tags": [
           "issue"
@@ -8981,10 +8833,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -9002,7 +8853,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/reactions": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/reactions": {
       "get": {
         "consumes": [
           "application/json"
@@ -9051,10 +8902,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -9114,10 +8964,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -9180,10 +9029,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -9201,7 +9049,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/stopwatch/delete": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/stopwatch/delete": {
       "delete": {
         "consumes": [
           "application/json"
@@ -9238,10 +9086,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -9262,7 +9109,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/stopwatch/start": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/stopwatch/start": {
       "post": {
         "consumes": [
           "application/json"
@@ -9299,10 +9146,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -9323,7 +9169,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/stopwatch/stop": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/stopwatch/stop": {
       "post": {
         "consumes": [
           "application/json"
@@ -9360,10 +9206,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -9384,7 +9229,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/subscriptions": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/subscriptions": {
       "get": {
         "consumes": [
           "application/json"
@@ -9433,10 +9278,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -9451,7 +9295,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/subscriptions/check": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/subscriptions/check": {
       "get": {
         "consumes": [
           "application/json"
@@ -9488,10 +9332,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -9506,7 +9349,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/subscriptions/{user}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/subscriptions/{user}": {
       "put": {
         "consumes": [
           "application/json"
@@ -9550,10 +9393,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -9616,10 +9458,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -9640,7 +9481,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/timeline": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/timeline": {
       "get": {
         "produces": [
           "application/json"
@@ -9700,10 +9541,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -9718,7 +9558,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/times": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/times": {
       "get": {
         "produces": [
           "application/json"
@@ -9784,10 +9624,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -9844,10 +9683,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -9903,10 +9741,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -9927,7 +9764,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/times/{id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/times/{id}": {
       "delete": {
         "consumes": [
           "application/json"
@@ -9972,10 +9809,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -9996,7 +9832,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/keys": {
+    "/repos/{owner}/group/{repo_group}/{repo}/keys": {
       "get": {
         "produces": [
           "application/json"
@@ -10046,10 +9882,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -10098,10 +9933,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -10119,7 +9953,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/keys/{id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/keys/{id}": {
       "get": {
         "produces": [
           "application/json"
@@ -10153,10 +9987,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -10200,10 +10033,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -10221,7 +10053,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/labels": {
+    "/repos/{owner}/group/{repo_group}/{repo}/labels": {
       "get": {
         "produces": [
           "application/json"
@@ -10259,10 +10091,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -10311,10 +10142,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -10332,7 +10162,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/labels/{id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/labels/{id}": {
       "get": {
         "produces": [
           "application/json"
@@ -10366,10 +10196,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -10413,10 +10242,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -10473,10 +10301,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -10494,7 +10321,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/languages": {
+    "/repos/{owner}/group/{repo_group}/{repo}/languages": {
       "get": {
         "produces": [
           "application/json"
@@ -10520,10 +10347,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -10538,7 +10364,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/licenses": {
+    "/repos/{owner}/group/{repo_group}/{repo}/licenses": {
       "get": {
         "produces": [
           "application/json"
@@ -10564,10 +10390,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -10582,7 +10407,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/media/{filepath}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/media/{filepath}": {
       "get": {
         "produces": [
           "application/octet-stream"
@@ -10621,10 +10446,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -10642,7 +10466,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/merge-upstream": {
+    "/repos/{owner}/group/{repo_group}/{repo}/merge-upstream": {
       "post": {
         "produces": [
           "application/json"
@@ -10675,10 +10499,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -10696,7 +10519,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/milestones": {
+    "/repos/{owner}/group/{repo_group}/{repo}/milestones": {
       "get": {
         "produces": [
           "application/json"
@@ -10746,10 +10569,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -10798,10 +10620,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -10816,7 +10637,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/milestones/{id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/milestones/{id}": {
       "get": {
         "produces": [
           "application/json"
@@ -10849,10 +10670,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -10895,10 +10715,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -10954,10 +10773,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -10972,7 +10790,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/mirror-sync": {
+    "/repos/{owner}/group/{repo_group}/{repo}/mirror-sync": {
       "post": {
         "produces": [
           "application/json"
@@ -10998,10 +10816,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -11019,7 +10836,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/new_pin_allowed": {
+    "/repos/{owner}/group/{repo_group}/{repo}/new_pin_allowed": {
       "get": {
         "produces": [
           "application/json"
@@ -11045,10 +10862,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -11063,7 +10879,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/notifications": {
+    "/repos/{owner}/group/{repo_group}/{repo}/notifications": {
       "get": {
         "consumes": [
           "application/json"
@@ -11150,10 +10966,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -11221,10 +11036,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -11236,7 +11050,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls": {
       "get": {
         "produces": [
           "application/json"
@@ -11334,10 +11148,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -11389,10 +11202,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -11419,7 +11231,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/comments/{id}/resolve": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/comments/{id}/resolve": {
       "post": {
         "produces": [
           "application/json"
@@ -11453,10 +11265,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -11477,7 +11288,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/comments/{id}/unresolve": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/comments/{id}/unresolve": {
       "post": {
         "produces": [
           "application/json"
@@ -11511,10 +11322,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -11535,7 +11345,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/pinned": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/pinned": {
       "get": {
         "produces": [
           "application/json"
@@ -11561,10 +11371,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -11579,7 +11388,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{base}/{head}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{base}/{head}": {
       "get": {
         "produces": [
           "application/json"
@@ -11619,10 +11428,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -11637,7 +11445,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{index}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{index}": {
       "get": {
         "produces": [
           "application/json"
@@ -11671,10 +11479,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -11731,10 +11538,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -11761,7 +11567,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{index}.{diffType}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{index}.{diffType}": {
       "get": {
         "produces": [
           "text/plain"
@@ -11812,10 +11618,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -11830,7 +11635,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{index}/comments/{id}/replies": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{index}/comments/{id}/replies": {
       "post": {
         "consumes": [
           "application/json"
@@ -11883,10 +11688,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -11907,7 +11711,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{index}/commits": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{index}/commits": {
       "get": {
         "produces": [
           "application/json"
@@ -11965,10 +11769,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -11983,7 +11786,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{index}/files": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{index}/files": {
       "get": {
         "produces": [
           "application/json"
@@ -12047,10 +11850,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -12065,7 +11867,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{index}/merge": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{index}/merge": {
       "get": {
         "produces": [
           "application/json"
@@ -12099,10 +11901,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -12156,10 +11957,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -12218,10 +12018,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -12242,7 +12041,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{index}/requested_reviewers": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{index}/requested_reviewers": {
       "post": {
         "produces": [
           "application/json"
@@ -12284,10 +12083,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -12345,10 +12143,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -12369,7 +12166,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{index}/reviews": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{index}/reviews": {
       "get": {
         "produces": [
           "application/json"
@@ -12415,10 +12212,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -12473,10 +12269,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -12494,7 +12289,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{index}/reviews/{id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{index}/reviews/{id}": {
       "get": {
         "produces": [
           "application/json"
@@ -12536,10 +12331,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -12602,10 +12396,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -12663,10 +12456,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -12684,7 +12476,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{index}/reviews/{id}/comments": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{index}/reviews/{id}/comments": {
       "get": {
         "produces": [
           "application/json"
@@ -12726,10 +12518,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -12744,7 +12535,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{index}/reviews/{id}/dismissals": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{index}/reviews/{id}/dismissals": {
       "post": {
         "produces": [
           "application/json"
@@ -12794,10 +12585,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -12818,7 +12608,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{index}/reviews/{id}/undismissals": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{index}/reviews/{id}/undismissals": {
       "post": {
         "produces": [
           "application/json"
@@ -12860,10 +12650,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -12884,7 +12673,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{index}/update": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{index}/update": {
       "post": {
         "produces": [
           "application/json"
@@ -12928,10 +12717,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -12955,7 +12743,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/push_mirrors": {
+    "/repos/{owner}/group/{repo_group}/{repo}/push_mirrors": {
       "get": {
         "produces": [
           "application/json"
@@ -12993,10 +12781,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -13051,10 +12838,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -13075,7 +12861,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/push_mirrors-sync": {
+    "/repos/{owner}/group/{repo_group}/{repo}/push_mirrors-sync": {
       "post": {
         "produces": [
           "application/json"
@@ -13101,10 +12887,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -13128,7 +12913,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/push_mirrors/{name}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/push_mirrors/{name}": {
       "get": {
         "produces": [
           "application/json"
@@ -13161,10 +12946,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -13216,10 +13000,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -13237,7 +13020,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/raw/{filepath}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/raw/{filepath}": {
       "get": {
         "produces": [
           "application/octet-stream"
@@ -13276,10 +13059,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -13297,7 +13079,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/releases": {
+    "/repos/{owner}/group/{repo_group}/{repo}/releases": {
       "get": {
         "produces": [
           "application/json"
@@ -13347,10 +13129,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -13399,10 +13180,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -13423,7 +13203,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/releases/latest": {
+    "/repos/{owner}/group/{repo_group}/{repo}/releases/latest": {
       "get": {
         "produces": [
           "application/json"
@@ -13449,10 +13229,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -13467,7 +13246,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/releases/tags/{tag}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/releases/tags/{tag}": {
       "get": {
         "produces": [
           "application/json"
@@ -13500,10 +13279,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -13546,10 +13324,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -13567,7 +13344,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/releases/{id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/releases/{id}": {
       "get": {
         "produces": [
           "application/json"
@@ -13601,10 +13378,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -13648,10 +13424,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -13711,10 +13486,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -13729,7 +13503,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/releases/{id}/assets": {
+    "/repos/{owner}/group/{repo_group}/{repo}/releases/{id}/assets": {
       "get": {
         "produces": [
           "application/json"
@@ -13763,10 +13537,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -13829,10 +13602,9 @@
             "in": "formData"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -13853,7 +13625,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/releases/{id}/assets/{attachment_id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/releases/{id}/assets/{attachment_id}": {
       "get": {
         "produces": [
           "application/json"
@@ -13895,10 +13667,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -13953,10 +13724,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -14021,10 +13791,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -14042,7 +13811,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/reviewers": {
+    "/repos/{owner}/group/{repo_group}/{repo}/reviewers": {
       "get": {
         "produces": [
           "application/json"
@@ -14068,10 +13837,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -14086,7 +13854,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/signing-key.gpg": {
+    "/repos/{owner}/group/{repo_group}/{repo}/signing-key.gpg": {
       "get": {
         "produces": [
           "text/plain"
@@ -14112,10 +13880,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -14130,7 +13897,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/signing-key.pub": {
+    "/repos/{owner}/group/{repo_group}/{repo}/signing-key.pub": {
       "get": {
         "produces": [
           "text/plain"
@@ -14156,10 +13923,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -14174,7 +13940,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/stargazers": {
+    "/repos/{owner}/group/{repo_group}/{repo}/stargazers": {
       "get": {
         "produces": [
           "application/json"
@@ -14212,10 +13978,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -14233,7 +13998,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/statuses/{sha}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/statuses/{sha}": {
       "get": {
         "produces": [
           "application/json"
@@ -14304,10 +14069,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -14363,10 +14127,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -14384,7 +14147,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/subscribers": {
+    "/repos/{owner}/group/{repo_group}/{repo}/subscribers": {
       "get": {
         "produces": [
           "application/json"
@@ -14422,10 +14185,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -14440,7 +14202,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/subscription": {
+    "/repos/{owner}/group/{repo_group}/{repo}/subscription": {
       "get": {
         "tags": [
           "repository"
@@ -14463,10 +14225,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -14502,10 +14263,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -14544,10 +14304,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -14562,7 +14321,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/tag_protections": {
+    "/repos/{owner}/group/{repo_group}/{repo}/tag_protections": {
       "get": {
         "produces": [
           "application/json"
@@ -14588,10 +14347,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -14637,10 +14395,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -14664,7 +14421,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/tag_protections/{id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/tag_protections/{id}": {
       "get": {
         "produces": [
           "application/json"
@@ -14697,10 +14454,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -14746,10 +14502,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -14805,10 +14560,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -14829,7 +14583,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/tags": {
+    "/repos/{owner}/group/{repo_group}/{repo}/tags": {
       "get": {
         "produces": [
           "application/json"
@@ -14867,10 +14621,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -14916,10 +14669,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -14946,7 +14698,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/tags/{tag}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/tags/{tag}": {
       "get": {
         "produces": [
           "application/json"
@@ -14979,10 +14731,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -15028,10 +14779,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -15058,7 +14808,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/teams": {
+    "/repos/{owner}/group/{repo_group}/{repo}/teams": {
       "get": {
         "produces": [
           "application/json"
@@ -15084,10 +14834,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -15102,7 +14851,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/teams/{team}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/teams/{team}": {
       "get": {
         "produces": [
           "application/json"
@@ -15135,10 +14884,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -15187,10 +14935,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -15242,10 +14989,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -15266,7 +15012,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/times": {
+    "/repos/{owner}/group/{repo_group}/{repo}/times": {
       "get": {
         "produces": [
           "application/json"
@@ -15324,10 +15070,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -15348,7 +15093,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/times/{user}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/times/{user}": {
       "get": {
         "produces": [
           "application/json"
@@ -15382,10 +15127,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -15406,7 +15150,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/topics": {
+    "/repos/{owner}/group/{repo_group}/{repo}/topics": {
       "get": {
         "produces": [
           "application/json"
@@ -15444,10 +15188,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -15493,10 +15236,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -15514,7 +15256,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/topics/{topic}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/topics/{topic}": {
       "put": {
         "produces": [
           "application/json"
@@ -15547,10 +15289,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -15599,10 +15340,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -15620,7 +15360,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/transfer": {
+    "/repos/{owner}/group/{repo_group}/{repo}/transfer": {
       "post": {
         "produces": [
           "application/json"
@@ -15655,10 +15395,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -15679,7 +15418,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/transfer/accept": {
+    "/repos/{owner}/group/{repo_group}/{repo}/transfer/accept": {
       "post": {
         "produces": [
           "application/json"
@@ -15705,10 +15444,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -15726,7 +15464,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/transfer/reject": {
+    "/repos/{owner}/group/{repo_group}/{repo}/transfer/reject": {
       "post": {
         "produces": [
           "application/json"
@@ -15752,10 +15490,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -15773,7 +15510,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/wiki/new": {
+    "/repos/{owner}/group/{repo_group}/{repo}/wiki/new": {
       "post": {
         "consumes": [
           "application/json"
@@ -15806,10 +15543,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -15833,7 +15569,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/wiki/page/{pageName}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/wiki/page/{pageName}": {
       "get": {
         "produces": [
           "application/json"
@@ -15866,10 +15602,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -15912,10 +15647,9 @@
             "required": true
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -15974,10 +15708,9 @@
             }
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -16001,7 +15734,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/wiki/pages": {
+    "/repos/{owner}/group/{repo_group}/{repo}/wiki/pages": {
       "get": {
         "produces": [
           "application/json"
@@ -16039,10 +15772,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }
@@ -16057,7 +15789,7 @@
         }
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/wiki/revisions/{pageName}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/wiki/revisions/{pageName}": {
       "get": {
         "produces": [
           "application/json"
@@ -16096,10 +15828,9 @@
             "in": "query"
           },
           {
-            "description": "group ID of the repo",
-            "name": "group_id",
-            "type": "integer",
-            "format": "int64",
+            "description": "the fully-qualified path of the group containing the repo",
+            "name": "repo_group",
+            "type": "string",
             "required": true,
             "in": "path"
           }

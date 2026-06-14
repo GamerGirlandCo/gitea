@@ -16237,7 +16237,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}": {
+    "/repos/{owner}/group/{repo_group}/{repo}": {
       "delete": {
         "operationId": "repoDeleteMixin0",
         "parameters": [
@@ -16260,13 +16260,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -16308,13 +16307,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -16353,13 +16351,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -16394,7 +16391,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/artifacts": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/artifacts": {
       "get": {
         "operationId": "getArtifactsMixin0",
         "parameters": [
@@ -16425,13 +16422,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -16452,7 +16448,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/artifacts/{artifact_id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/artifacts/{artifact_id}": {
       "delete": {
         "operationId": "deleteArtifactMixin0",
         "parameters": [
@@ -16484,13 +16480,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -16541,13 +16536,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -16568,7 +16562,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/artifacts/{artifact_id}/zip": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/artifacts/{artifact_id}/zip": {
       "get": {
         "operationId": "downloadArtifactMixin0",
         "parameters": [
@@ -16600,13 +16594,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -16627,7 +16620,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/jobs": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/jobs": {
       "get": {
         "operationId": "listWorkflowJobsMixin0",
         "parameters": [
@@ -16690,13 +16683,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -16720,7 +16712,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/jobs/{job_id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/jobs/{job_id}": {
       "get": {
         "operationId": "getWorkflowJobMixin0",
         "parameters": [
@@ -16752,13 +16744,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -16779,7 +16770,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/jobs/{job_id}/logs": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/jobs/{job_id}/logs": {
       "get": {
         "operationId": "downloadActionsRunJobLogsMixin0",
         "parameters": [
@@ -16811,13 +16802,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -16838,7 +16828,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/runners": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/runners": {
       "get": {
         "operationId": "getRepoRunnersMixin0",
         "parameters": [
@@ -16869,13 +16859,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -16896,7 +16885,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/runners/registration-token": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/runners/registration-token": {
       "post": {
         "operationId": "repoCreateRunnerRegistrationTokenMixin0",
         "parameters": [
@@ -16919,13 +16908,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -16940,7 +16928,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/runners/{runner_id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/runners/{runner_id}": {
       "delete": {
         "operationId": "deleteRepoRunnerMixin0",
         "parameters": [
@@ -16972,13 +16960,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -17029,13 +17016,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -17086,13 +17072,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -17126,7 +17111,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/runs": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/runs": {
       "get": {
         "operationId": "getWorkflowRunsMixin0",
         "parameters": [
@@ -17213,13 +17198,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -17240,7 +17224,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/runs/{run}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/runs/{run}": {
       "delete": {
         "operationId": "deleteActionRunMixin0",
         "parameters": [
@@ -17272,13 +17256,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -17329,13 +17312,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -17356,7 +17338,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/runs/{run}/artifacts": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/runs/{run}/artifacts": {
       "get": {
         "operationId": "getArtifactsOfRunMixin0",
         "parameters": [
@@ -17396,13 +17378,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -17423,7 +17404,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/runs/{run}/attempts/{attempt}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/runs/{run}/attempts/{attempt}": {
       "get": {
         "operationId": "getWorkflowRunAttemptMixin0",
         "parameters": [
@@ -17464,13 +17445,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -17491,7 +17471,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/runs/{run}/attempts/{attempt}/jobs": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/runs/{run}/attempts/{attempt}/jobs": {
       "get": {
         "operationId": "listWorkflowRunAttemptJobsMixin0",
         "parameters": [
@@ -17556,13 +17536,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -17583,7 +17562,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/runs/{run}/jobs": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/runs/{run}/jobs": {
       "get": {
         "operationId": "listWorkflowRunJobsMixin0",
         "parameters": [
@@ -17655,13 +17634,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -17685,7 +17663,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/runs/{run}/jobs/{job_id}/rerun": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/runs/{run}/jobs/{job_id}/rerun": {
       "post": {
         "operationId": "rerunWorkflowJobMixin0",
         "parameters": [
@@ -17726,13 +17704,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -17762,7 +17739,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/runs/{run}/rerun": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/runs/{run}/rerun": {
       "post": {
         "operationId": "rerunWorkflowRunMixin0",
         "parameters": [
@@ -17794,13 +17771,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -17830,7 +17806,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/runs/{run}/rerun-failed-jobs": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/runs/{run}/rerun-failed-jobs": {
       "post": {
         "operationId": "rerunFailedWorkflowRunMixin0",
         "parameters": [
@@ -17862,13 +17838,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -17898,7 +17873,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/secrets": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/secrets": {
       "get": {
         "operationId": "repoListActionsSecretsMixin0",
         "parameters": [
@@ -17937,13 +17912,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -17961,7 +17935,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/secrets/{secretname}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/secrets/{secretname}": {
       "delete": {
         "operationId": "deleteRepoSecretMixin0",
         "parameters": [
@@ -17993,13 +17967,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -18050,13 +18023,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -18090,7 +18062,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/tasks": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/tasks": {
       "get": {
         "operationId": "ListActionTasksMixin0",
         "parameters": [
@@ -18129,13 +18101,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -18165,7 +18136,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/variables": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/variables": {
       "get": {
         "operationId": "getRepoVariablesListMixin0",
         "parameters": [
@@ -18204,13 +18175,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -18231,7 +18201,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/variables/{variablename}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/variables/{variablename}": {
       "delete": {
         "operationId": "deleteRepoVariableMixin0",
         "parameters": [
@@ -18263,13 +18233,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -18326,13 +18295,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -18383,13 +18351,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -18453,13 +18420,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -18493,7 +18459,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/workflows": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/workflows": {
       "get": {
         "operationId": "ActionsListRepositoryWorkflowsMixin0",
         "parameters": [
@@ -18516,13 +18482,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -18552,7 +18517,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/workflows/{workflow_id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/workflows/{workflow_id}": {
       "get": {
         "operationId": "ActionsGetWorkflowMixin0",
         "parameters": [
@@ -18584,13 +18549,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -18620,7 +18584,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/workflows/{workflow_id}/disable": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/workflows/{workflow_id}/disable": {
       "put": {
         "operationId": "ActionsDisableWorkflowMixin0",
         "parameters": [
@@ -18652,13 +18616,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -18685,7 +18648,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/workflows/{workflow_id}/dispatches": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/workflows/{workflow_id}/dispatches": {
       "post": {
         "operationId": "ActionsDispatchWorkflowMixin0",
         "parameters": [
@@ -18725,13 +18688,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -18771,7 +18733,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/workflows/{workflow_id}/enable": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/workflows/{workflow_id}/enable": {
       "put": {
         "operationId": "ActionsEnableWorkflowMixin0",
         "parameters": [
@@ -18803,13 +18765,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -18839,7 +18800,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/actions/workflows/{workflow_id}/runs": {
+    "/repos/{owner}/group/{repo_group}/{repo}/actions/workflows/{workflow_id}/runs": {
       "get": {
         "operationId": "ActionsListWorkflowRunsMixin0",
         "parameters": [
@@ -18935,13 +18896,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -18965,7 +18925,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/activities/feeds": {
+    "/repos/{owner}/group/{repo_group}/{repo}/activities/feeds": {
       "get": {
         "operationId": "repoListActivityFeedsMixin0",
         "parameters": [
@@ -19013,13 +18973,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -19037,7 +18996,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/archive/{archive}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/archive/{archive}": {
       "get": {
         "operationId": "repoGetArchiveMixin0",
         "parameters": [
@@ -19080,13 +19039,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -19104,7 +19062,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/assignees": {
+    "/repos/{owner}/group/{repo_group}/{repo}/assignees": {
       "get": {
         "operationId": "repoGetAssigneesMixin0",
         "parameters": [
@@ -19127,13 +19085,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -19151,7 +19108,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/assignees/{assignee}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/assignees/{assignee}": {
       "get": {
         "operationId": "repoCheckAssigneeMixin0",
         "parameters": [
@@ -19183,13 +19140,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -19210,7 +19166,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/avatar": {
+    "/repos/{owner}/group/{repo_group}/{repo}/avatar": {
       "delete": {
         "operationId": "repoDeleteAvatarMixin0",
         "parameters": [
@@ -19233,13 +19189,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -19278,13 +19233,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -19312,7 +19266,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/branch_protections": {
+    "/repos/{owner}/group/{repo_group}/{repo}/branch_protections": {
       "get": {
         "operationId": "repoListBranchProtectionMixin0",
         "parameters": [
@@ -19335,13 +19289,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -19377,13 +19330,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -19420,7 +19372,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/branch_protections/priority": {
+    "/repos/{owner}/group/{repo_group}/{repo}/branch_protections/priority": {
       "post": {
         "operationId": "repoUpdateBranchProtectionPrioriesMixin0",
         "parameters": [
@@ -19443,13 +19395,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -19483,7 +19434,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/branch_protections/{name}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/branch_protections/{name}": {
       "delete": {
         "operationId": "repoDeleteBranchProtectionMixin0",
         "parameters": [
@@ -19515,13 +19466,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -19569,13 +19519,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -19623,13 +19572,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -19663,7 +19611,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/branches": {
+    "/repos/{owner}/group/{repo_group}/{repo}/branches": {
       "get": {
         "operationId": "repoListBranchesMixin0",
         "parameters": [
@@ -19710,13 +19658,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -19752,13 +19699,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -19795,7 +19741,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/branches/{branch}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/branches/{branch}": {
       "delete": {
         "operationId": "repoDeleteBranchMixin0",
         "parameters": [
@@ -19827,13 +19773,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -19887,13 +19832,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -19941,13 +19885,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -20011,13 +19954,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -20054,7 +19996,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/collaborators": {
+    "/repos/{owner}/group/{repo_group}/{repo}/collaborators": {
       "get": {
         "operationId": "repoListCollaboratorsMixin0",
         "parameters": [
@@ -20093,13 +20035,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -20117,7 +20058,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/collaborators/{collaborator}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/collaborators/{collaborator}": {
       "delete": {
         "operationId": "repoDeleteCollaboratorMixin0",
         "parameters": [
@@ -20149,13 +20090,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -20206,13 +20146,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -20263,13 +20202,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -20303,7 +20241,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/collaborators/{collaborator}/permission": {
+    "/repos/{owner}/group/{repo_group}/{repo}/collaborators/{collaborator}/permission": {
       "get": {
         "operationId": "repoGetRepoPermissionsMixin0",
         "parameters": [
@@ -20335,13 +20273,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -20362,7 +20299,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/commits": {
+    "/repos/{owner}/group/{repo_group}/{repo}/commits": {
       "get": {
         "operationId": "repoGetAllCommitsMixin0",
         "parameters": [
@@ -20467,13 +20404,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -20494,7 +20430,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/commits/{ref}/status": {
+    "/repos/{owner}/group/{repo_group}/{repo}/commits/{ref}/status": {
       "get": {
         "operationId": "repoGetCombinedStatusByRefMixin0",
         "parameters": [
@@ -20542,13 +20478,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -20569,7 +20504,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/commits/{ref}/statuses": {
+    "/repos/{owner}/group/{repo_group}/{repo}/commits/{ref}/statuses": {
       "get": {
         "operationId": "repoListStatusesByRefMixin0",
         "parameters": [
@@ -20647,13 +20582,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -20674,7 +20608,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/commits/{sha}/pull": {
+    "/repos/{owner}/group/{repo_group}/{repo}/commits/{sha}/pull": {
       "get": {
         "operationId": "repoGetCommitPullRequestMixin0",
         "parameters": [
@@ -20706,13 +20640,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -20730,7 +20663,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/compare/{basehead}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/compare/{basehead}": {
       "get": {
         "description": "By default returns JSON commit comparison information. The raw diff or patch can be\nrequested with the `output` query parameter set to `diff` or `patch` respectively.\n",
         "operationId": "repoCompareDiffMixin0",
@@ -20775,13 +20708,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -20799,7 +20731,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/contents": {
+    "/repos/{owner}/group/{repo_group}/{repo}/contents": {
       "get": {
         "description": "This API follows GitHub's design, and it is not easy to use. Recommend users to use our \"contents-ext\" API instead.",
         "operationId": "repoGetContentsListMixin0",
@@ -20831,13 +20763,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -20876,13 +20807,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -20920,7 +20850,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/contents-ext/{filepath}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/contents-ext/{filepath}": {
       "get": {
         "description": "It guarantees that only one of the response fields is set if the request succeeds. Users can pass \"includes=file_content\" or \"includes=lfs_metadata\" to retrieve more fields. \"includes=file_content\" only works for single file, if you need to retrieve file contents in batch, use \"file-contents\" API after listing the directory.",
         "operationId": "repoGetContentsExtMixin0",
@@ -20969,13 +20899,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -20993,7 +20922,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/contents/{filepath}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/contents/{filepath}": {
       "delete": {
         "operationId": "repoDeleteFileMixin0",
         "parameters": [
@@ -21025,13 +20954,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -21111,13 +21039,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -21165,13 +21092,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -21239,13 +21165,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -21286,7 +21211,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/diffpatch": {
+    "/repos/{owner}/group/{repo_group}/{repo}/diffpatch": {
       "post": {
         "operationId": "repoApplyDiffPatchMixin0",
         "parameters": [
@@ -21309,13 +21234,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -21347,7 +21271,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/editorconfig/{filepath}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/editorconfig/{filepath}": {
       "get": {
         "operationId": "repoGetEditorConfigMixin0",
         "parameters": [
@@ -21387,13 +21311,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -21411,7 +21334,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/file-contents": {
+    "/repos/{owner}/group/{repo_group}/{repo}/file-contents": {
       "get": {
         "description": "See the POST method. This GET method supports using JSON encoded request body in query parameter.",
         "operationId": "repoGetFileContentsMixin0",
@@ -21452,13 +21375,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -21506,13 +21428,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -21541,7 +21462,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/forks": {
+    "/repos/{owner}/group/{repo_group}/{repo}/forks": {
       "get": {
         "operationId": "listForksMixin0",
         "parameters": [
@@ -21580,13 +21501,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -21625,13 +21545,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -21668,7 +21587,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/git/blobs/{sha}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/git/blobs/{sha}": {
       "get": {
         "operationId": "GetBlobMixin0",
         "parameters": [
@@ -21700,13 +21619,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -21727,7 +21645,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/git/commits/{sha}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/git/commits/{sha}": {
       "get": {
         "operationId": "repoGetSingleCommitMixin0",
         "parameters": [
@@ -21783,13 +21701,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -21810,7 +21727,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/git/commits/{sha}.{diffType}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/git/commits/{sha}.{diffType}": {
       "get": {
         "operationId": "repoDownloadCommitDiffOrPatchMixin0",
         "parameters": [
@@ -21855,13 +21772,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -21879,7 +21795,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/git/notes/{sha}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/git/notes/{sha}": {
       "get": {
         "operationId": "repoGetNoteMixin0",
         "parameters": [
@@ -21927,13 +21843,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -21954,7 +21869,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/git/refs": {
+    "/repos/{owner}/group/{repo_group}/{repo}/git/refs": {
       "get": {
         "operationId": "repoListAllGitRefsMixin0",
         "parameters": [
@@ -21977,13 +21892,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -22001,7 +21915,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/git/refs/{ref}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/git/refs/{ref}": {
       "get": {
         "operationId": "repoListGitRefsMixin0",
         "parameters": [
@@ -22033,13 +21947,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -22057,7 +21970,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/git/tags/{sha}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/git/tags/{sha}": {
       "get": {
         "operationId": "GetAnnotatedTagMixin0",
         "parameters": [
@@ -22089,13 +22002,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -22116,7 +22028,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/git/trees/{sha}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/git/trees/{sha}": {
       "get": {
         "operationId": "GetTreeMixin0",
         "parameters": [
@@ -22172,13 +22084,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -22199,7 +22110,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/hooks": {
+    "/repos/{owner}/group/{repo_group}/{repo}/hooks": {
       "get": {
         "operationId": "repoListHooksMixin0",
         "parameters": [
@@ -22238,13 +22149,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -22283,13 +22193,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -22317,7 +22226,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/hooks/git": {
+    "/repos/{owner}/group/{repo_group}/{repo}/hooks/git": {
       "get": {
         "operationId": "repoListGitHooksMixin0",
         "parameters": [
@@ -22340,13 +22249,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -22364,7 +22272,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/hooks/git/{id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/hooks/git/{id}": {
       "delete": {
         "operationId": "repoDeleteGitHookMixin0",
         "parameters": [
@@ -22396,13 +22304,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -22450,13 +22357,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -22504,13 +22410,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -22538,7 +22443,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/hooks/{id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/hooks/{id}": {
       "delete": {
         "operationId": "repoDeleteHookMixin0",
         "parameters": [
@@ -22571,13 +22476,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -22626,13 +22530,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -22681,13 +22584,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -22715,7 +22617,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/hooks/{id}/tests": {
+    "/repos/{owner}/group/{repo_group}/{repo}/hooks/{id}/tests": {
       "post": {
         "operationId": "repoTestHookMixin0",
         "parameters": [
@@ -22756,13 +22658,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -22780,7 +22681,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issue_config": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issue_config": {
       "get": {
         "operationId": "repoGetIssueConfigMixin0",
         "parameters": [
@@ -22803,13 +22704,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -22827,7 +22727,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issue_config/validate": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issue_config/validate": {
       "get": {
         "operationId": "repoValidateIssueConfigMixin0",
         "parameters": [
@@ -22850,13 +22750,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -22874,7 +22773,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issue_templates": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issue_templates": {
       "get": {
         "operationId": "repoGetIssueTemplatesMixin0",
         "parameters": [
@@ -22897,13 +22796,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -22921,7 +22819,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues": {
       "get": {
         "operationId": "issueListIssuesMixin0",
         "parameters": [
@@ -23051,13 +22949,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -23096,13 +22993,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -23142,7 +23038,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/comments": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/comments": {
       "get": {
         "operationId": "issueGetRepoCommentsMixin0",
         "parameters": [
@@ -23199,13 +23095,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -23223,7 +23118,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/comments/{id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/comments/{id}": {
       "delete": {
         "operationId": "issueDeleteCommentMixin0",
         "parameters": [
@@ -23256,13 +23151,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -23314,13 +23208,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -23375,13 +23268,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -23418,7 +23310,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/comments/{id}/assets": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/comments/{id}/assets": {
       "get": {
         "operationId": "issueListIssueCommentAttachmentsMixin0",
         "parameters": [
@@ -23451,13 +23343,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -23514,13 +23405,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -23573,7 +23463,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/comments/{id}/assets/{attachment_id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/comments/{id}/assets/{attachment_id}": {
       "delete": {
         "operationId": "issueDeleteIssueCommentAttachmentMixin0",
         "parameters": [
@@ -23616,13 +23506,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -23684,13 +23573,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -23749,13 +23637,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -23789,7 +23676,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/comments/{id}/reactions": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/comments/{id}/reactions": {
       "delete": {
         "operationId": "issueDeleteCommentReactionMixin0",
         "parameters": [
@@ -23822,13 +23709,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -23890,13 +23776,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -23948,13 +23833,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -23988,7 +23872,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/pinned": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/pinned": {
       "get": {
         "operationId": "repoListPinnedIssuesMixin0",
         "parameters": [
@@ -24011,13 +23895,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -24035,7 +23918,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}": {
       "delete": {
         "operationId": "issueDeleteMixin0",
         "parameters": [
@@ -24068,13 +23951,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -24126,13 +24008,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -24182,13 +24063,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -24222,7 +24102,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/assets": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/assets": {
       "get": {
         "operationId": "issueListIssueAttachmentsMixin0",
         "parameters": [
@@ -24255,13 +24135,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -24318,13 +24197,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -24374,7 +24252,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/assets/{attachment_id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/assets/{attachment_id}": {
       "delete": {
         "operationId": "issueDeleteIssueAttachmentMixin0",
         "parameters": [
@@ -24417,13 +24295,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -24485,13 +24362,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -24550,13 +24426,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -24590,7 +24465,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/assignees": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/assignees": {
       "delete": {
         "operationId": "issueRemoveAssigneesMixin0",
         "parameters": [
@@ -24623,13 +24498,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -24695,13 +24569,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -24739,7 +24612,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/assignees/{assignee}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/assignees/{assignee}": {
       "get": {
         "operationId": "issueCheckAssigneeMixin0",
         "parameters": [
@@ -24781,13 +24654,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -24808,7 +24680,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/blocks": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/blocks": {
       "delete": {
         "operationId": "issueRemoveIssueBlockingMixin0",
         "parameters": [
@@ -24840,13 +24712,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -24920,13 +24791,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -24974,13 +24844,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -25008,7 +24877,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/comments": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/comments": {
       "get": {
         "operationId": "issueGetCommentsMixin0",
         "parameters": [
@@ -25059,13 +24928,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -25114,13 +24982,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -25154,7 +25021,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/comments/{id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/comments/{id}": {
       "delete": {
         "deprecated": true,
         "operationId": "issueDeleteCommentDeprecatedMixin0",
@@ -25197,13 +25064,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -25265,13 +25131,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -25305,7 +25170,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/deadline": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/deadline": {
       "post": {
         "operationId": "issueEditIssueDeadlineMixin0",
         "parameters": [
@@ -25338,13 +25203,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -25375,7 +25239,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/dependencies": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/dependencies": {
       "delete": {
         "operationId": "issueRemoveIssueDependenciesMixin0",
         "parameters": [
@@ -25407,13 +25271,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -25490,13 +25353,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -25544,13 +25406,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -25581,7 +25442,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/labels": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/labels": {
       "delete": {
         "operationId": "issueClearLabelsMixin0",
         "parameters": [
@@ -25614,13 +25475,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -25672,13 +25532,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -25727,13 +25586,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -25795,13 +25653,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -25832,7 +25689,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/labels/{id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/labels/{id}": {
       "delete": {
         "operationId": "issueRemoveLabelMixin0",
         "parameters": [
@@ -25875,13 +25732,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -25905,7 +25761,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/lock": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/lock": {
       "delete": {
         "operationId": "issueUnlockIssueMixin0",
         "parameters": [
@@ -25938,13 +25794,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -25996,13 +25851,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -26033,7 +25887,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/pin": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/pin": {
       "delete": {
         "operationId": "unpinIssueMixin0",
         "parameters": [
@@ -26066,13 +25920,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -26124,13 +25977,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -26151,7 +26003,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/pin/{position}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/pin/{position}": {
       "patch": {
         "operationId": "moveIssuePinMixin0",
         "parameters": [
@@ -26194,13 +26046,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -26221,7 +26072,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/reactions": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/reactions": {
       "delete": {
         "operationId": "issueDeleteIssueReactionMixin0",
         "parameters": [
@@ -26254,13 +26105,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -26338,13 +26188,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -26396,13 +26245,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -26436,7 +26284,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/stopwatch/delete": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/stopwatch/delete": {
       "delete": {
         "operationId": "issueDeleteStopWatchMixin0",
         "parameters": [
@@ -26469,13 +26317,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -26499,7 +26346,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/stopwatch/start": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/stopwatch/start": {
       "post": {
         "operationId": "issueStartStopWatchMixin0",
         "parameters": [
@@ -26532,13 +26379,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -26562,7 +26408,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/stopwatch/stop": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/stopwatch/stop": {
       "post": {
         "operationId": "issueStopStopWatchMixin0",
         "parameters": [
@@ -26595,13 +26441,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -26625,7 +26470,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/subscriptions": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/subscriptions": {
       "get": {
         "operationId": "issueSubscriptionsMixin0",
         "parameters": [
@@ -26674,13 +26519,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -26698,7 +26542,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/subscriptions/check": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/subscriptions/check": {
       "get": {
         "operationId": "issueCheckSubscriptionMixin0",
         "parameters": [
@@ -26731,13 +26575,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -26755,7 +26598,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/subscriptions/{user}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/subscriptions/{user}": {
       "delete": {
         "operationId": "issueDeleteSubscriptionMixin0",
         "parameters": [
@@ -26797,13 +26640,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -26867,13 +26709,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -26897,7 +26738,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/timeline": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/timeline": {
       "get": {
         "operationId": "issueGetCommentsAndTimelineMixin0",
         "parameters": [
@@ -26964,13 +26805,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -26988,7 +26828,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/times": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/times": {
       "delete": {
         "operationId": "issueResetTimeMixin0",
         "parameters": [
@@ -27021,13 +26861,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -27124,13 +26963,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -27179,13 +27017,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -27219,7 +27056,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/issues/{index}/times/{id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/issues/{index}/times/{id}": {
       "delete": {
         "operationId": "issueDeleteTimeMixin0",
         "parameters": [
@@ -27262,13 +27099,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -27292,7 +27128,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/keys": {
+    "/repos/{owner}/group/{repo_group}/{repo}/keys": {
       "get": {
         "operationId": "repoListKeysMixin0",
         "parameters": [
@@ -27347,13 +27183,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -27392,13 +27227,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -27429,7 +27263,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/keys/{id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/keys/{id}": {
       "delete": {
         "operationId": "repoDeleteKeyMixin0",
         "parameters": [
@@ -27462,13 +27296,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -27520,13 +27353,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -27544,7 +27376,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/labels": {
+    "/repos/{owner}/group/{repo_group}/{repo}/labels": {
       "get": {
         "operationId": "issueListLabelsMixin0",
         "parameters": [
@@ -27583,13 +27415,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -27628,13 +27459,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -27665,7 +27495,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/labels/{id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/labels/{id}": {
       "delete": {
         "operationId": "issueDeleteLabelMixin0",
         "parameters": [
@@ -27698,13 +27528,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -27753,13 +27582,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -27808,13 +27636,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -27845,7 +27672,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/languages": {
+    "/repos/{owner}/group/{repo_group}/{repo}/languages": {
       "get": {
         "operationId": "repoGetLanguagesMixin0",
         "parameters": [
@@ -27868,13 +27695,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -27892,7 +27718,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/licenses": {
+    "/repos/{owner}/group/{repo_group}/{repo}/licenses": {
       "get": {
         "operationId": "repoGetLicensesMixin0",
         "parameters": [
@@ -27915,13 +27741,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -27939,7 +27764,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/media/{filepath}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/media/{filepath}": {
       "get": {
         "operationId": "repoGetRawFileOrLFSMixin0",
         "parameters": [
@@ -27979,13 +27804,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -28011,7 +27835,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/merge-upstream": {
+    "/repos/{owner}/group/{repo_group}/{repo}/merge-upstream": {
       "post": {
         "operationId": "repoMergeUpstreamMixin0",
         "parameters": [
@@ -28034,13 +27858,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -28071,7 +27894,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/milestones": {
+    "/repos/{owner}/group/{repo_group}/{repo}/milestones": {
       "get": {
         "operationId": "issueGetMilestonesListMixin0",
         "parameters": [
@@ -28126,13 +27949,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -28171,13 +27993,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -28205,7 +28026,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/milestones/{id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/milestones/{id}": {
       "delete": {
         "operationId": "issueDeleteMilestoneMixin0",
         "parameters": [
@@ -28237,13 +28058,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -28291,13 +28111,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -28345,13 +28164,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -28379,7 +28197,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/mirror-sync": {
+    "/repos/{owner}/group/{repo_group}/{repo}/mirror-sync": {
       "post": {
         "operationId": "repoMirrorSyncMixin0",
         "parameters": [
@@ -28402,13 +28220,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -28429,7 +28246,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/new_pin_allowed": {
+    "/repos/{owner}/group/{repo_group}/{repo}/new_pin_allowed": {
       "get": {
         "operationId": "repoNewPinAllowedMixin0",
         "parameters": [
@@ -28452,13 +28269,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -28476,7 +28292,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/notifications": {
+    "/repos/{owner}/group/{repo_group}/{repo}/notifications": {
       "get": {
         "operationId": "notifyGetRepoListMixin0",
         "parameters": [
@@ -28569,13 +28385,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -28647,13 +28462,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -28668,7 +28482,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls": {
       "get": {
         "operationId": "repoListPullRequestsMixin0",
         "parameters": [
@@ -28778,13 +28592,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -28826,13 +28639,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -28872,7 +28684,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/comments/{id}/resolve": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/comments/{id}/resolve": {
       "post": {
         "operationId": "repoResolvePullReviewCommentMixin0",
         "parameters": [
@@ -28905,13 +28717,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -28935,7 +28746,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/comments/{id}/unresolve": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/comments/{id}/unresolve": {
       "post": {
         "operationId": "repoUnresolvePullReviewCommentMixin0",
         "parameters": [
@@ -28968,13 +28779,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -28998,7 +28808,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/pinned": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/pinned": {
       "get": {
         "operationId": "repoListPinnedPullRequestsMixin0",
         "parameters": [
@@ -29021,13 +28831,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -29045,7 +28854,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{base}/{head}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{base}/{head}": {
       "get": {
         "operationId": "repoGetPullRequestByBaseHeadMixin0",
         "parameters": [
@@ -29086,13 +28895,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -29110,7 +28918,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{index}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{index}": {
       "get": {
         "operationId": "repoGetPullRequestMixin0",
         "parameters": [
@@ -29143,13 +28951,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -29198,13 +29005,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -29244,7 +29050,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{index}.{diffType}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{index}.{diffType}": {
       "get": {
         "operationId": "repoDownloadPullDiffOrPatchMixin0",
         "parameters": [
@@ -29298,13 +29104,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -29322,7 +29127,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{index}/comments/{id}/replies": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{index}/comments/{id}/replies": {
       "post": {
         "operationId": "repoCreatePullReviewCommentReplyMixin0",
         "parameters": [
@@ -29365,13 +29170,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -29406,7 +29210,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{index}/commits": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{index}/commits": {
       "get": {
         "operationId": "repoGetPullRequestCommitsMixin0",
         "parameters": [
@@ -29471,13 +29275,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -29495,7 +29298,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{index}/files": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{index}/files": {
       "get": {
         "operationId": "repoGetPullRequestFilesMixin0",
         "parameters": [
@@ -29566,13 +29369,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -29590,7 +29392,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{index}/merge": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{index}/merge": {
       "delete": {
         "operationId": "repoCancelScheduledAutoMergeMixin0",
         "parameters": [
@@ -29623,13 +29425,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -29684,13 +29485,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -29739,13 +29539,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -29785,7 +29584,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{index}/requested_reviewers": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{index}/requested_reviewers": {
       "delete": {
         "operationId": "repoDeletePullReviewRequestsMixin0",
         "parameters": [
@@ -29818,13 +29617,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -29890,13 +29688,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -29928,7 +29725,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{index}/reviews": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{index}/reviews": {
       "get": {
         "operationId": "repoListPullReviewsMixin0",
         "parameters": [
@@ -29977,13 +29774,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -30032,13 +29828,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -30070,7 +29865,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{index}/reviews/{id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{index}/reviews/{id}": {
       "delete": {
         "operationId": "repoDeletePullReviewMixin0",
         "parameters": [
@@ -30113,13 +29908,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -30181,13 +29975,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -30246,13 +30039,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -30284,7 +30076,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{index}/reviews/{id}/comments": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{index}/reviews/{id}/comments": {
       "get": {
         "operationId": "repoGetPullReviewCommentsMixin0",
         "parameters": [
@@ -30327,13 +30119,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -30351,7 +30142,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{index}/reviews/{id}/dismissals": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{index}/reviews/{id}/dismissals": {
       "post": {
         "operationId": "repoDismissPullReviewMixin0",
         "parameters": [
@@ -30394,13 +30185,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -30435,7 +30225,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{index}/reviews/{id}/undismissals": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{index}/reviews/{id}/undismissals": {
       "post": {
         "operationId": "repoUnDismissPullReviewMixin0",
         "parameters": [
@@ -30478,13 +30268,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -30508,7 +30297,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/pulls/{index}/update": {
+    "/repos/{owner}/group/{repo_group}/{repo}/pulls/{index}/update": {
       "post": {
         "operationId": "repoUpdatePullRequestMixin0",
         "parameters": [
@@ -30553,13 +30342,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -30586,7 +30374,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/push_mirrors": {
+    "/repos/{owner}/group/{repo_group}/{repo}/push_mirrors": {
       "get": {
         "operationId": "repoListPushMirrorsMixin0",
         "parameters": [
@@ -30625,13 +30413,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -30676,13 +30463,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -30716,7 +30502,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/push_mirrors-sync": {
+    "/repos/{owner}/group/{repo_group}/{repo}/push_mirrors-sync": {
       "post": {
         "operationId": "repoPushMirrorSyncMixin0",
         "parameters": [
@@ -30739,13 +30525,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -30772,7 +30557,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/push_mirrors/{name}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/push_mirrors/{name}": {
       "delete": {
         "operationId": "repoDeletePushMirrorMixin0",
         "parameters": [
@@ -30804,13 +30589,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -30861,13 +30645,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -30891,7 +30674,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/raw/{filepath}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/raw/{filepath}": {
       "get": {
         "operationId": "repoGetRawFileMixin0",
         "parameters": [
@@ -30931,13 +30714,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -30963,7 +30745,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/releases": {
+    "/repos/{owner}/group/{repo_group}/{repo}/releases": {
       "get": {
         "operationId": "repoListReleasesMixin0",
         "parameters": [
@@ -31018,13 +30800,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -31063,13 +30844,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -31103,7 +30883,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/releases/latest": {
+    "/repos/{owner}/group/{repo_group}/{repo}/releases/latest": {
       "get": {
         "operationId": "repoGetLatestReleaseMixin0",
         "parameters": [
@@ -31126,13 +30906,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -31150,7 +30929,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/releases/tags/{tag}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/releases/tags/{tag}": {
       "delete": {
         "operationId": "repoDeleteReleaseByTagMixin0",
         "parameters": [
@@ -31182,13 +30961,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -31239,13 +31017,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -31263,7 +31040,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/releases/{id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/releases/{id}": {
       "delete": {
         "operationId": "repoDeleteReleaseMixin0",
         "parameters": [
@@ -31296,13 +31073,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -31354,13 +31130,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -31409,13 +31184,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -31443,7 +31217,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/releases/{id}/assets": {
+    "/repos/{owner}/group/{repo_group}/{repo}/releases/{id}/assets": {
       "get": {
         "operationId": "repoListReleaseAttachmentsMixin0",
         "parameters": [
@@ -31476,13 +31250,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -31539,13 +31312,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -31599,7 +31371,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/releases/{id}/assets/{attachment_id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/releases/{id}/assets/{attachment_id}": {
       "delete": {
         "operationId": "repoDeleteReleaseAttachmentMixin0",
         "parameters": [
@@ -31642,13 +31414,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -31707,13 +31478,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -31772,13 +31542,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -31809,7 +31578,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/reviewers": {
+    "/repos/{owner}/group/{repo_group}/{repo}/reviewers": {
       "get": {
         "operationId": "repoGetReviewersMixin0",
         "parameters": [
@@ -31832,13 +31601,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -31856,7 +31624,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/signing-key.gpg": {
+    "/repos/{owner}/group/{repo_group}/{repo}/signing-key.gpg": {
       "get": {
         "operationId": "repoSigningKeyMixin0",
         "parameters": [
@@ -31879,13 +31647,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -31907,7 +31674,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/signing-key.pub": {
+    "/repos/{owner}/group/{repo_group}/{repo}/signing-key.pub": {
       "get": {
         "operationId": "repoSigningKeySSHMixin0",
         "parameters": [
@@ -31930,13 +31697,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -31958,7 +31724,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/stargazers": {
+    "/repos/{owner}/group/{repo_group}/{repo}/stargazers": {
       "get": {
         "operationId": "repoListStargazersMixin0",
         "parameters": [
@@ -31997,13 +31763,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -32024,7 +31789,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/statuses/{sha}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/statuses/{sha}": {
       "get": {
         "operationId": "repoListStatusesMixin0",
         "parameters": [
@@ -32102,13 +31867,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -32159,13 +31923,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -32196,7 +31959,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/subscribers": {
+    "/repos/{owner}/group/{repo_group}/{repo}/subscribers": {
       "get": {
         "operationId": "repoListSubscribersMixin0",
         "parameters": [
@@ -32235,13 +31998,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -32259,7 +32021,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/subscription": {
+    "/repos/{owner}/group/{repo_group}/{repo}/subscription": {
       "delete": {
         "operationId": "userCurrentDeleteSubscriptionMixin0",
         "parameters": [
@@ -32282,13 +32044,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -32327,13 +32088,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -32372,13 +32132,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -32399,7 +32158,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/tag_protections": {
+    "/repos/{owner}/group/{repo_group}/{repo}/tag_protections": {
       "get": {
         "operationId": "repoListTagProtectionMixin0",
         "parameters": [
@@ -32422,13 +32181,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -32464,13 +32222,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -32507,7 +32264,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/tag_protections/{id}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/tag_protections/{id}": {
       "delete": {
         "operationId": "repoDeleteTagProtectionMixin0",
         "parameters": [
@@ -32539,13 +32296,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -32593,13 +32349,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -32647,13 +32402,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -32687,7 +32441,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/tags": {
+    "/repos/{owner}/group/{repo_group}/{repo}/tags": {
       "get": {
         "operationId": "repoListTagsMixin0",
         "parameters": [
@@ -32726,13 +32480,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -32771,13 +32524,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -32817,7 +32569,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/tags/{tag}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/tags/{tag}": {
       "delete": {
         "operationId": "repoDeleteTagMixin0",
         "parameters": [
@@ -32849,13 +32601,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -32915,13 +32666,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -32939,7 +32689,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/teams": {
+    "/repos/{owner}/group/{repo_group}/{repo}/teams": {
       "get": {
         "operationId": "repoListTeamsMixin0",
         "parameters": [
@@ -32962,13 +32712,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -32986,7 +32735,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/teams/{team}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/teams/{team}": {
       "delete": {
         "operationId": "repoDeleteTeamMixin0",
         "parameters": [
@@ -33018,13 +32767,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -33078,13 +32826,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -33135,13 +32882,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -33165,7 +32911,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/times": {
+    "/repos/{owner}/group/{repo_group}/{repo}/times": {
       "get": {
         "operationId": "repoTrackedTimesMixin0",
         "parameters": [
@@ -33230,13 +32976,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -33260,7 +33005,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/times/{user}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/times/{user}": {
       "get": {
         "deprecated": true,
         "operationId": "userTrackedTimesMixin0",
@@ -33293,13 +33038,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -33323,7 +33067,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/topics": {
+    "/repos/{owner}/group/{repo_group}/{repo}/topics": {
       "get": {
         "operationId": "repoListTopicsMixin0",
         "parameters": [
@@ -33362,13 +33106,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -33407,13 +33150,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -33444,7 +33186,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/topics/{topic}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/topics/{topic}": {
       "delete": {
         "operationId": "repoDeleteTopicMixin0",
         "parameters": [
@@ -33476,13 +33218,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -33533,13 +33274,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -33560,7 +33300,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/transfer": {
+    "/repos/{owner}/group/{repo_group}/{repo}/transfer": {
       "post": {
         "operationId": "repoTransferMixin0",
         "parameters": [
@@ -33583,13 +33323,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -33625,7 +33364,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/transfer/accept": {
+    "/repos/{owner}/group/{repo_group}/{repo}/transfer/accept": {
       "post": {
         "operationId": "acceptRepoTransferMixin0",
         "parameters": [
@@ -33648,13 +33387,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -33675,7 +33413,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/transfer/reject": {
+    "/repos/{owner}/group/{repo_group}/{repo}/transfer/reject": {
       "post": {
         "operationId": "rejectRepoTransferMixin0",
         "parameters": [
@@ -33698,13 +33436,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -33725,7 +33462,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/wiki/new": {
+    "/repos/{owner}/group/{repo_group}/{repo}/wiki/new": {
       "post": {
         "operationId": "repoCreateWikiPageMixin0",
         "parameters": [
@@ -33748,13 +33485,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -33791,7 +33527,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/wiki/page/{pageName}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/wiki/page/{pageName}": {
       "delete": {
         "operationId": "repoDeleteWikiPageMixin0",
         "parameters": [
@@ -33823,13 +33559,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -33883,13 +33618,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -33937,13 +33671,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -33980,7 +33713,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/wiki/pages": {
+    "/repos/{owner}/group/{repo_group}/{repo}/wiki/pages": {
       "get": {
         "operationId": "repoGetWikiPagesMixin0",
         "parameters": [
@@ -34019,13 +33752,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
@@ -34043,7 +33775,7 @@
         ]
       }
     },
-    "/repos/{owner}/group/{group_id}/{repo}/wiki/revisions/{pageName}": {
+    "/repos/{owner}/group/{repo_group}/{repo}/wiki/revisions/{pageName}": {
       "get": {
         "operationId": "repoGetWikiPageRevisionsMixin0",
         "parameters": [
@@ -34083,13 +33815,12 @@
             }
           },
           {
-            "description": "group ID of the repo",
+            "description": "the fully-qualified path of the group containing the repo",
             "in": "path",
-            "name": "group_id",
+            "name": "repo_group",
             "required": true,
             "schema": {
-              "format": "int64",
-              "type": "integer"
+              "type": "string"
             }
           }
         ],
