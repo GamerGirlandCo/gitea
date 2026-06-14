@@ -21,8 +21,10 @@ import (
 	"xorm.io/builder"
 )
 
-const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-const idLen = 16
+const (
+	charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+	idLen   = 16
+)
 
 func randString(n int) string {
 	var sb strings.Builder
