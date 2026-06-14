@@ -39,9 +39,13 @@ type Group struct {
 	SortOrder int `xorm:"INDEX"`
 }
 
+func GroupLink(ownerName, path string) string {
+	return setting.AppSubURL + "/" + url.PathEscape(ownerName) + "/groups/" + path
+}
+
 // GroupLink returns the link to this group
 func (g *Group) GroupLink() string {
-	return setting.AppSubURL + "/" + url.PathEscape(g.OwnerName) + "/groups/" + g.FullPath()
+	return GroupLink(g.OwnerName, g.FullPath())
 }
 
 func (g *Group) OrgGroupLink() string {
