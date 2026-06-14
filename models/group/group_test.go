@@ -4,6 +4,7 @@ package group_test
 
 import (
 	"fmt"
+	"math/rand/v2"
 	"slices"
 	"strings"
 	"testing"
@@ -19,6 +20,18 @@ import (
 	"github.com/stretchr/testify/require"
 	"xorm.io/builder"
 )
+
+const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+const idLen = 16
+
+func randString(n int) string {
+	var sb strings.Builder
+	sb.Grow(n)
+	for range n {
+		sb.WriteByte(charset[rand.IntN(len(charset))])
+	}
+	return sb.String()
+}
 
 func createTestGroup(t *testing.T, name string, pgid int64) *group_model.Group {
 	newGroup := &group_model.Group{
@@ -37,10 +50,11 @@ func createTestGroup(t *testing.T, name string, pgid int64) *group_model.Group {
 }
 
 func createParentGroup(t *testing.T) (*group_model.Group, group_model.RepoGroupList) {
-	parentGroup := createTestGroup(t, t.Name(), 0)
+	rid := randString(idLen)
+	parentGroup := createTestGroup(t, t.Name()+" "+rid, 0)
 	var groups group_model.RepoGroupList
 	for i := range 7 {
-		groups = append(groups, createTestGroup(t, fmt.Sprintf("group %d", i+1), parentGroup.ID))
+		groups = append(groups, createTestGroup(t, fmt.Sprintf("%s group %d", rid, i+1), parentGroup.ID))
 	}
 	return parentGroup, groups
 }
@@ -78,8 +92,8 @@ func TestIsPrivateBecauseOfParentPermissions(t *testing.T) {
 	}
 
 	t.Run("PublicHierarchy", func(t *testing.T) {
-		root := createTestGroup(t, "public root", 0)
-		child := createTestGroup(t, "public child", root.ID)
+		root := createTestGroup(t, "public root "+randString(idLen), 0)
+		child := createTestGroup(t, "public child "+randString(idLen), root.ID)
 
 		private, err := child.IsPrivateBecauseOfParentPermissions(ctx, nil)
 		require.NoError(t, err)
@@ -87,9 +101,9 @@ func TestIsPrivateBecauseOfParentPermissions(t *testing.T) {
 	})
 
 	t.Run("PrivateRoot", func(t *testing.T) {
-		root := createTestGroup(t, "private root", 0)
+		root := createTestGroup(t, "private root "+randString(idLen), 0)
 		setVisibility(t, root, structs.VisibleTypePrivate)
-		child := createTestGroup(t, "public child", root.ID)
+		child := createTestGroup(t, "public child "+randString(idLen), root.ID)
 
 		private, err := child.IsPrivateBecauseOfParentPermissions(ctx, nil)
 		require.NoError(t, err)
@@ -105,10 +119,10 @@ func TestIsPrivateBecauseOfParentPermissions(t *testing.T) {
 	})
 
 	t.Run("PrivateIntermediateAncestor", func(t *testing.T) {
-		root := createTestGroup(t, "public root", 0)
-		parent := createTestGroup(t, "private parent", root.ID)
+		root := createTestGroup(t, "public root "+randString(idLen), 0)
+		parent := createTestGroup(t, "private parent "+randString(idLen), root.ID)
 		setVisibility(t, parent, structs.VisibleTypePrivate)
-		child := createTestGroup(t, "public child", parent.ID)
+		child := createTestGroup(t, "public child "+randString(idLen), parent.ID)
 
 		private, err := child.IsPrivateBecauseOfParentPermissions(ctx, nil)
 		require.NoError(t, err)
