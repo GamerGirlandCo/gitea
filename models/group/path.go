@@ -13,6 +13,7 @@ import (
 	"gitea.dev/modules/log"
 	"gitea.dev/modules/setting"
 	"gitea.dev/modules/util"
+	"xorm.io/builder"
 )
 
 func PathByID(gid int64, ctxs ...context.Context) (string, error) {
@@ -31,6 +32,39 @@ select path from group_hierarchy where id = ?`, gid).Find(&strs)
 		return "", nil
 	}
 	return strs[0], nil
+}
+
+func PathsByIDs(gids []int64, ctxs ...context.Context) (m map[int64]string, err error) {
+	type idPath struct {
+		ID   int64
+		Path string
+	}
+	m = map[int64]string{}
+	if len(gids) == 0 {
+		return m, err
+	}
+	ctx := util.OptionalArg(ctxs, context.TODO())
+	selPart := builder.Select("id", "path").
+		From("group_hierarchy").
+		Where(builder.In("id", gids))
+
+	selSQL, args, err := builder.ToSQL(selPart)
+	if err != nil {
+		return m, err
+	}
+	r := new(idPath)
+	rows, err := db.GetEngine(ctx).SQL(groupPathCTEBuilder()+"\n"+selSQL, args...).Rows(r)
+	if err != nil {
+		return m, err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		if err = rows.Scan(r); err != nil {
+			return map[int64]string{}, err
+		}
+		m[r.ID] = r.Path
+	}
+	return m, err
 }
 
 func groupPathCTEBuilder() string {
