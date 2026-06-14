@@ -38,7 +38,8 @@ async function moveItem({item, from, to, oldIndex}: SortableEvent): Promise<void
       data,
     });
     const jsonRes = await p.json();
-    const newPath: string = jsonRes.newPath;
+    const children: {id: number, newPath: string, isGroup: boolean}[] = jsonRes.children ?? [];
+    const newPath = jsonRes.newPath;
     const fromItem = from.closest('li');
     const fromLabel = fromItem?.querySelector(':scope > label');
     const itemAnchor = item?.querySelector(':scope > label > a') as HTMLAnchorElement;
@@ -50,6 +51,15 @@ async function moveItem({item, from, to, oldIndex}: SortableEvent): Promise<void
     }
     const toItem = to.closest('li');
     toItem?.querySelector(':scope > label')?.classList.add('has-children');
+
+    const parentEl = document.querySelector("#group-navigation-menu > .sortable")!;
+    for(const c of children) {
+      const it = parentEl.querySelector(`[data-sort-id^="${c.isGroup ? 'group' : 'repo'}-${c.id}-"]`);
+      if(it != null) {
+        const anchorEl = it.querySelector(':scope > label > a') as HTMLAnchorElement;
+        anchorEl.href = c.newPath;
+      }
+    }
   } catch (error) {
     console.error(error);
     from.insertBefore(item, from.children[oldIndex]);

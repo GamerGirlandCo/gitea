@@ -137,9 +137,10 @@ const options: SortableOptions = {
           isGroup: true,
         };
         try {
-          await POST(`/${orgName}/groups/items/move`, {
+          const {newPath} = await POST(`/${orgName}/groups/items/move`, {
             data,
-          });
+          }).then(r => r.json());
+          groupData.set(sg, {...groupData.get(sg)!, link: newPath})
         } catch (error) {
           console.error(error);
         }
