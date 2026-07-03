@@ -35,7 +35,7 @@ type UsesRef struct {
 
 var (
 	reLocalSameRepo  = regexp.MustCompile(`^\./([^@]+\.ya?ml)$`)
-	reLocalCrossRepo = regexp.MustCompile(`^([-.\w]+)/(?:((?:[-.\w]+/)*?[-.\w]+?)/)?([-.\w]+)/([^@]+\.ya?ml)@(.+)$`)
+	reLocalCrossRepo = regexp.MustCompile(`^([-.\w]+)/((?:[-.\w]+/)*?)([-.\w]+)/([^@]+\.ya?ml)@(.+)$`)
 )
 
 // ParseUses parses the SYNTAX of a reusable workflow "uses:" value into a UsesRef. Two forms are supported:
