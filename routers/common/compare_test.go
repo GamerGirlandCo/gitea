@@ -8,6 +8,7 @@ import (
 
 	"gitea.dev/modules/optional"
 	"gitea.dev/modules/util"
+
 	"github.com/stretchr/testify/assert"
 )
 
