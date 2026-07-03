@@ -6,6 +6,7 @@ package common
 import (
 	"testing"
 
+	"gitea.dev/modules/optional"
 	"gitea.dev/modules/util"
 
 	"github.com/stretchr/testify/assert"
@@ -26,6 +27,7 @@ func TestCompareRouterReq(t *testing.T) {
 				BaseOriRef:       "v1.0",
 				CompareSeparator: "...",
 				HeadOriRef:       "v1.1",
+				HeadGroupPath:    optional.None[string](),
 			},
 		},
 		{
@@ -34,6 +36,7 @@ func TestCompareRouterReq(t *testing.T) {
 				BaseOriRef:       "main",
 				CompareSeparator: "..",
 				HeadOriRef:       "develop",
+				HeadGroupPath:    optional.None[string](),
 			},
 		},
 		{
@@ -43,6 +46,7 @@ func TestCompareRouterReq(t *testing.T) {
 				BaseOriRefSuffix: "^",
 				CompareSeparator: "...",
 				HeadOriRef:       "develop",
+				HeadGroupPath:    optional.None[string](),
 			},
 		},
 		{
@@ -52,6 +56,7 @@ func TestCompareRouterReq(t *testing.T) {
 				BaseOriRefSuffix: "^^^^^",
 				CompareSeparator: "...",
 				HeadOriRef:       "develop",
+				HeadGroupPath:    optional.None[string](),
 			},
 		},
 		{
@@ -59,6 +64,7 @@ func TestCompareRouterReq(t *testing.T) {
 			CompareRouterReq: &CompareRouterReq{
 				CompareSeparator: "...",
 				HeadOriRef:       "develop",
+				HeadGroupPath:    optional.None[string](),
 			},
 		},
 		{
@@ -67,7 +73,7 @@ func TestCompareRouterReq(t *testing.T) {
 				CompareSeparator: "...",
 				HeadOwner:        "teabot",
 				HeadOriRef:       "feature1",
-				HeadGroupID:      -1,
+				HeadGroupPath:    optional.None[string](),
 			},
 		},
 		{
@@ -77,6 +83,7 @@ func TestCompareRouterReq(t *testing.T) {
 				HeadOwner:        "lunny",
 				HeadRepoName:     "forked_repo",
 				HeadOriRef:       "develop",
+				HeadGroupPath:    optional.None[string](),
 			},
 		},
 		{
@@ -87,6 +94,7 @@ func TestCompareRouterReq(t *testing.T) {
 				HeadOwner:        "lunny",
 				HeadRepoName:     "forked_repo",
 				HeadOriRef:       "develop",
+				HeadGroupPath:    optional.None[string](),
 			},
 		},
 		{
@@ -98,6 +106,7 @@ func TestCompareRouterReq(t *testing.T) {
 				HeadOwner:        "lunny",
 				HeadRepoName:     "forked_repo",
 				HeadOriRef:       "develop",
+				HeadGroupPath:    optional.None[string](),
 			},
 		},
 		{

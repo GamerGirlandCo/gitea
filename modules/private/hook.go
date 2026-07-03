@@ -81,8 +81,8 @@ type HookProcReceiveRefResult struct {
 	HeadBranch        string
 }
 
-func newInternalRequestAPIForHooks(ctx context.Context, hookName, ownerName, repoName string, groupID int64, opts HookOptions) *httplib.Request {
-	locator := giturl.NewLocator(ownerName, repoName, groupID)
+func newInternalRequestAPIForHooks(ctx context.Context, hookName, ownerName, repoName, groupPath string, opts HookOptions) *httplib.Request {
+	locator := giturl.NewLocator(ownerName, repoName, groupPath)
 	reqURL := setting.LocalURL + fmt.Sprintf("api/internal/hook/%s/%s", hookName, locator.WebPath())
 	req := newInternalRequestAPI(ctx, reqURL, "POST", opts)
 	// This "timeout" applies to http.Client's timeout: A Timeout of zero means no timeout.
@@ -93,27 +93,27 @@ func newInternalRequestAPIForHooks(ctx context.Context, hookName, ownerName, rep
 }
 
 // HookPreReceive check whether the provided commits are allowed
-func HookPreReceive(ctx context.Context, ownerName, repoName string, groupID int64, opts HookOptions) ResponseExtra {
-	req := newInternalRequestAPIForHooks(ctx, "pre-receive", ownerName, repoName, groupID, opts)
+func HookPreReceive(ctx context.Context, ownerName, repoName, groupPath string, opts HookOptions) ResponseExtra {
+	req := newInternalRequestAPIForHooks(ctx, "pre-receive", ownerName, repoName, groupPath, opts)
 	_, extra := requestJSONResp(req, &ResponseText{})
 	return extra
 }
 
 // HookPostReceive updates services and users
-func HookPostReceive(ctx context.Context, ownerName, repoName string, groupID int64, opts HookOptions) (*HookPostReceiveResult, ResponseExtra) {
-	req := newInternalRequestAPIForHooks(ctx, "post-receive", ownerName, repoName, groupID, opts)
+func HookPostReceive(ctx context.Context, ownerName, repoName, groupPath string, opts HookOptions) (*HookPostReceiveResult, ResponseExtra) {
+	req := newInternalRequestAPIForHooks(ctx, "post-receive", ownerName, repoName, groupPath, opts)
 	return requestJSONResp(req, &HookPostReceiveResult{})
 }
 
 // HookProcReceive proc-receive hook
-func HookProcReceive(ctx context.Context, ownerName, repoName string, groupID int64, opts HookOptions) (*HookProcReceiveResult, ResponseExtra) {
-	req := newInternalRequestAPIForHooks(ctx, "proc-receive", ownerName, repoName, groupID, opts)
+func HookProcReceive(ctx context.Context, ownerName, repoName, groupPath string, opts HookOptions) (*HookProcReceiveResult, ResponseExtra) {
+	req := newInternalRequestAPIForHooks(ctx, "proc-receive", ownerName, repoName, groupPath, opts)
 	return requestJSONResp(req, &HookProcReceiveResult{})
 }
 
 // SetDefaultBranch will set the default branch to the provided branch for the provided repository
-func SetDefaultBranch(ctx context.Context, ownerName, repoName string, groupID int64, branch string) ResponseExtra {
-	locator := giturl.NewLocator(ownerName, repoName, groupID)
+func SetDefaultBranch(ctx context.Context, ownerName, repoName, groupPath, branch string) ResponseExtra {
+	locator := giturl.NewLocator(ownerName, repoName, groupPath)
 	reqURL := setting.LocalURL + fmt.Sprintf("api/internal/hook/set-default-branch/%s/%s",
 		locator.WebPath(),
 		url.PathEscape(branch),

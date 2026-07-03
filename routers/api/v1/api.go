@@ -66,10 +66,10 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
-	"strconv"
 	"strings"
 
 	auth_model "gitea.dev/models/auth"
+	group_model "gitea.dev/models/group"
 	"gitea.dev/models/organization"
 	"gitea.dev/models/perm"
 	access_model "gitea.dev/models/perm/access"
@@ -139,19 +139,11 @@ func repoAssignment() func(ctx *context.APIContext) {
 	return func(ctx *context.APIContext) {
 		userName := ctx.PathParam("username")
 		repoName := ctx.PathParam("reponame")
-		var gid int64
-		groupParam := ctx.PathParam("group_id")
-		if groupParam != "" {
-			gid, _ = strconv.ParseInt(groupParam, 10, 64)
-			if gid == 0 {
-				ctx.Redirect(strings.Replace(ctx.Req.URL.RequestURI(), "/0/", "/", 1), 307)
-				return
-			}
-		}
 		var (
-			owner *user_model.User
-			err   error
+			gid int64
+			err error
 		)
+		var owner *user_model.User
 
 		// Check if the user is the same as the repository owner.
 		if ctx.IsSigned && strings.EqualFold(ctx.Doer.LowerName, userName) {
@@ -175,6 +167,18 @@ func repoAssignment() func(ctx *context.APIContext) {
 		}
 		ctx.Repo.Owner = owner
 		ctx.ContextUser = owner
+
+		groupParam := ctx.PathParam("repo_group")
+		if groupParam != "" {
+			if gid, err = group_model.IDByPathname(ctx, owner.ID, groupParam); err != nil {
+				if group_model.IsErrGroupNotExist(err) {
+					ctx.APIErrorNotFound()
+				} else {
+					ctx.APIErrorInternal(err)
+				}
+				return
+			}
+		}
 
 		// Get repository.
 		repo, err := repo_model.GetRepositoryByName(ctx, owner.ID, gid, repoName)

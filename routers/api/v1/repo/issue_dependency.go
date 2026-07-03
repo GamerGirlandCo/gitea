@@ -6,6 +6,7 @@ package repo
 
 import (
 	"net/http"
+	"strings"
 
 	issues_model "gitea.dev/models/issues"
 	access_model "gitea.dev/models/perm/access"
@@ -498,7 +499,10 @@ func getFormIssue(ctx *context.APIContext, form *api.IssueMeta) *issues_model.Is
 			return nil
 		}
 		var err error
-		repo, err = repo_model.GetRepositoryByOwnerAndName(ctx, form.Owner, form.Name, form.GroupID)
+		splitName := strings.Split(form.Name, "/")
+		name := splitName[len(splitName)-1]
+		groupPath := strings.Join(splitName[:len(splitName)-1], "/")
+		repo, err = repo_model.GetRepositoryByOwnerAndName(ctx, form.Owner, name, groupPath)
 		if err != nil {
 			ctx.APIErrorAuto(err)
 			return nil

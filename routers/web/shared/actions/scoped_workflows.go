@@ -7,10 +7,10 @@ import (
 	"errors"
 	"net/http"
 	"slices"
-	"strconv"
 	"strings"
 
 	actions_model "gitea.dev/models/actions"
+	group_model "gitea.dev/models/group"
 	repo_model "gitea.dev/models/repo"
 	actions_module "gitea.dev/modules/actions"
 	"gitea.dev/modules/actions/jobparser"
@@ -254,7 +254,7 @@ func ScopedWorkflowAdd(ctx *context.Context) {
 	}
 
 	repoName := ctx.FormString("repo_name")
-	gid, _ := strconv.ParseInt(ctx.FormString("group_id"), 10, 64)
+	groupPath := ctx.FormString("group_path")
 	var repo *repo_model.Repository
 	if swCtx.IsGlobal {
 		// instance-level: the source may be any repo on the instance, identified by owner/name
@@ -263,8 +263,14 @@ func ScopedWorkflowAdd(ctx *context.Context) {
 			ctx.JSONError(ctx.Tr("actions.scoped_workflows.source.not_found"))
 			return
 		}
-		repo, err = repo_model.GetRepositoryByOwnerAndName(ctx, ownerName, name, gid)
+		repo, err = repo_model.GetRepositoryByOwnerAndName(ctx, ownerName, name, groupPath)
 	} else {
+		var gid int64
+		gid, err = group_model.IDByPathname(ctx, swCtx.OwnerID, groupPath)
+		if err != nil {
+			ctx.JSONError(ctx.Tr("actions.scoped_workflows.source.not_found"))
+			return
+		}
 		// owner-level: resolve within the owner, which also enforces that the source is one of the owner's own repositories
 		repo, err = repo_model.GetRepositoryByName(ctx, swCtx.OwnerID, gid, repoName)
 	}

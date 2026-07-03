@@ -8,7 +8,6 @@ import (
 	"fmt"
 	"path"
 	"regexp"
-	"strconv"
 	"strings"
 )
 
@@ -26,17 +25,17 @@ const (
 
 // UsesRef is the parsed form of a reusable workflow "uses:" value.
 type UsesRef struct {
-	Kind    UsesKind
-	Owner   string // empty for UsesKindLocalSameRepo
-	Repo    string // empty for UsesKindLocalSameRepo
-	GroupID int64  // empty for UsesKindLocalSameRepo
-	Path    string // workflow file path inside the source repo
-	Ref     string // git ref; empty for UsesKindLocalSameRepo
+	Kind      UsesKind
+	Owner     string // empty for UsesKindLocalSameRepo
+	Repo      string // empty for UsesKindLocalSameRepo
+	GroupPath string // empty for UsesKindLocalSameRepo
+	Path      string // workflow file path inside the source repo
+	Ref       string // git ref; empty for UsesKindLocalSameRepo
 }
 
 var (
 	reLocalSameRepo  = regexp.MustCompile(`^\./([^@]+\.ya?ml)$`)
-	reLocalCrossRepo = regexp.MustCompile(`^([-.\w]+)/(?:group/([-.\w]+)/)?([-.\w]+)/([^@]+\.ya?ml)@(.+)$`)
+	reLocalCrossRepo = regexp.MustCompile(`^([-.\w]+)/((?:[-.\w]+/)*?)([-.\w]+)/([^@]+\.ya?ml)@(.+)$`)
 )
 
 // ParseUses parses the SYNTAX of a reusable workflow "uses:" value into a UsesRef. Two forms are supported:
@@ -71,13 +70,12 @@ func ParseUses(s string) (*UsesRef, error) {
 	if path.Clean(p) != p {
 		return nil, fmt.Errorf("invalid workflow path %q", s)
 	}
-	gid, _ := strconv.ParseInt(m[2], 10, 64)
 	return &UsesRef{
-		Kind:    UsesKindLocalCrossRepo,
-		Owner:   m[1],
-		Repo:    m[3],
-		GroupID: gid,
-		Path:    p,
-		Ref:     m[5],
+		Kind:      UsesKindLocalCrossRepo,
+		Owner:     m[1],
+		Repo:      m[3],
+		GroupPath: strings.TrimSuffix(m[2], "/"),
+		Path:      p,
+		Ref:       m[5],
 	}, nil
 }

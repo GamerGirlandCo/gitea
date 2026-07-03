@@ -181,6 +181,10 @@ func MoveGroupItem(ctx context.Context, opts MoveGroupOptions, doer *user_model.
 		return err
 	}
 	defer committer.Close()
+	newPath, err := group_model.PathByID(opts.NewParent, ctx)
+	if err != nil {
+		return err
+	}
 	var parentGroup *group_model.Group
 	if opts.NewParent > 0 {
 		parentGroup, err = group_model.GetGroupByID(ctx, opts.NewParent)
@@ -216,6 +220,15 @@ func MoveGroupItem(ctx context.Context, opts MoveGroupOptions, doer *user_model.
 			if parentGroup != nil && group.OwnerID != parentGroup.OwnerID {
 				return util.NewInvalidArgumentErrorf("New parent group %d does not belong to same owner [ID: %d]", parentGroup.ID, parentGroup.OwnerID)
 			}
+			if group.ParentGroupID != opts.NewParent {
+				oldDir := filepath.Join(setting.RepoRootPath, strings.ToLower(group.OwnerName), filepath.FromSlash(group.FullPath(ctx)))
+				ndir := filepath.Join(setting.RepoRootPath, strings.ToLower(group.OwnerName), filepath.FromSlash(newPath), group.LowerName)
+				if err = util.Rename(oldDir, ndir); err != nil {
+					if !os.IsNotExist(err) {
+						return err
+					}
+				}
+			}
 			if err = group_model.MoveGroup(ctx, group, opts.NewParent, opts.NewPos); err != nil {
 				return err
 			}
@@ -241,7 +254,7 @@ func MoveGroupItem(ctx context.Context, opts MoveGroupOptions, doer *user_model.
 				return util.NewInvalidArgumentErrorf("New parent group %d does not belong to same owner [ID: %d]", parentGroup.ID, parentGroup.OwnerID)
 			}
 			if repo.GroupID != opts.NewParent {
-				ndir := filepath.Dir(filepath.Join(setting.RepoRootPath, filepath.FromSlash(repo_model.RelativePath(repo.OwnerName, repo.Name, opts.NewParent))))
+				ndir := filepath.Dir(filepath.Join(setting.RepoRootPath, filepath.FromSlash(repo_model.RelativePath(repo.OwnerName, repo.Name, newPath))))
 				_, err = os.Stat(ndir)
 				if err != nil {
 					if errors.Is(err, os.ErrNotExist) {
@@ -252,7 +265,7 @@ func MoveGroupItem(ctx context.Context, opts MoveGroupOptions, doer *user_model.
 						return err
 					}
 				}
-				if err = gitrepo.RenameRepository(ctx, repo, repo_model.StorageRepo(repo_model.RelativePath(repo.OwnerName, repo.Name, opts.NewParent))); err != nil {
+				if err = gitrepo.RenameRepository(ctx, repo, repo_model.StorageRepo(repo_model.RelativePath(repo.OwnerName, repo.Name, newPath))); err != nil {
 					return err
 				}
 			}
