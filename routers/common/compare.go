@@ -43,7 +43,7 @@ func parseHead(head string) (headOwnerName, headRepoName string, headGroupPath *
 		_, rawGid, _ := strings.Cut(paths[0], "group/")
 		gid, _ = strconv.ParseInt(rawGid, 10, 64)*/
 
-		return "", "", new(""), paths[0]
+		return "", "", nil, paths[0]
 	}
 	ownerRepo := strings.SplitN(paths[0], "/", 2)
 	if len(ownerRepo) == 1 {
@@ -62,7 +62,7 @@ func parseHead(head string) (headOwnerName, headRepoName string, headGroupPath *
 	_, rawGid, _ := strings.Cut(paths[0], "group/")
 	gid, _ = strconv.ParseInt(rawGid, 10, 64)*/
 
-	return ownerRepo[0], realRepoName, new(groupPath), paths[1]
+	return ownerRepo[0], realRepoName, util.Iif(groupPath == "", nil, new(groupPath)), paths[1]
 }
 
 // ParseCompareRouterParam Get compare information from the router parameter.
@@ -119,6 +119,7 @@ func ParseCompareRouterParam(routerParam string) *CompareRouterReq {
 	ci := &CompareRouterReq{CompareSeparator: sep}
 	ci.BaseOriRef, ci.BaseOriRefSuffix = git.ParseRefSuffix(basePart)
 	ci.HeadOwner, ci.HeadRepoName, ciHeadGrpPtr, ci.HeadOriRef = parseHead(headPart)
+	ci.HeadOriRef, ci.HeadOriRefSuffix = git.ParseRefSuffix(ci.HeadOriRef)
 	ci.HeadGroupPath = optional.FromPtr(ciHeadGrpPtr)
 	return ci
 }

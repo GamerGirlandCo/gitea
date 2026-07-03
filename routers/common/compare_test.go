@@ -27,7 +27,7 @@ func TestCompareRouterReq(t *testing.T) {
 				BaseOriRef:       "v1.0",
 				CompareSeparator: "...",
 				HeadOriRef:       "v1.1",
-				HeadGroupPath:    optional.Some(""),
+				HeadGroupPath:    optional.None[string](),
 			},
 		},
 		{
@@ -36,7 +36,7 @@ func TestCompareRouterReq(t *testing.T) {
 				BaseOriRef:       "main",
 				CompareSeparator: "..",
 				HeadOriRef:       "develop",
-				HeadGroupPath:    optional.Some(""),
+				HeadGroupPath:    optional.None[string](),
 			},
 		},
 		{
@@ -46,7 +46,7 @@ func TestCompareRouterReq(t *testing.T) {
 				BaseOriRefSuffix: "^",
 				CompareSeparator: "...",
 				HeadOriRef:       "develop",
-				HeadGroupPath:    optional.Some(""),
+				HeadGroupPath:    optional.None[string](),
 			},
 		},
 		{
@@ -56,7 +56,7 @@ func TestCompareRouterReq(t *testing.T) {
 				BaseOriRefSuffix: "^^^^^",
 				CompareSeparator: "...",
 				HeadOriRef:       "develop",
-				HeadGroupPath:    optional.Some(""),
+				HeadGroupPath:    optional.None[string](),
 			},
 		},
 		{
@@ -64,7 +64,7 @@ func TestCompareRouterReq(t *testing.T) {
 			CompareRouterReq: &CompareRouterReq{
 				CompareSeparator: "...",
 				HeadOriRef:       "develop",
-				HeadGroupPath:    optional.Some(""),
+				HeadGroupPath:    optional.None[string](),
 			},
 		},
 		{
@@ -83,7 +83,7 @@ func TestCompareRouterReq(t *testing.T) {
 				HeadOwner:        "lunny",
 				HeadRepoName:     "forked_repo",
 				HeadOriRef:       "develop",
-				HeadGroupPath:    optional.Some(""),
+				HeadGroupPath:    optional.None[string](),
 			},
 		},
 		{
@@ -94,7 +94,7 @@ func TestCompareRouterReq(t *testing.T) {
 				HeadOwner:        "lunny",
 				HeadRepoName:     "forked_repo",
 				HeadOriRef:       "develop",
-				HeadGroupPath:    optional.Some(""),
+				HeadGroupPath:    optional.None[string](),
 			},
 		},
 		{
@@ -106,7 +106,7 @@ func TestCompareRouterReq(t *testing.T) {
 				HeadOwner:        "lunny",
 				HeadRepoName:     "forked_repo",
 				HeadOriRef:       "develop",
-				HeadGroupPath:    optional.Some(""),
+				HeadGroupPath:    optional.None[string](),
 			},
 		},
 		{
