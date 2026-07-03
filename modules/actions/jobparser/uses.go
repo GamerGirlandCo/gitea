@@ -74,7 +74,7 @@ func ParseUses(s string) (*UsesRef, error) {
 		Kind:      UsesKindLocalCrossRepo,
 		Owner:     m[1],
 		Repo:      m[3],
-		GroupPath: m[2],
+		GroupPath: strings.TrimSuffix(m[2], "/"),
 		Path:      p,
 		Ref:       m[5],
 	}, nil
