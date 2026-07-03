@@ -897,7 +897,14 @@ func GetRepositoriesMapByIDs(ctx context.Context, ids []int64) (map[int64]*Repos
 	return repos, db.GetEngine(ctx).In("id", ids).Find(&repos)
 }
 
-func IsRepositoryModelExist(ctx context.Context, u *user_model.User, repoName string, groupID int64) (bool, error) {
+func IsRepositoryModelExist(ctx context.Context, u *user_model.User, repoName, groupPath string) (bool, error) {
+	groupID, err := group.IDByPathname(ctx, u.ID, groupPath)
+	if err != nil {
+		if !group.IsErrGroupNotExist(err) {
+			return false, err
+		}
+		return false, nil
+	}
 	return db.Exist[Repository](ctx, builder.Eq{
 		"owner_id":   u.ID,
 		"lower_name": strings.ToLower(repoName),
